@@ -28,7 +28,7 @@
 //         className="w-full"
 //         size="lg"
 //       >
-//         <Link href="/shop">
+//         <Link href="/donate">
 //           Upgrade today
 //         </Link>
 //       </Button>
