@@ -1,6 +1,5 @@
 import { quizData } from '@/data/personalityQuestions'
 import { useState, useEffect } from 'react'
-import { H2 } from './headings'
 import { useRouter } from 'next/navigation'
 
 interface Answer {
