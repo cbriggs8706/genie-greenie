@@ -1,5 +1,7 @@
 import { quizData } from '@/data/personalityQuestions'
 import { useState, useEffect } from 'react'
+import { H2 } from './headings'
+import { useRouter } from 'next/navigation'
 
 interface Answer {
 	[questionId: string]: string
@@ -17,13 +19,11 @@ interface Question {
 	subcategoryName?: string
 }
 
-const QUESTIONS_PER_PAGE = 5
-
 export default function QuizComponent() {
 	const [selectedAnswers, setSelectedAnswers] = useState<Answer>({})
 	const [totals, setTotals] = useState<Totals>({})
 	const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([])
-	const [currentPage, setCurrentPage] = useState(0)
+	const router = useRouter()
 
 	useEffect(() => {
 		const storedAnswers = JSON.parse(
@@ -32,7 +32,7 @@ export default function QuizComponent() {
 		setSelectedAnswers(storedAnswers)
 		calculateTotals(storedAnswers)
 
-		// Select two random questions per category
+		// Group questions by category
 		const categoryMap: { [key: string]: Question[] } = {}
 		quizData.questions.forEach((question) => {
 			if (question.categoryName) {
@@ -43,11 +43,12 @@ export default function QuizComponent() {
 			}
 		})
 
+		// Select the first two questions from each category
 		const selectedQuestions: Question[] = Object.values(categoryMap)
-			.map((questions) => questions.sort(() => Math.random() - 0.5).slice(0, 2))
+			.map((questions) => questions.slice(0, 2))
 			.flat()
 
-		setShuffledQuestions(selectedQuestions.sort(() => Math.random() - 0.5))
+		setShuffledQuestions(selectedQuestions)
 	}, [])
 
 	const handleReset = () => {
@@ -82,26 +83,9 @@ export default function QuizComponent() {
 		setTotals(newTotals)
 	}
 
-	const startIndex = currentPage * QUESTIONS_PER_PAGE
-	const currentQuestions = shuffledQuestions.slice(
-		startIndex,
-		startIndex + QUESTIONS_PER_PAGE
-	)
-	const hasNext = startIndex + QUESTIONS_PER_PAGE < shuffledQuestions.length
-	const hasPrev = currentPage > 0
-	const progress =
-		((startIndex + QUESTIONS_PER_PAGE) / shuffledQuestions.length) * 100
-
 	return (
 		<div className="flex flex-col gap-4 p-4 mb-20">
-			<div className="w-full bg-gray-200 h-2 rounded-full">
-				<div
-					className="bg-blue-500 h-2 rounded-full"
-					style={{ width: `${progress}%` }}
-				></div>
-			</div>
-
-			{currentQuestions.map((question) => (
+			{shuffledQuestions.map((question) => (
 				<div key={question.id} className="mb-4">
 					<p className="text-xl font-bold">{question.text}</p>
 					<div className="flex gap-2">
@@ -131,39 +115,36 @@ export default function QuizComponent() {
 
 			<div className="flex justify-between mt-4">
 				<button
-					disabled={!hasPrev}
-					onClick={() => setCurrentPage((prev) => prev - 1)}
-					className="p-2 border rounded disabled:opacity-50"
-				>
-					Previous
-				</button>
-				<button
 					onClick={handleReset}
 					className="p-2 border rounded disabled:opacity-50"
 				>
 					Reset & Start Over
 				</button>
-				<button
-					disabled={!hasNext}
-					onClick={() => setCurrentPage((prev) => prev + 1)}
-					className="p-2 border rounded disabled:opacity-50"
-				>
-					Next
-				</button>
 			</div>
 
-			{startIndex + QUESTIONS_PER_PAGE >= shuffledQuestions.length && (
-				<div className="mt-6 p-4 border-t w-full max-w-md">
-					<h2 className="text-xl font-bold">Totals</h2>
-					{Object.entries(totals).map(([key, value]) => (
-						<div key={key} className="w-full">
-							<p className="text-lg font-bold">
-								{key}: <span className="font-normal">{value} points</span>
-							</p>
-						</div>
-					))}
-				</div>
-			)}
+			<h2>Your Personality Mix </h2>
+			<div className="mt-6 p-4 border-t w-full max-w-md">
+				<h2 className="text-xl font-bold">Totals</h2>
+				{Object.entries(totals).map(([key, value]) => (
+					<div key={key} className="w-full">
+						<p className="text-lg font-bold">
+							{key}: <span className="font-normal">{value} points</span>
+						</p>
+					</div>
+				))}
+			</div>
+			<div>
+				Want to take the full personality quiz and find out exactly what type of
+				genealogist you are?
+				<button
+					onClick={() => {
+						router.push('/test')
+					}}
+					className="p-2 border rounded disabled:opacity-50"
+				>
+					Click Here
+				</button>
+			</div>
 		</div>
 	)
 }

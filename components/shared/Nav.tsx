@@ -92,7 +92,7 @@ export default function Example() {
 												className="group relative flex items-center gap-x-6 rounded-lg p-4 text-xl leading-6"
 											>
 												<div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-darkblue">
-													{item.img ? (
+													{/* {item.img ? (
 														<Image
 															height={100}
 															width={100}
@@ -104,7 +104,7 @@ export default function Example() {
 															className="h-6 w-6 text-white"
 															aria-hidden="true"
 														/>
-													)}
+													)} */}
 												</div>
 												<div className="flex-auto">
 													<a href={item.href} className="block text-white">

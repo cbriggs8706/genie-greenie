@@ -20,13 +20,13 @@ const FullTestPage = () => {
 
 	const router = useRouter()
 
-	useEffect(() => {
-		// Flatten all questions from all categories and subcategories
-		const allQuestions: Question[] = quizData.categories.flatMap((category) =>
-			category.subcategories.flatMap((subcategory) => subcategory.questions)
-		)
-		setQuestions(allQuestions)
-	}, [])
+	// useEffect(() => {
+	// 	// Flatten all questions from all categories and subcategories
+	// 	const allQuestions: Question[] = quizData.categories.flatMap((category) =>
+	// 		category.subcategories.flatMap((subcategory) => subcategory.questions)
+	// 	)
+	// 	setQuestions(allQuestions)
+	// }, [])
 
 	const handleAnswerSelection = (
 		question: Question,
@@ -47,64 +47,63 @@ const FullTestPage = () => {
 		window.location.reload()
 	}
 
-	return (
-		<div>
-			<h1>Full Genealogy Personality Test</h1>
+	return null
+	// <div>
+	// 	<h1>Full Genealogy Personality Test</h1>
 
-			{!showResults ? (
-				<div>
-					{quizData.categories.map((category) => (
-						<div key={category.name}>
-							<h2>{category.name}</h2>
-							{category.subcategories.map((subcategory) => (
-								<div key={subcategory.name}>
-									<h3>{subcategory.name}</h3>
-									{subcategory.questions.map((question) => (
-										<div key={question.id}>
-											<p>{question.text}</p>
-											{question.options.map((option) => (
-												<button
-													key={option.name}
-													onClick={() =>
-														handleAnswerSelection(question, option)
-													}
-												>
-													{option.name}
-												</button>
-											))}
-										</div>
-									))}
-								</div>
-							))}
-						</div>
-					))}
-					<button onClick={handleSubmit}>Submit Full Test</button>
-				</div>
-			) : (
-				<div>
-					<h2>Your Final Results</h2>
+	// 	{!showResults ? (
+	// 		<div>
+	// 			{quizData.categories.map((category) => (
+	// 				<div key={category.name}>
+	// 					<h2>{category.name}</h2>
+	// 					{category.subcategories.map((subcategory) => (
+	// 						<div key={subcategory.name}>
+	// 							<h3>{subcategory.name}</h3>
+	// 							{subcategory.questions.map((question) => (
+	// 								<div key={question.id}>
+	// 									<p>{question.text}</p>
+	// 									{question.options.map((option) => (
+	// 										<button
+	// 											key={option.name}
+	// 											onClick={() =>
+	// 												handleAnswerSelection(question, option)
+	// 											}
+	// 										>
+	// 											{option.name}
+	// 										</button>
+	// 									))}
+	// 								</div>
+	// 							))}
+	// 						</div>
+	// 					))}
+	// 				</div>
+	// 			))}
+	// 			<button onClick={handleSubmit}>Submit Full Test</button>
+	// 		</div>
+	// 	) : (
+	// 		<div>
+	// 			<h2>Your Final Results</h2>
 
-					<h3>Subcategory Scores</h3>
-					{Object.entries(scores.subcategoryScores).map(
-						([subcategory, score]) => (
-							<p key={subcategory}>
-								{subcategory}: {score} points
-							</p>
-						)
-					)}
+	// 			<h3>Subcategory Scores</h3>
+	// 			{Object.entries(scores.subcategoryScores).map(
+	// 				([subcategory, score]) => (
+	// 					<p key={subcategory}>
+	// 						{subcategory}: {score} points
+	// 					</p>
+	// 				)
+	// 			)}
 
-					<h3>Category Scores</h3>
-					{Object.entries(scores.categoryScores).map(([category, score]) => (
-						<p key={category}>
-							{category}: {score} points
-						</p>
-					))}
+	// 			<h3>Category Scores</h3>
+	// 			{Object.entries(scores.categoryScores).map(([category, score]) => (
+	// 				<p key={category}>
+	// 					{category}: {score} points
+	// 				</p>
+	// 			))}
 
-					<button onClick={handleRetakeTest}>Retake Full Test</button>
-				</div>
-			)}
-		</div>
-	)
+	// 			<button onClick={handleRetakeTest}>Retake Full Test</button>
+	// 		</div>
+	// 	)}
+	// </div>
 }
 
 export default FullTestPage
