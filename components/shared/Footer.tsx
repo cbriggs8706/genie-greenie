@@ -48,7 +48,7 @@ export default function Footer() {
 					<div className="flex flex-col lg:grid lg:grid-cols-3 py-5">
 						<div className="col-span-3 mx-auto flex items-center gap-3">
 							<Link
-								href="https://www.facebook.com/highdesertmilk"
+								href="https://www.facebook.com/geniegreenie"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -57,7 +57,7 @@ export default function Footer() {
 								</div>
 							</Link>
 							<Link
-								href="https://www.instagram.com/highdesertmilk/"
+								href="https://www.instagram.com/geniegreenie/"
 								target="_blank"
 								rel="noopener noreferrer"
 							>

@@ -24,37 +24,10 @@ const products = [
 		icon: MdPallet,
 	},
 	{
-		name: 'Butter',
-		href: '/products/butter',
-		icon: HiCursorArrowRays,
-		img: '/products/big-butter.png',
+		name: 'SourceLinker 101',
+		href: '/source-linker',
+		img: 'mascot.svg',
 	},
-	{
-		name: 'Cream Cheese',
-		href: '/products/creamcheese',
-		icon: HiCursorArrowRays,
-		img: '/products/creamCheeseBox.png',
-	},
-	{
-		name: 'Powder',
-		href: '/products/powder',
-		icon: HiFingerPrint,
-		img: '/products/big-powder.png',
-	},
-	{
-		name: 'Bulk',
-		href: '/products/bulk',
-		icon: HiSquaresPlus,
-		img: '/products/bulk-skim-powder.png',
-	},
-]
-const callsToAction = [
-	{
-		name: 'Customer Portal',
-		href: 'https://highdesertmilk.sharepoint.com/:f:/s/website/ErVRGHnrgNRNmvoB67ey_30BAoLM5J0ySbCxP-_CNT5WTA?e=H91kzn',
-		icon: HiDocumentCheck,
-	},
-	{ name: 'Contact Sales', href: '/contact', icon: HiPhone },
 ]
 
 function classNames(...classes: any) {
@@ -140,22 +113,6 @@ export default function Example() {
 													</a>
 												</div>
 											</div>
-										))}
-									</div>
-									<div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-darkblue">
-										{callsToAction.map((item) => (
-											<Link
-												key={item.name}
-												href={item.href}
-												target={item.name === 'Customer Portal' ? '_blank' : ''}
-												className="flex items-center justify-center gap-x-2.5 p-3 text-md leading-6 text-white"
-											>
-												<item.icon
-													className="h-5 w-5 flex-none text-white"
-													aria-hidden="true"
-												/>
-												{item.name}
-											</Link>
 										))}
 									</div>
 								</Popover.Panel>

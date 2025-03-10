@@ -1,5 +1,3 @@
-// types.ts
-
 export type Options = {
 	name: string
 	points: number
@@ -8,23 +6,13 @@ export type Options = {
 export type Question = {
 	id: string
 	text: string
-	type: 'multiple-choice' | 'true-false' // or any other type you might use
 	options: Options[]
-	categoryName?: string // This will help us group the questions by categories
-}
-
-export type Subcategory = {
-	name: string
-	questions: Question[]
-}
-
-export type Category = {
-	name: string
-	subcategories: Subcategory[]
+	categoryName?: string
+	subcategoryName?: string
 }
 
 export type QuizData = {
-	categories: Category[]
+	questions: Question[]
 }
 
 export type Answer = {

@@ -19,7 +19,7 @@ interface Question {
 
 const QUESTIONS_PER_PAGE = 5
 
-export default function QuizComponent() {
+export default function TestComponent() {
 	const [selectedAnswers, setSelectedAnswers] = useState<Answer>({})
 	const [totals, setTotals] = useState<Totals>({})
 	const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([])
@@ -27,56 +27,49 @@ export default function QuizComponent() {
 
 	useEffect(() => {
 		const storedAnswers = JSON.parse(
-			localStorage.getItem('personality') || '{}'
+			localStorage.getItem('userAnswers') || '{}'
 		) as Answer
 		setSelectedAnswers(storedAnswers)
 		calculateTotals(storedAnswers)
 
-		// Select two random questions per category
-		const categoryMap: { [key: string]: Question[] } = {}
-		quizData.questions.forEach((question) => {
-			if (question.categoryName) {
-				if (!categoryMap[question.categoryName]) {
-					categoryMap[question.categoryName] = []
-				}
-				categoryMap[question.categoryName].push(question)
-			}
-		})
-
-		const selectedQuestions: Question[] = Object.values(categoryMap)
-			.map((questions) => questions.sort(() => Math.random() - 0.5).slice(0, 2))
-			.flat()
-
-		setShuffledQuestions(selectedQuestions.sort(() => Math.random() - 0.5))
+		// Shuffle the questions only once when component mounts
+		const shuffled = [...quizData.questions].sort(
+			() => Math.random() - 0.5
+		) as Question[]
+		setShuffledQuestions(shuffled)
 	}, [])
-
-	const handleReset = () => {
-		localStorage.removeItem('personality')
-		window.location.reload()
-	}
 
 	const handleClick = (
 		questionId: string,
 		option: string,
 		points: number,
-		categoryName?: string
+		categoryName?: string,
+		subcategoryName?: string
 	) => {
-		const updatedAnswers: Answer = { ...selectedAnswers, [questionId]: option }
+		const updatedAnswers: Answer = {
+			...selectedAnswers,
+			[questionId]: option,
+		}
 		setSelectedAnswers(updatedAnswers)
-		localStorage.setItem('personality', JSON.stringify(updatedAnswers))
+		localStorage.setItem('userAnswers', JSON.stringify(updatedAnswers))
 		calculateTotals(updatedAnswers)
 	}
 
 	const calculateTotals = (answers: Answer) => {
 		const newTotals: Totals = {}
+
 		shuffledQuestions.forEach((question) => {
 			const selectedOption = answers[question.id]
 			const option = question.options.find((opt) => opt.name === selectedOption)
-			if (option && question.categoryName) {
+			if (option && question.categoryName && question.subcategoryName) {
 				if (!newTotals[question.categoryName]) {
 					newTotals[question.categoryName] = 0
 				}
+				if (!newTotals[question.subcategoryName]) {
+					newTotals[question.subcategoryName] = 0
+				}
 				newTotals[question.categoryName] += option.points
+				newTotals[question.subcategoryName] += option.points
 			}
 		})
 		setTotals(newTotals)
@@ -118,7 +111,8 @@ export default function QuizComponent() {
 										question.id,
 										option.name,
 										option.points,
-										question.categoryName
+										question.categoryName,
+										question.subcategoryName
 									)
 								}
 							>
@@ -138,12 +132,6 @@ export default function QuizComponent() {
 					Previous
 				</button>
 				<button
-					onClick={handleReset}
-					className="p-2 border rounded disabled:opacity-50"
-				>
-					Reset & Start Over
-				</button>
-				<button
 					disabled={!hasNext}
 					onClick={() => setCurrentPage((prev) => prev + 1)}
 					className="p-2 border rounded disabled:opacity-50"
@@ -155,11 +143,16 @@ export default function QuizComponent() {
 			{startIndex + QUESTIONS_PER_PAGE >= shuffledQuestions.length && (
 				<div className="mt-6 p-4 border-t w-full max-w-md">
 					<h2 className="text-xl font-bold">Totals</h2>
-					{Object.entries(totals).map(([key, value]) => (
+					{Object.entries(totals).map(([key, value], index, array) => (
 						<div key={key} className="w-full">
 							<p className="text-lg font-bold">
 								{key}: <span className="font-normal">{value} points</span>
 							</p>
+							{index < array.length - 1 &&
+								array[index + 1] &&
+								array[index + 1][0] !== key && (
+									<hr className="my-2 border-gray-300" />
+								)}
 						</div>
 					))}
 				</div>

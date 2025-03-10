@@ -37,30 +37,30 @@ export const updateCategoryTotal = (): void => {
 	})
 
 	// Sum up points for each category
-	Object.entries(subcategoryScores).forEach(([subcategory, points]) => {
-		const categoryName = findCategoryBySubcategory(subcategory)
-		if (categoryName) {
-			categoryScores[categoryName] =
-				(categoryScores[categoryName] || 0) + points
-		}
-	})
+	// Object.entries(subcategoryScores).forEach(([subcategory, points]) => {
+	// 	const categoryName = findCategoryBySubcategory(subcategory)
+	// 	if (categoryName) {
+	// 		categoryScores[categoryName] =
+	// 			(categoryScores[categoryName] || 0) + points
+	// 	}
+	// })
 
 	localStorage.setItem('categoryScores', JSON.stringify(categoryScores))
 }
 
 // Retrieve category name by subcategory name
-export const findCategoryBySubcategory = (
-	subcategoryName: string
-): string | null => {
-	for (const category of quizData.categories) {
-		for (const subcategory of category.subcategories) {
-			if (subcategory.name === subcategoryName) {
-				return category.name
-			}
-		}
-	}
-	return null
-}
+// export const findCategoryBySubcategory = (
+// 	subcategoryName: string
+// ): string | null => {
+// 	for (const category of quizData.categories) {
+// 		for (const subcategory of category.subcategories) {
+// 			if (subcategory.name === subcategoryName) {
+// 				return category.name
+// 			}
+// 		}
+// 	}
+// 	return null
+// }
 
 // Retrieve scores from localStorage
 export const getStoredScores = (): {
