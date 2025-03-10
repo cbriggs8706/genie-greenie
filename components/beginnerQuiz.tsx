@@ -277,13 +277,13 @@ export default function BeginnerQuiz() {
 					<div className="flex gap-2 mt-2">
 						<button
 							onClick={() => selectAll(index, q.options)}
-							className="px-2 py-1 text-xs bg-green-500 text-white rounded-lg"
+							className="px-2 py-1 text-xs bg-green-500 text-white rounded-lg font-inter"
 						>
 							Select All
 						</button>
 						<button
 							onClick={() => deselectAll(index)}
-							className="px-2 py-1 text-xs bg-red-500 text-white rounded-lg"
+							className="px-2 py-1 text-xs bg-red-500 text-white rounded-lg font-inter"
 						>
 							Deselect All
 						</button>
@@ -297,7 +297,7 @@ export default function BeginnerQuiz() {
 							<button
 								key={option}
 								onClick={() => toggleFilter(index, option)}
-								className={`px-3 py-1 rounded-lg border ${
+								className={`px-3 py-1 rounded-lg border font-inter ${
 									filters[index]?.includes(option)
 										? 'bg-blue-500 text-white'
 										: 'bg-gray-200'

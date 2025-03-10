@@ -3,7 +3,7 @@
 
 import { quizData } from '@/data/personalityQuestions'
 import { Question } from '@/data/types'
-import { getStoredScores, storeSubcategoryPoints } from '@/utils/utils'
+import { getStoredScores, storeSubcategoryPoints } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 

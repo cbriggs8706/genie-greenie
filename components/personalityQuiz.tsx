@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Question } from '@/data/types'
 import { quizData } from '@/data/personalityQuestions'
-import { getStoredScores, storeSubcategoryPoints } from '@/utils/utils'
+import { getStoredScores, storeSubcategoryPoints } from '@/lib/utils'
 
 const QuizComponent = () => {
 	const [questions, setQuestions] = useState<Question[]>([])
