@@ -1,6 +1,6 @@
 // utils.ts
 
-import { quizData } from '@/data/personalityQuestions'
+import { quizData } from '@/data/deepPersonalityQuestions'
 
 // Store points in localStorage under the subcategory name
 export const storeSubcategoryPoints = (

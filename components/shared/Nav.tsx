@@ -122,6 +122,12 @@ export default function Example() {
 						<Link href="/personality" className="text-xl leading-6 text-white">
 							Personality Quiz
 						</Link>
+						<Link
+							href="/deep-personality"
+							className="text-xl leading-6 text-white"
+						>
+							Deep Personality Quiz
+						</Link>
 					</Popover.Group>
 				</nav>
 
@@ -183,6 +189,13 @@ export default function Example() {
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Personality Quiz
+									</Link>
+									<Link
+										href="/deep-personality"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-josefin"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										Deep Personality Quiz
 									</Link>
 								</div>
 							</div>

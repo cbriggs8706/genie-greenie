@@ -1,7 +1,7 @@
 'use client'
 // pages/full-test.tsx
 
-import { quizData } from '@/data/personalityQuestions'
+import { quizData } from '@/data/deepPersonalityQuestions'
 import { Question } from '@/data/types'
 import { getStoredScores, storeSubcategoryPoints } from '@/lib/utils/utils'
 import { useRouter } from 'next/navigation'

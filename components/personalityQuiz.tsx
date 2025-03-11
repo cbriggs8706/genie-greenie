@@ -1,149 +1,121 @@
-import { quizData } from '@/data/personalityQuestions'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+'use client'
 
-interface Answer {
-	[questionId: string]: string
-}
+import { useState } from 'react'
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
+import { personalityData } from '@/data/personalityQuestions'
+import { personalityTypes } from '@/data/personalityTypes'
+import { Button } from '@headlessui/react'
 
-interface Totals {
-	[key: string]: number
-}
+const COLORS = [
+	'#0088FE',
+	'#00C49F',
+	'#FFBB28',
+	'#FF8042',
+	'#A28DFF',
+	'#FF5678',
+	'#52D726',
+	'#D72652',
+]
 
-interface Question {
-	id: string
-	text: string
-	options: { name: string; points: number }[]
-	categoryName?: string
-	subcategoryName?: string
-}
+export default function PersonalityQuiz() {
+	const [currentQuestion, setCurrentQuestion] = useState(0)
+	const [results, setResults] = useState<Record<string, number>>({})
+	const [quizComplete, setQuizComplete] = useState(false)
+	const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
-export default function QuizComponent() {
-	const [selectedAnswers, setSelectedAnswers] = useState<Answer>({})
-	const [totals, setTotals] = useState<Totals>({})
-	const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([])
-	const router = useRouter()
+	const questions = personalityData.questions
+	const totalQuestions = questions.length
 
-	useEffect(() => {
-		const storedAnswers = JSON.parse(
-			localStorage.getItem('personality') || '{}'
-		) as Answer
-		setSelectedAnswers(storedAnswers)
-		calculateTotals(storedAnswers)
+	const handleAnswer = (category: string) => {
+		setResults((prev) => ({
+			...prev,
+			[category]: (prev[category] || 0) + 1,
+		}))
 
-		// Group questions by category
-		const categoryMap: { [key: string]: Question[] } = {}
-		quizData.questions.forEach((question) => {
-			if (question.categoryName) {
-				if (!categoryMap[question.categoryName]) {
-					categoryMap[question.categoryName] = []
-				}
-				categoryMap[question.categoryName].push(question)
-			}
-		})
-
-		// Select the first two questions from each category
-		const selectedQuestions: Question[] = Object.values(categoryMap)
-			.map((questions) => questions.slice(0, 2))
-			.flat()
-
-		setShuffledQuestions(selectedQuestions)
-	}, [])
-
-	const handleReset = () => {
-		localStorage.removeItem('personality')
-		window.location.reload()
+		if (currentQuestion < totalQuestions - 1) {
+			setCurrentQuestion(currentQuestion + 1)
+		} else {
+			setQuizComplete(true)
+		}
 	}
 
-	const handleClick = (
-		questionId: string,
-		option: string,
-		points: number,
-		categoryName?: string
-	) => {
-		const updatedAnswers: Answer = { ...selectedAnswers, [questionId]: option }
-		setSelectedAnswers(updatedAnswers)
-		localStorage.setItem('personality', JSON.stringify(updatedAnswers))
-		calculateTotals(updatedAnswers)
+	const data = Object.entries(results).map(([category, count], index) => ({
+		name: category,
+		value: count,
+		color: COLORS[index % COLORS.length],
+	}))
+
+	const handlePieClick = (data: { name: string }) => {
+		setSelectedCategory(data.name)
 	}
 
-	const calculateTotals = (answers: Answer) => {
-		const newTotals: Totals = {}
-		shuffledQuestions.forEach((question) => {
-			const selectedOption = answers[question.id]
-			const option = question.options.find((opt) => opt.name === selectedOption)
-			if (option && question.categoryName) {
-				if (!newTotals[question.categoryName]) {
-					newTotals[question.categoryName] = 0
-				}
-				newTotals[question.categoryName] += option.points
-			}
-		})
-		setTotals(newTotals)
-	}
+	const selectedPersonality = personalityTypes.find((type) =>
+		type.title.toLowerCase().includes(selectedCategory?.toLowerCase() || '')
+	)
 
 	return (
-		<div className="flex flex-col gap-4 p-4 mb-20">
-			{shuffledQuestions.map((question) => (
-				<div key={question.id} className="mb-4">
-					<p className="text-xl font-bold">{question.text}</p>
-					<div className="flex gap-2">
-						{question.options.map((option) => (
-							<button
-								key={option.name}
-								className={`p-2 rounded text-sm ${
-									selectedAnswers[question.id] === option.name
-										? 'bg-blue-700 text-white'
-										: 'border-solid border-blue-500 text-blue-500 border-2'
-								}`}
-								onClick={() =>
-									handleClick(
-										question.id,
-										option.name,
-										option.points,
-										question.categoryName
-									)
-								}
+		<div className="flex flex-col items-center justify-center min-h-screen p-6">
+			{!quizComplete ? (
+				<div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg text-center">
+					<h2 className="text-xl font-bold mb-4">
+						{questions[currentQuestion].text}
+					</h2>
+					<div className="flex flex-col gap-4">
+						{questions[currentQuestion].options.map((option, idx) => (
+							<Button
+								key={idx}
+								onClick={() => handleAnswer(option.category)}
+								className="w-full p-3"
 							>
-								{option.name}
-							</button>
+								{option.answer}
+							</Button>
 						))}
 					</div>
+					<p className="mt-4 text-gray-500">
+						{currentQuestion + 1} / {totalQuestions}
+					</p>
 				</div>
-			))}
+			) : (
+				<div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg text-center">
+					<h2 className="text-2xl font-bold mb-4">Your Personality Results</h2>
+					<PieChart width={400} height={400} className="mx-auto">
+						<Pie
+							data={data}
+							cx="50%"
+							cy="50%"
+							outerRadius={150}
+							fill="#8884d8"
+							dataKey="value"
+							label
+							onClick={(e) => handlePieClick(e)}
+						>
+							{data.map((entry, index) => (
+								<Cell key={`cell-${index}`} fill={entry.color} />
+							))}
+						</Pie>
+						<Tooltip />
+						<Legend />
+					</PieChart>
 
-			<div className="flex justify-between mt-4">
-				<button
-					onClick={handleReset}
-					className="p-2 border rounded disabled:opacity-50"
-				>
-					Reset & Start Over
-				</button>
-			</div>
+					{selectedPersonality && (
+						<div className="mt-6 p-4 bg-gray-100 rounded-lg text-left">
+							<h3 className="text-xl font-bold">{selectedPersonality.title}</h3>
 
-			<h2>Your Personality Mix </h2>
-			<div className="mt-6 p-4 border-t w-full max-w-md">
-				<h2 className="text-xl font-bold">Totals</h2>
-				{Object.entries(totals).map(([key, value]) => (
-					<div key={key} className="w-full">
-						<p className="text-lg font-bold">
-							{key}: <span className="font-normal">{value} points</span>
-						</p>
-					</div>
-				))}
-			</div>
-			<div>
-				Want to take the full personality quiz and find out exactly what type of
-				genealogist you are?
-				<button
-					onClick={() => {
-						router.push('/test')
-					}}
-					className="p-2 border rounded disabled:opacity-50"
-				>
-					Click Here
-				</button>
-			</div>
+							{selectedPersonality.text
+								.split('\n\n')
+								.map((paragraph, index) => (
+									<p key={index} className="mt-4">
+										{paragraph}
+									</p>
+								))}
+						</div>
+					)}
+
+					<Button onClick={() => window.location.reload()} className="mt-4">
+						Retake Quiz
+					</Button>
+				</div>
+			)}
 		</div>
 	)
 }
