@@ -8,6 +8,8 @@ export default authMiddleware({
 		'/personality',
 		'/test',
 		'/source-linker',
+		'/deep-personality',
+		'/start',
 	],
 })
 

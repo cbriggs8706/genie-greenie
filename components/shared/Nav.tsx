@@ -17,15 +17,27 @@ import {
 
 import { MdPallet } from 'react-icons/md'
 
-const products = [
+const training = [
+	// {
+	// 	name: 'SourceLinker 101',
+	// 	href: '/source-linker',
+	// 	icon: MdPallet,
+	// },
 	{
 		name: 'SourceLinker 101',
 		href: '/source-linker',
-		icon: MdPallet,
+		img: 'mascot.svg',
+	},
+]
+const quizzes = [
+	{
+		name: 'Personality Quiz',
+		href: '/personality',
+		img: 'mascot.svg',
 	},
 	{
-		name: 'SourceLinker 101',
-		href: '/source-linker',
+		name: 'Deep Personality Quiz',
+		href: '/deep-personality',
 		img: 'mascot.svg',
 	},
 ]
@@ -38,7 +50,7 @@ export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	return (
 		<>
-			<header className="bg-darkblue text-white z-30 sticky font-josefin uppercase">
+			<header className="bg-darkblue text-white z-30 sticky font-Young_Serif uppercase">
 				<nav
 					className="mx-auto flex max-w-7xl items-center justify-between lg:px-16"
 					aria-label="Global"
@@ -66,7 +78,7 @@ export default function Example() {
 					</div>
 
 					<Popover.Group className="hidden lg:flex lg:gap-x-12">
-						<Popover className="relative">
+						{/* <Popover className="relative">
 							<Popover.Button className="flex items-center gap-x-1 text-xl leading-6 text-white uppercase">
 								Training
 								<HiChevronDown
@@ -86,13 +98,13 @@ export default function Example() {
 							>
 								<Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-darkblue shadow-lg ring-1 ring-gray-900/5">
 									<div className="p-4">
-										{products.map((item) => (
+										{training.map((item) => (
 											<div
 												key={item.name}
 												className="group relative flex items-center gap-x-6 rounded-lg p-4 text-xl leading-6"
 											>
 												<div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-darkblue">
-													{/* {item.img ? (
+													{item.img ? (
 														<Image
 															height={100}
 															width={100}
@@ -104,7 +116,7 @@ export default function Example() {
 															className="h-6 w-6 text-white"
 															aria-hidden="true"
 														/>
-													)} */}
+													)}
 												</div>
 												<div className="flex-auto">
 													<a href={item.href} className="block text-white">
@@ -117,14 +129,23 @@ export default function Example() {
 									</div>
 								</Popover.Panel>
 							</Transition>
-						</Popover>
+						</Popover> */}
 
-						<Link href="/personality" className="text-xl leading-6 text-white">
+						<Link href="/start" className="text-lg leading-6 text-white">
+							Where do I start?
+						</Link>
+						<Link
+							href="/source-linker"
+							className="text-lg leading-6 text-white"
+						>
+							SourceLinker
+						</Link>
+						<Link href="/personality" className="text-lg leading-6 text-white">
 							Personality Quiz
 						</Link>
 						<Link
 							href="/deep-personality"
-							className="text-xl leading-6 text-white"
+							className="text-lg leading-6 text-white"
 						>
 							Deep Personality Quiz
 						</Link>
@@ -171,28 +192,35 @@ export default function Example() {
 									</div>
 									<Link
 										href="/"
-										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-josefin"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Home
 									</Link>
 									<Link
-										href="/training"
-										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-josefin"
+										href="/start"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
-										Training
+										Where do I start?
+									</Link>
+									<Link
+										href="/source-linker"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										SourceLinker
 									</Link>
 									<Link
 										href="/personality"
-										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-josefin"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Personality Quiz
 									</Link>
 									<Link
 										href="/deep-personality"
-										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-josefin"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Deep Personality Quiz

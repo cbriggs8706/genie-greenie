@@ -54,14 +54,14 @@ export default function SourceLinkerComponent() {
 	}
 
 	return (
-		<div className="max-w-xl mx-auto p-4">
+		<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center mx-auto mt-10 mb-20">
 			{breadcrumb.length > 0 && <p>Your responses:</p>}
 			<ol className="mb-4 text-sm text-gray-600">
 				{breadcrumb.map((crumb, index) => (
 					<li key={index} className="">
 						<button
 							onClick={() => handleBreadcrumbClick(index)}
-							className="hover:underline hover:text-blue-500 text-left"
+							className="hover:underline hover:text-green-500 text-left"
 						>
 							{crumb.question}: <strong>{crumb.answer}</strong>
 						</button>
@@ -98,7 +98,7 @@ export default function SourceLinkerComponent() {
 							<button
 								key={answer.id}
 								onClick={() => handleAnswerClick(answer)}
-								className="block w-full text-left bg-blue-500 text-white px-4 py-2 my-1 rounded shadow hover:bg-blue-600"
+								className="block w-full text-left bg-green-500 text-white px-4 py-2 my-1 rounded shadow hover:bg-green-600"
 							>
 								{answer.answer}
 							</button>

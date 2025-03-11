@@ -2,12 +2,17 @@ import { cn } from '@/lib/utils/shadcn'
 
 type Props = {
 	children: string
-	className: string
+	className?: string
 }
 
 export const H1 = ({ children, className }: Props) => {
 	return (
-		<h1 className={cn(`font-young text-6xl md:text-9xl`, className)}>
+		<h1
+			className={cn(
+				`font-Young_Serif text-4xl md:text-6xl text-center my-10`,
+				className
+			)}
+		>
 			{children}
 		</h1>
 	)
@@ -16,7 +21,7 @@ export const H2 = ({ children, className }: Props) => {
 	return (
 		<h2
 			className={cn(
-				`font-young text-4xl md:text-5xl lg:text-6xl text-center`,
+				`font-Young_Serif text-4xl md:text-5xl lg:text-6xl text-center`,
 				className
 			)}
 		>
@@ -28,7 +33,7 @@ export const H3 = ({ children, className }: Props) => {
 	return (
 		<h3
 			className={cn(
-				`text-2xl md:text-3xl lg:text-4xl font-young font-bold`,
+				`text-2xl md:text-3xl lg:text-4xl font-Young_Serif font-bold`,
 				className
 			)}
 		>
@@ -40,7 +45,7 @@ export const H4 = ({ children, className }: Props) => {
 	return (
 		<h4
 			className={cn(
-				`text-lg md:text-xl font-young lg:text-2xl font-bold`,
+				`text-lg md:text-xl font-Young_Serif lg:text-2xl font-bold`,
 				className
 			)}
 		>

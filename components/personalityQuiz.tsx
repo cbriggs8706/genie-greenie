@@ -54,36 +54,49 @@ export default function PersonalityQuiz() {
 	)
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen p-6">
+		<div className="flex flex-col items-center px-6">
 			{!quizComplete ? (
-				<div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg text-center">
-					<h2 className="text-xl font-bold mb-4">
-						{questions[currentQuestion].text}
-					</h2>
-					<div className="flex flex-col gap-4">
-						{questions[currentQuestion].options.map((option, idx) => (
-							<Button
-								key={idx}
-								onClick={() => handleAnswer(option.category)}
-								className="w-full p-3"
-							>
-								{option.answer}
-							</Button>
-						))}
-					</div>
-					<p className="mt-4 text-gray-500">
-						{currentQuestion + 1} / {totalQuestions}
+				<>
+					<p className="p-6 text-center max-w-4xl">
+						You&apos;re 28 questions away from finding out what type of
+						genealogist you are at heart! Tap/click the green buttons to answer.
+						After you&apos;re finished, you&apos;ll be able to see your results
+						or retake the quiz.
 					</p>
-				</div>
+
+					<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center">
+						<h2 className="text-xl font-bold mb-4">
+							{questions[currentQuestion].text}
+						</h2>
+						<div className="flex flex-col gap-8">
+							{questions[currentQuestion].options.map((option, idx) => (
+								<Button
+									key={idx}
+									onClick={() => handleAnswer(option.category)}
+									className="w-full p-3 bg-green-500 text-white"
+								>
+									{option.answer}
+								</Button>
+							))}
+						</div>
+						<p className="mt-8 text-green-500 text-3xl font-bold">
+							{currentQuestion + 1} / {totalQuestions}
+						</p>
+					</div>
+				</>
 			) : (
-				<div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg text-center">
+				<div className="w-full mb-20 text-center">
+					{/* <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg text-center"> */}
 					<h2 className="text-2xl font-bold mb-4">Your Personality Results</h2>
-					<PieChart width={400} height={400} className="mx-auto">
+					<p className="mb-4">
+						Tap the areas of the chart to read more about each personality.
+					</p>
+					<PieChart width={350} height={350} className="mx-auto">
 						<Pie
 							data={data}
 							cx="50%"
 							cy="50%"
-							outerRadius={150}
+							outerRadius={100}
 							fill="#8884d8"
 							dataKey="value"
 							label
@@ -98,7 +111,7 @@ export default function PersonalityQuiz() {
 					</PieChart>
 
 					{selectedPersonality && (
-						<div className="mt-6 p-4 bg-gray-100 rounded-lg text-left">
+						<div className="mt-6 text-left">
 							<h3 className="text-xl font-bold">{selectedPersonality.title}</h3>
 
 							{selectedPersonality.text

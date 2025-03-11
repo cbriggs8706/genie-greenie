@@ -33,18 +33,11 @@ export default function Footer() {
 	]
 
 	return (
-		<footer className="bg-darkblue lg:pt-20 lg:px-20">
-			<div className="hidden lg:block">
+		<footer className="">
+			<div className="hidden lg:block fixed bottom-0 h-16 bg-darkblue w-full"></div>
+			{/* <div className="hidden lg:block">
 				<div className="mx-auto border-white border-t-2" />
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white text-center pt-5">
-					<Image
-						src="mascot.svg"
-						width={50}
-						height={50}
-						alt="Genie Greenie Logo"
-						className="mx-auto w-20"
-					/>
-
 					<div className="flex flex-col lg:grid lg:grid-cols-3 py-5">
 						<div className="col-span-3 mx-auto flex items-center gap-3">
 							<Link
@@ -87,7 +80,8 @@ export default function Footer() {
 				</div>
 
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white font-thin text-xs text-center px-4 pb-5"></div>
-			</div>
+			</div> */}
+			{/* Mobile Menu */}
 			<div className="fixed bottom-0 left-0 lg:hidden grid grid-cols-3 justify-around py-4 z-20 bg-darkblue w-full">
 				{footerIcons.map((item) => (
 					<a href={item.href} key={item.name}>
