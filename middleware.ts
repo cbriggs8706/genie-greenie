@@ -7,6 +7,7 @@ export default authMiddleware({
 		'/full-test',
 		'/personality',
 		'/test',
+		'/source-linker',
 	],
 })
 
