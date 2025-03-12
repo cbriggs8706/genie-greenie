@@ -12,10 +12,10 @@ export default function Home() {
 				<p>
 					Welcome to Genie Greenie, your ultimate guide to mastering genealogy
 					from day one. We simplify your entry into family history, removing the
-					overwhelm and guesswork. Whether you're a complete beginner or seeking
-					to deepen your existing skills, our interactive training platform
-					helps you quickly discover your niche and provides personalized
-					pathways to genealogy success.
+					overwhelm and guesswork. Whether you&apos;re a complete beginner or
+					seeking to deepen your existing skills, our interactive training
+					platform helps you quickly discover your niche and provides
+					personalized pathways to genealogy success.
 				</p>
 				<H3>Find Your Place in Family History</H3>
 
@@ -23,18 +23,18 @@ export default function Home() {
 					At Genie Greenie, we understand that genealogy can feel intimidating.
 					Our user-friendly, structured training system breaks down complex
 					concepts into clear, actionable steps. With engaging resources,
-					quizzes, and hands-on activities, you'll confidently build essential
-					skills, uncover hidden family stories, and make meaningful discoveries
-					faster.
+					quizzes, and hands-on activities, you&apos;ll confidently build
+					essential skills, uncover hidden family stories, and make meaningful
+					discoveries faster.
 				</p>
 				<H3>Personalized Learning, Immediate Results</H3>
 
 				<p>
-					Don't waste time guessing where to start. Genie Greenie guides you
-					directly to the resources you need, customized to your interests and
-					experience level. From understanding historical records to utilizing
-					powerful genealogy tools, we'll help you gain proficiency quickly and
-					enjoyably.
+					Don&apos;t waste time guessing where to start. Genie Greenie guides
+					you directly to the resources you need, customized to your interests
+					and experience level. From understanding historical records to
+					utilizing powerful genealogy tools, we&apos;ll help you gain
+					proficiency quickly and enjoyably.
 				</p>
 				<H3>Your Genealogy Success Starts Here</H3>
 

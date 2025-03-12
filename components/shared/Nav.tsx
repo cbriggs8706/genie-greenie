@@ -58,7 +58,7 @@ export default function Example() {
 					<div className="flex lg:flex-1">
 						<Link href="/" className="p-2 px-4 flex-shrink-0">
 							<Image
-								src="mascot.svg"
+								src="/genieGreenieLogo150px.png"
 								width={75}
 								height={75}
 								alt="Genie Greenie Logo"
