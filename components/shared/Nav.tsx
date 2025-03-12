@@ -35,11 +35,11 @@ const quizzes = [
 		href: '/personality',
 		img: 'mascot.svg',
 	},
-	{
-		name: 'Deep Personality Quiz',
-		href: '/deep-personality',
-		img: 'mascot.svg',
-	},
+	// {
+	// 	name: 'Deep Personality Quiz',
+	// 	href: '/deep-personality',
+	// 	img: 'mascot.svg',
+	// },
 ]
 
 function classNames(...classes: any) {
@@ -50,7 +50,7 @@ export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	return (
 		<>
-			<header className="bg-darkblue text-white z-30 sticky font-Young_Serif uppercase">
+			<header className="bg-sky-800 text-white z-30 sticky font-Young_Serif uppercase">
 				<nav
 					className="mx-auto flex max-w-7xl items-center justify-between lg:px-16"
 					aria-label="Global"
@@ -66,6 +66,9 @@ export default function Example() {
 							/>
 						</Link>
 					</div>
+					{/* <span className="font-Young_Serif text-lg lg:text-2xl text-white text-center lg:text-left">
+						Genie Greenie
+					</span> */}
 					<div className="flex lg:hidden">
 						<button
 							type="button"
@@ -134,21 +137,18 @@ export default function Example() {
 						<Link href="/start" className="text-lg leading-6 text-white">
 							Where do I start?
 						</Link>
-						<Link
-							href="/source-linker"
-							className="text-lg leading-6 text-white"
-						>
-							SourceLinker
+						<Link href="/learn" className="text-lg leading-6 text-white">
+							Learn
 						</Link>
 						<Link href="/personality" className="text-lg leading-6 text-white">
-							Personality Quiz
+							Quiz
 						</Link>
-						<Link
+						{/* <Link
 							href="/deep-personality"
 							className="text-lg leading-6 text-white"
 						>
 							Deep Personality Quiz
-						</Link>
+						</Link> */}
 					</Popover.Group>
 				</nav>
 
@@ -205,26 +205,27 @@ export default function Example() {
 										Where do I start?
 									</Link>
 									<Link
-										href="/source-linker"
+										href="/learn"
 										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
-										SourceLinker
+										Learn
 									</Link>
+
 									<Link
 										href="/personality"
 										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
-										Personality Quiz
+										Quiz
 									</Link>
-									<Link
+									{/* <Link
 										href="/deep-personality"
 										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Deep Personality Quiz
-									</Link>
+									</Link> */}
 								</div>
 							</div>
 						</div>

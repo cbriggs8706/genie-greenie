@@ -71,7 +71,7 @@
 		@apply border-border;
 	}
 	body {
-		@apply bg-background text-foreground text-darkblue;
+		@apply bg-background text-foreground text-sky-900;
 	}
 	p {
 		@apply font-inter;

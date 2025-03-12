@@ -74,17 +74,17 @@ export default function PersonalityQuiz() {
 	)
 
 	return (
-		<div className="flex flex-col items-center px-6">
+		<div className="flex flex-col items-center text-center">
 			{!quizComplete ? (
 				<>
-					<p className="p-6 text-center max-w-4xl">
+					<p>
 						You&apos;re 28 questions away from finding out what type of
 						genealogist you are at heart! Tap/click the green buttons to answer.
 						After you&apos;re finished, you&apos;ll be able to see your results
 						or retake the quiz.
 					</p>
 
-					<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center">
+					<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center mx-auto mt-10 mb-20">
 						<h2 className="text-xl font-bold mb-4">
 							{questions[currentQuestion].text}
 						</h2>

@@ -10,6 +10,8 @@ export default authMiddleware({
 		'/source-linker',
 		'/deep-personality',
 		'/start',
+		'/learn',
+		'/learn/source-linker',
 	],
 })
 

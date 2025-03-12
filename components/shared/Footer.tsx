@@ -26,7 +26,7 @@ export default function Footer() {
 		},
 		{
 			name: 'Learn',
-			href: '/source-linker',
+			href: '/learn',
 			icon: FaGraduationCap,
 		},
 		{
@@ -86,7 +86,7 @@ export default function Footer() {
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white font-thin text-xs text-center px-4 pb-5"></div>
 			</div> */}
 			{/* Mobile Menu */}
-			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 lg:hidden grid grid-cols-4 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
+			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 grid grid-cols-4 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
 				{footerIcons.map((item) => (
 					<a href={item.href} key={item.name}>
 						<div className="">

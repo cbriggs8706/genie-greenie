@@ -1,11 +1,11 @@
 'use client'
 
-import BeginnerQuiz from '@/components/beginnerQuiz'
+import BeginnerQuiz from '@/components/startQuiz'
 import { H1, H2, H3 } from '@/components/headings'
 
 export default function Home() {
 	return (
-		<div className="flex flex-wrap w-full gap-4 justify-center">
+		<div className="flex flex-wrap w-full gap-4 justify-center text-center md:text-left">
 			<div>
 				<H1>Discover Your Genealogy Journey with Confidence</H1>
 
@@ -59,7 +59,7 @@ export default function Home() {
 					confidence.
 				</p>
 			</div>
-			<div className="bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center">
+			{/* <div className="bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center">
 				Learn SourceLinker
 			</div>
 			<div className="bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center">
@@ -67,7 +67,7 @@ export default function Home() {
 			</div>
 			<div className="bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center">
 				Where do I begin?
-			</div>
+			</div> */}
 		</div>
 	)
 }
