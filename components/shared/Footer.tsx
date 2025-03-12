@@ -3,38 +3,42 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import {
-	MdHome,
-	MdInventory2,
-	MdGroups,
-	MdHandshake,
-	MdDirectionsWalk,
-	MdCall,
-} from 'react-icons/md'
-
-import { Mail, Facebook, Instagram } from 'lucide-react'
+	FaChartPie,
+	FaCircleQuestion,
+	FaGraduationCap,
+	FaHouseChimney,
+	FaSquareFacebook,
+	FaSquareInstagram,
+	FaSquareEnvelope,
+} from 'react-icons/fa6'
 
 export default function Footer() {
 	const footerIcons = [
 		{
 			name: 'Home',
 			href: '/',
-			icon: MdHome,
+			icon: FaHouseChimney,
 		},
 		{
-			name: 'Training',
-			href: '/training',
-			icon: MdInventory2,
+			name: 'Start',
+			href: '/start',
+			icon: FaCircleQuestion,
+		},
+		{
+			name: 'Learn',
+			href: '/source-linker',
+			icon: FaGraduationCap,
 		},
 		{
 			name: 'Quiz',
 			href: '/personality',
-			icon: MdGroups,
+			icon: FaChartPie,
 		},
 	]
 
 	return (
 		<footer className="">
-			<div className="hidden lg:block fixed bottom-0 h-16 bg-darkblue w-full"></div>
+			{/* <div className="hidden lg:block fixed bottom-0 h-16 bg-amber-300 w-full"></div> */}
 			{/* <div className="hidden lg:block">
 				<div className="mx-auto border-white border-t-2" />
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white text-center pt-5">
@@ -46,7 +50,7 @@ export default function Footer() {
 								rel="noopener noreferrer"
 							>
 								<div className=" rounded-xl border-4 border-white">
-									<Facebook className="text-white" size={50} />
+									<FaSquareFacebook className="text-white" size={50} />
 								</div>
 							</Link>
 							<Link
@@ -54,10 +58,10 @@ export default function Footer() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<Instagram className="text-white" size={63} />
+								<FaSquareInstagram className="text-white" size={63} />
 							</Link>
 							<Link href="/contact">
-								<Mail className=" text-white" size={65} />
+								<FaSquareEnvelope className=" text-white" size={65} />
 							</Link>
 							<p>
 								&copy; {new Date().getFullYear()} Genie Greenie. All Rights
@@ -82,7 +86,7 @@ export default function Footer() {
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white font-thin text-xs text-center px-4 pb-5"></div>
 			</div> */}
 			{/* Mobile Menu */}
-			<div className="fixed bottom-0 left-0 lg:hidden grid grid-cols-3 justify-around py-4 z-20 bg-darkblue w-full">
+			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 lg:hidden grid grid-cols-4 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
 				{footerIcons.map((item) => (
 					<a href={item.href} key={item.name}>
 						<div className="">

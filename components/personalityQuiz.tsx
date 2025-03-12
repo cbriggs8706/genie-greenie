@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 import { personalityData } from '@/data/personalityQuestions'
 import { personalityTypes } from '@/data/personalityTypes'
@@ -22,6 +22,26 @@ export default function PersonalityQuiz() {
 	const [results, setResults] = useState<Record<string, number>>({})
 	const [quizComplete, setQuizComplete] = useState(false)
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+	const [chartSize, setChartSize] = useState({
+		width: 350,
+		height: 350,
+		outerRadius: 100,
+	})
+
+	useEffect(() => {
+		const updateChartSize = () => {
+			if (window.innerWidth < 480) {
+				setChartSize({ width: 200, height: 300, outerRadius: 75 })
+			} else {
+				setChartSize({ width: 350, height: 350, outerRadius: 100 })
+			}
+		}
+
+		updateChartSize()
+		window.addEventListener('resize', updateChartSize)
+
+		return () => window.removeEventListener('resize', updateChartSize)
+	}, [])
 
 	const questions = personalityData.questions
 	const totalQuestions = questions.length
@@ -86,17 +106,20 @@ export default function PersonalityQuiz() {
 				</>
 			) : (
 				<div className="w-full mb-20 text-center">
-					{/* <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg text-center"> */}
 					<h2 className="text-2xl font-bold mb-4">Your Personality Results</h2>
 					<p className="mb-4">
 						Tap the areas of the chart to read more about each personality.
 					</p>
-					<PieChart width={350} height={350} className="mx-auto">
+					<PieChart
+						width={chartSize.width}
+						height={chartSize.height}
+						className="mx-auto"
+					>
 						<Pie
 							data={data}
 							cx="50%"
 							cy="50%"
-							outerRadius={100}
+							outerRadius={chartSize.outerRadius}
 							fill="#8884d8"
 							dataKey="value"
 							label

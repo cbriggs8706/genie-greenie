@@ -9,7 +9,7 @@ export const H1 = ({ children, className }: Props) => {
 	return (
 		<h1
 			className={cn(
-				`font-Young_Serif text-4xl md:text-6xl text-center my-10`,
+				`font-Young_Serif text-4xl md:text-6xl text-center mb-8`,
 				className
 			)}
 		>
@@ -33,7 +33,7 @@ export const H3 = ({ children, className }: Props) => {
 	return (
 		<h3
 			className={cn(
-				`text-2xl md:text-3xl lg:text-4xl font-Young_Serif font-bold`,
+				`text-2xl md:text-3xl lg:text-4xl font-Young_Serif font-bold my-8`,
 				className
 			)}
 		>
