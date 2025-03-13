@@ -17,7 +17,7 @@ export default function Home() {
 					interactive training platform helps you quickly discover your niche
 					and provides personalized pathways to genealogy success.
 				</p>
-				<H3>What's a Genie?</H3>
+				<H3>What&apos;s a Genie?</H3>
 
 				<p>
 					The fun nickname for a genealogist is a &apos;gene&apos;, pronounced

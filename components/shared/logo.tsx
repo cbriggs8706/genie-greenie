@@ -8,7 +8,7 @@ export default function Logo({ className = '', width = 100, height = 100 }) {
 			className={className}
 		>
 			<defs>
-				<style>{'.b{fill:#75c045;stroke-width:0px;}'}</style>
+				<style>{'.b{fill:#ffffff;stroke-width:0px;}'}</style>
 			</defs>
 			<path
 				className="b"
