@@ -50,7 +50,7 @@ export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	return (
 		<>
-			<header className="bg-sky-800 text-white z-30 sticky font-Young_Serif uppercase">
+			<header className="bg-sky-800 text-white z-30 sticky font-Young_Serif">
 				<nav
 					className="mx-auto flex max-w-7xl items-center justify-between lg:px-16"
 					aria-label="Global"
@@ -66,9 +66,9 @@ export default function Example() {
 							/>
 						</Link>
 					</div>
-					{/* <span className="font-Young_Serif text-lg lg:text-2xl text-white text-center lg:text-left">
+					<span className="font-Young_Serif text-2xl lg:text-4xl text-white text-center">
 						Genie Greenie
-					</span> */}
+					</span>
 					<div className="flex lg:hidden">
 						<button
 							type="button"
@@ -80,8 +80,8 @@ export default function Example() {
 						</button>
 					</div>
 
-					<Popover.Group className="hidden lg:flex lg:gap-x-12">
-						{/* <Popover className="relative">
+					{/*<Popover.Group className="hidden lg:flex lg:gap-x-12">
+						 <Popover className="relative">
 							<Popover.Button className="flex items-center gap-x-1 text-xl leading-6 text-white uppercase">
 								Training
 								<HiChevronDown
@@ -132,7 +132,7 @@ export default function Example() {
 									</div>
 								</Popover.Panel>
 							</Transition>
-						</Popover> */}
+						</Popover> 
 
 						<Link href="/start" className="text-lg leading-6 text-white">
 							Where do I start?
@@ -143,13 +143,13 @@ export default function Example() {
 						<Link href="/personality" className="text-lg leading-6 text-white">
 							Quiz
 						</Link>
-						{/* <Link
+						 <Link
 							href="/deep-personality"
 							className="text-lg leading-6 text-white"
 						>
 							Deep Personality Quiz
-						</Link> */}
-					</Popover.Group>
+						</Link> 
+					</Popover.Group>*/}
 				</nav>
 
 				<Dialog
@@ -159,13 +159,13 @@ export default function Example() {
 					onClose={setMobileMenuOpen}
 				>
 					<div className="fixed inset-0 z-40" />
-					<Dialog.Panel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-darkblue px-2 pb-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+					<Dialog.Panel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-sky-800 px-2 pb-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
 						<div className="flex items-center justify-between">
 							<Link href="/" className="p-2">
-								<span className="sr-only">Genie Greenie</span>
+								<span className="sr-only font-Young_Serif">Genie Greenie</span>
 
 								<Image
-									src="mascot.svg"
+									src="/genieGreenieLogo150px.png"
 									width={50}
 									height={50}
 									alt="Genie Greenie Logo"
@@ -186,7 +186,7 @@ export default function Example() {
 							<div className="">
 								<div className="">
 									<div>
-										<p className="text-2xl text-center text-white font-bold font-roboto uppercase">
+										<p className="text-2xl text-center text-white font-Young_Serif uppercase">
 											Genie Greenie
 										</p>
 									</div>
@@ -219,6 +219,21 @@ export default function Example() {
 									>
 										Quiz
 									</Link>
+									<Link
+										href="/help"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										Help Desk
+									</Link>
+									<Link
+										href="/about"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										About Us
+									</Link>
+
 									{/* <Link
 										href="/deep-personality"
 										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"

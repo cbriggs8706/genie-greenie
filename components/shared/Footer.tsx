@@ -10,6 +10,8 @@ import {
 	FaSquareFacebook,
 	FaSquareInstagram,
 	FaSquareEnvelope,
+	FaLocationDot,
+	FaCircleInfo,
 } from 'react-icons/fa6'
 
 export default function Footer() {
@@ -22,7 +24,7 @@ export default function Footer() {
 		{
 			name: 'Start',
 			href: '/start',
-			icon: FaCircleQuestion,
+			icon: FaLocationDot,
 		},
 		{
 			name: 'Learn',
@@ -34,6 +36,16 @@ export default function Footer() {
 			href: '/personality',
 			icon: FaChartPie,
 		},
+		{
+			name: 'Help',
+			href: '/help',
+			icon: FaCircleQuestion,
+		},
+		// {
+		// 	name: 'About',
+		// 	href: '/about',
+		// 	icon: FaCircleInfo,
+		// },
 	]
 
 	return (
@@ -86,7 +98,7 @@ export default function Footer() {
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white font-thin text-xs text-center px-4 pb-5"></div>
 			</div> */}
 			{/* Mobile Menu */}
-			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 grid grid-cols-4 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
+			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 grid grid-cols-5 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
 				{footerIcons.map((item) => (
 					<a href={item.href} key={item.name}>
 						<div className="">

@@ -17,34 +17,39 @@ export const personalityData: PersonalityData = {
 			id: 'q1',
 			text: 'When working with a photo, do you get more satisfaction:',
 			options: [
-				{ answer: 'scanning and uploading it?', category: 'Digitizer' },
+				{ answer: 'Scanning and uploading it?', category: 'Digitizer' },
 				{
-					answer: 'adding handy background information to make it searchable?',
+					answer:
+						'indentifying the people in it and writing information on the back.',
 					category: 'Indexer',
 				},
 			],
 		},
 		{
 			id: 'q2',
-			text: 'Do you prefer spending time: ',
+			text: "You've got some free time this afternoon, which project would you rather tackle?",
 			options: [
 				{
-					answer: 'digitizing records to preserving them',
+					answer: 'Scanning a shoebox of family photos and uploading them.',
 					category: 'Digitizer',
 				},
 				{
-					answer: 'linking records to the right ancestors',
+					answer:
+						'Find new blue record hints in FamilySearch and link records to your ancestors',
 					category: 'Attacher',
 				},
 			],
 		},
 		{
 			id: 'q3',
-			text: 'When you come across an old family letter, do you enjoy:',
+			text: 'You come across an old family letter that no one in your family has seen, what do you do first?',
 			options: [
-				{ answer: 'Scanning and preserving it', category: 'Digitizer' },
 				{
-					answer: 'Writing about its historical and emotional significance',
+					answer: 'Scan it and upload it to FamilySearch',
+					category: 'Digitizer',
+				},
+				{
+					answer: 'Call up a family member and read it to them',
 					category: 'Storyteller',
 				},
 			],
@@ -62,14 +67,14 @@ export const personalityData: PersonalityData = {
 		},
 		{
 			id: 'q5',
-			text: 'Do you prefer:',
+			text: 'Which phase brings you more joy?',
 			options: [
 				{
-					answer: 'Scanning and saving old photographs',
+					answer: 'Scanning and saving old photographs.',
 					category: 'Digitizer',
 				},
 				{
-					answer: 'Sorting and labeling them into well-organized albums',
+					answer: 'Sorting and labeling them into well-organized albums.',
 					category: 'Organizer',
 				},
 			],
@@ -78,17 +83,19 @@ export const personalityData: PersonalityData = {
 			id: 'q6',
 			text: 'Would you rather:',
 			options: [
-				{ answer: 'Preserve history by digitizing it', category: 'Digitizer' },
 				{
-					answer:
-						'Create new ways to make family history engaging for future generations',
+					answer: 'Preserve an audio clip of an deceased ancestor',
+					category: 'Digitizer',
+				},
+				{
+					answer: 'Record a new audio clip of a living family member',
 					category: 'Creator',
 				},
 			],
 		},
 		{
 			id: 'q7',
-			text: 'Do you feel a stronger connection to your ancestors by:',
+			text: 'You feel a stronger connection to your ancestors by:',
 			options: [
 				{ answer: 'Scanning their records', category: 'Digitizer' },
 				{ answer: 'Visiting the places they lived', category: 'Explorer' },
@@ -98,10 +105,12 @@ export const personalityData: PersonalityData = {
 			id: 'q8',
 			text: 'When looking at historical records, do you prefer:',
 			options: [
-				{ answer: 'Making them searchable for others', category: 'Indexer' },
 				{
-					answer:
-						'Personally linking them to the right people in a family tree',
+					answer: 'Reading through the whole record for context',
+					category: 'Indexer',
+				},
+				{
+					answer: 'Linking them to the right people in the family tree',
 					category: 'Attacher',
 				},
 			],
@@ -110,37 +119,38 @@ export const personalityData: PersonalityData = {
 			id: 'q9',
 			text: 'Do you get more satisfaction from:',
 			options: [
-				{ answer: 'Making old documents easy to search', category: 'Indexer' },
+				{ answer: 'Deciphering old handwriting', category: 'Indexer' },
 				{
-					answer: 'Crafting meaningful stories based on those documents',
+					answer: 'Crafting meaningful stories based on old documents',
 					category: 'Storyteller',
 				},
 			],
 		},
 		{
 			id: 'q10',
-			text: 'Would you rather:',
+			text: 'Would you rather spend an afternoon',
 			options: [
 				{
-					answer: 'Index thousands of names into a searchable database',
+					answer: "Indexing a thousand names so that they're searchable",
 					category: 'Indexer',
 				},
 				{
-					answer: 'Hunt through records to solve a specific family mystery',
+					answer: 'Hunting through records to solve a specific family mystery',
 					category: 'Researcher',
 				},
 			],
 		},
 		{
 			id: 'q11',
-			text: 'Do you enjoy:',
+			text: 'What would do you enjoy more:',
 			options: [
 				{
-					answer: 'Transcribing and making records searchable',
+					answer: 'Quick Name Review (a form of indexing)',
 					category: 'Indexer',
 				},
 				{
-					answer: 'Sorting and categorizing family history materials',
+					answer:
+						'Categorizing and alphabetizing a newly acquired collection of family documents',
 					category: 'Organizer',
 				},
 			],
@@ -162,25 +172,29 @@ export const personalityData: PersonalityData = {
 		},
 		{
 			id: 'q13',
-			text: 'Do you prefer:',
+			text: 'Would you prefer:',
 			options: [
-				{ answer: 'Making old records accessible online', category: 'Indexer' },
 				{
-					answer: 'Traveling to historical sites to find them in person',
+					answer:
+						'Making old records accessible online with some form of indexing from home',
+					category: 'Indexer',
+				},
+				{
+					answer: 'Traveling to historical sites to find the records in person',
 					category: 'Explorer',
 				},
 			],
 		},
 		{
 			id: 'q14',
-			text: 'Do you enjoy more:',
+			text: "What's more exciting to you?",
 			options: [
 				{
-					answer: 'Connecting documents and records to ancestors',
+					answer: "A new record for an ancestor you've been researching",
 					category: 'Attacher',
 				},
 				{
-					answer: 'Crafting detailed stories about their lives',
+					answer: "A new story about an ancestor you've never heard before",
 					category: 'Storyteller',
 				},
 			],
@@ -190,149 +204,148 @@ export const personalityData: PersonalityData = {
 			text: 'Would you rather:',
 			options: [
 				{
-					answer: 'Focus on attaching records to known ancestors',
+					answer: 'Focus on attaching blue record hints to known ancestors',
 					category: 'Attacher',
 				},
 				{
-					answer: 'Hunt for new ancestors in hard-to-find documents',
+					answer: 'Hunt for new ancestors in newly indexed documents',
 					category: 'Researcher',
 				},
 			],
 		},
 		{
 			id: 'q16',
-			text: 'Do you prefer:',
+			text: "What's more valuable to you?",
 			options: [
 				{
-					answer: 'Linking documents to individuals in an online tree',
+					answer:
+						'Uploading a document to FamilySearch and attaching it to an ancestor',
 					category: 'Attacher',
 				},
 				{
-					answer: 'Organizing them into a system where they are easily found',
+					answer: 'Keeping a physical copy, neatly organized',
 					category: 'Organizer',
 				},
 			],
 		},
 		{
 			id: 'q17',
-			text: 'Are you more interested in:',
+			text: 'You have an afternoon with a helpful teenage grandchild.  Would you be more inclined to:',
 			options: [
 				{
-					answer: 'Linking historical documents to ancestors',
+					answer: 'Have them help you link historical documents to ancestors',
 					category: 'Attacher',
 				},
 				{
-					answer:
-						'Creating experiences that help family members engage with history',
+					answer: 'Play a few rounds of family history games like Geneopardy',
 					category: 'Creator',
 				},
 			],
 		},
 		{
 			id: 'q18',
-			text: 'Would you rather:',
+			text: 'Given the right service mission opportunity (all expenses paid), would you rather:',
 			options: [
 				{ answer: 'Attach records from home', category: 'Attacher' },
 				{
 					answer:
-						'Travel to places where your ancestors lived to discover new records firsthand',
+						'Serve abroad digitizing and preserving records and memories from another country',
 					category: 'Explorer',
 				},
 			],
 		},
 		{
 			id: 'q19',
-			text: 'Do you find more joy in:',
+			text: 'In your opinion what has a greater inpact on the family unit?',
 			options: [
 				{
-					answer: 'Crafting engaging narratives about your ancestors',
+					answer: 'Passing stories along to the rising generations',
 					category: 'Storyteller',
 				},
 				{
-					answer: 'Uncovering new records that prove their history',
+					answer: 'Finding and sourcing data about their ancestors',
 					category: 'Researcher',
 				},
 			],
 		},
 		{
 			id: 'q20',
-			text: 'Do you prefer:',
+			text: "What would your family say that you're better known for?",
 			options: [
 				{
-					answer: 'Writing stories to preserve family history',
+					answer: 'Telling stories',
 					category: 'Storyteller',
 				},
 				{
-					answer:
-						'Meticulously organizing materials so others can easily access them',
+					answer: 'Being the record keeper',
 					category: 'Organizer',
 				},
 			],
 		},
 		{
 			id: 'q21',
-			text: 'Would you rather:',
+			text: 'Would you be better described as:',
 			options: [
 				{
-					answer: 'Document the past through stories',
+					answer: 'Someone who writes biographies',
 					category: 'Storyteller',
 				},
 				{
-					answer:
-						'Create interactive ways for family members to connect with their history',
+					answer: 'Someone who biographies are written about',
 					category: 'Creator',
 				},
 			],
 		},
 		{
 			id: 'q22',
-			text: 'Do you feel more inspired when:',
+			text: 'When visiting a town (with your family) when an ancestor lived, are you more likely to',
 			options: [
 				{
-					answer: 'Telling stories based on research',
+					answer: 'Drive past their old house and tell stories',
 					category: 'Storyteller',
 				},
 				{
-					answer:
-						'Physically visiting the places where those stories took place',
+					answer: 'Visit them at the cemetery',
 					category: 'Explorer',
 				},
 			],
 		},
 		{
 			id: 'q23',
-			text: 'Are you more passionate about:',
+			text: 'You have 5 minutes, which could you find faster?',
 			options: [
 				{
-					answer: 'Digging through historical records to make discoveries',
+					answer: 'A land deed of a close ancestor in a digital collection',
 					category: 'Researcher',
 				},
 				{
-					answer: 'Methodically organizing the records you already have',
+					answer:
+						"A physical copy/original of your parent's wedding certificate",
 					category: 'Organizer',
 				},
 			],
 		},
 		{
 			id: 'q24',
-			text: 'Do you enjoy more:',
+			text: "No other plans for spring break and you've got nothing but time, what do you choose to do:",
 			options: [
 				{
-					answer: "Spending time uncovering your family's past",
+					answer:
+						"Spend time uncovering your family's past based on a new DNA match",
 					category: 'Researcher',
 				},
 				{
-					answer: 'Building meaningful experiences for future generations',
+					answer: 'Spend time with family making memories',
 					category: 'Creator',
 				},
 			],
 		},
 		{
 			id: 'q25',
-			text: 'Would you rather:',
+			text: 'Say you go on a trip to discover your family roots, would you rather:',
 			options: [
 				{
-					answer: 'Spend hours online or in archives searching for records',
+					answer: 'Spend hours in archives searching for records',
 					category: 'Researcher',
 				},
 				{
@@ -343,46 +356,47 @@ export const personalityData: PersonalityData = {
 		},
 		{
 			id: 'q26',
-			text: 'Do you prefer:',
+			text: "It's Christmas break and the grandkids are over.  What would be more fulfilling to you:",
 			options: [
 				{
-					answer: 'Meticulously sorting and labeling family records',
+					answer:
+						'Sharing with a grandchild a scrapbook/album/book you made about them',
 					category: 'Organizer',
 				},
 				{
-					answer:
-						'Designing creative ways to engage family members with their history',
+					answer: 'Crafting/making new memories with a grandchild',
 					category: 'Creator',
 				},
 			],
 		},
 		{
 			id: 'q27',
-			text: 'Are you more drawn to:',
+			text: 'What would be more precious to you?',
 			options: [
 				{
-					answer: 'Organizing and preserving documents',
+					answer:
+						'Preserving a cherished recipe of an ancestor for future generations.',
 					category: 'Organizer',
 				},
 				{
 					answer:
-						"Traveling to historical sites to experience your family's past firsthand",
+						'Being able to taste the recipe one more time, made by the hands your ancestor.',
 					category: 'Explorer',
 				},
 			],
 		},
 		{
 			id: 'q28',
-			text: 'Would you rather:',
+			text: "It's Memorial Day. Which would be more enjoyable?",
 			options: [
 				{
 					answer:
-						'Design activities that connect your family to their heritage',
+						"Visiting a family cemeteries with some family members who havent't been there before",
 					category: 'Creator',
 				},
 				{
 					answer:
-						'Travel to the places where history happened to experience it firsthand',
+						'Researching and exploring obscure abandoned cemeteries and placing flags and flowers on some long forgotten headstones.',
 					category: 'Explorer',
 				},
 			],

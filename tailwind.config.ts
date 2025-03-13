@@ -1,4 +1,3 @@
-import { Young_Serif } from 'next/font/google'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -19,10 +18,8 @@ const config: Config = {
 		},
 		extend: {
 			fontFamily: {
-				roboto: ['var(--roboto)'],
 				inter: ['var(--inter)'],
 				Young_Serif: ['var(--young)'],
-				jslab: ['var(--jslab)'],
 			},
 			gridTemplateColumns: {
 				'16': 'repeat(16, minmax(0, 1fr))',

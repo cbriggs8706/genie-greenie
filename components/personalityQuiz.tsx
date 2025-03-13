@@ -84,7 +84,7 @@ export default function PersonalityQuiz() {
 						or retake the quiz.
 					</p>
 
-					<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center mx-auto mt-10 mb-20">
+					<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-700 border-2 border-solid text-center mx-auto mt-10 mb-20">
 						<h2 className="text-xl font-bold mb-4">
 							{questions[currentQuestion].text}
 						</h2>
@@ -93,13 +93,13 @@ export default function PersonalityQuiz() {
 								<Button
 									key={idx}
 									onClick={() => handleAnswer(option.category)}
-									className="w-full p-3 bg-green-500 text-white"
+									className="w-full p-3 bg-green-700 text-white"
 								>
 									{option.answer}
 								</Button>
 							))}
 						</div>
-						<p className="mt-8 text-green-500 text-3xl font-bold">
+						<p className="mt-8 text-green-700 text-3xl font-bold">
 							{currentQuestion + 1} / {totalQuestions}
 						</p>
 					</div>

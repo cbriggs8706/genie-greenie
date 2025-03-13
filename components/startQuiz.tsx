@@ -77,7 +77,7 @@ export default function StartQuiz() {
 	})
 
 	return (
-		<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center mx-auto mt-10 mb-20">
+		<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-700 border-2 border-solid text-center mx-auto mt-10 mb-20">
 			{currentQuestionIndex < questions.length ? (
 				<>
 					<h2 className="text-xl font-semibold mb-4">
@@ -88,7 +88,7 @@ export default function StartQuiz() {
 						{questions[currentQuestionIndex].options.map((option) => (
 							<button
 								key={option}
-								className={`block w-full text-left bg-green-500 text-white px-4 py-2 my-1 rounded shadow hover:bg-green-600 ${
+								className={`block w-full text-left bg-green-700 text-white px-4 py-2 my-1 rounded shadow hover:bg-green-700 ${
 									filters[currentQuestionIndex]?.includes(option)
 										? 'bg-blue-500 text-white'
 										: 'bg-gray-200'
@@ -100,7 +100,7 @@ export default function StartQuiz() {
 						))}
 					</div>
 					<button
-						className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
+						className="mt-4 px-4 py-2 bg-green-700 text-white rounded"
 						onClick={nextQuestion}
 					>
 						Next
@@ -113,7 +113,7 @@ export default function StartQuiz() {
 						filteredActivities.map((activity) => (
 							<div
 								key={activity.name}
-								className="w-full lg:max-w-2xl bg-white hover:bg-green-500 hover:cursor-pointer p-4 rounded-lg shadow-lg border-green-500 border-2 border-solid text-center mx-auto"
+								className="w-full lg:max-w-2xl bg-white hover:bg-green-700 hover:cursor-pointer p-4 rounded-lg shadow-lg border-green-700 border-2 border-solid text-center mx-auto"
 								onClick={() => activity.link && router.push(activity.link)}
 							>
 								<h3 className="font-semibold text-lg">{activity.name}</h3>
@@ -228,7 +228,7 @@ export default function StartQuiz() {
 // 					<div className="flex gap-2 mt-2">
 // 						<button
 // 							onClick={() => selectAll(index, q.options)}
-// 							className="px-2 py-1 text-xs bg-green-500 text-white rounded-lg font-inter"
+// 							className="px-2 py-1 text-xs bg-green-700 text-white rounded-lg font-inter"
 // 						>
 // 							Select All
 // 						</button>
@@ -321,7 +321,7 @@ export default function StartQuiz() {
 // 										{activity.skills.map((s) => (
 // 											<span
 // 												key={s}
-// 												className="bg-green-200 text-green-800 px-2 py-1 rounded text-xs"
+// 												className="bg-green-200 text-green-700 px-2 py-1 rounded text-xs"
 // 											>
 // 												{skills[Number(s)]}
 // 											</span>

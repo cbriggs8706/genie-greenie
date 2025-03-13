@@ -12,6 +12,8 @@ export default authMiddleware({
 		'/start',
 		'/learn',
 		'/learn/source-linker',
+		'/help',
+		'/about',
 	],
 })
 
