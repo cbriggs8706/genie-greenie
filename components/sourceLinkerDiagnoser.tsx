@@ -59,21 +59,6 @@ export default function SourceLinkerComponent() {
 
 	return (
 		<div className="w-full lg:max-w-2xl bg-white p-6 rounded-lg shadow-lg border-green-700 border-2 border-solid text-center mx-auto mt-10 mb-20">
-			{breadcrumb.length > 0 && <p>Your responses:</p>}
-			<ol className="mb-4 text-sm text-gray-600">
-				{breadcrumb.map((crumb, index) => (
-					<li key={index} className="">
-						<button
-							onClick={() => handleBreadcrumbClick(index)}
-							className="hover:underline hover:text-green-700 text-left"
-						>
-							{crumb.question}: <strong>{crumb.answer}</strong>
-						</button>
-						{/* {index < breadcrumb.length - 1 && <span className="mx-1">/</span>} */}
-					</li>
-				))}
-			</ol>
-
 			{currentVideo ? (
 				<div className="mb-4">
 					<h3 className="text-lg font-semibold mb-2">Recommended Video:</h3>
@@ -109,6 +94,27 @@ export default function SourceLinkerComponent() {
 						))}
 					</div>
 				</>
+			)}
+
+			{breadcrumb.length > 0 && (
+				<div className="mt-6 border-t pt-4">
+					<h3 className="font-semibold mb-2">
+						Your Answers to the Previous Questions:
+					</h3>
+					<p className="mb-4">Click any to change your answer.</p>
+					<ol className="space-y-4 text-left list-decimal ml-4">
+						{breadcrumb.map((crumb, idx) => (
+							<li key={idx}>
+								<button
+									className="text-sky-800 hover:underline text-left align-top"
+									onClick={() => handleBreadcrumbClick(idx)}
+								>
+									{crumb.question}: <strong>{crumb.answer}</strong>
+								</button>
+							</li>
+						))}
+					</ol>
+				</div>
 			)}
 		</div>
 	)
