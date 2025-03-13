@@ -13,8 +13,7 @@ import {
 	HiPhone,
 	HiDocumentCheck,
 } from 'react-icons/hi2'
-
-import Logo from '@/components/shared/Logo'
+import Logo from './Logo'
 
 const training = [
 	// {
