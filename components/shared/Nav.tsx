@@ -57,9 +57,9 @@ export default function Example() {
 					<div className="flex lg:flex-1">
 						<Link href="/" className="p-2 px-4 flex-shrink-0">
 							<Image
-								src="/genieGreenieLogo150px.jpg"
-								width={75}
-								height={75}
+								src="/genieGreenieLogo150px.png"
+								width={50}
+								height={50}
 								alt="Genie Greenie Logo"
 								className="mx-auto"
 							/>
@@ -163,7 +163,7 @@ export default function Example() {
 							<Link href="/" className="p-2">
 								<span className="sr-only font-Young_Serif">Genie Greenie</span>
 								<Image
-									src="/genieGreenieLogo150px.jpg"
+									src="/genieGreenieLogo150px.png"
 									width={75}
 									height={75}
 									alt="Genie Greenie Logo"
