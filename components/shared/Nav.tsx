@@ -13,7 +13,8 @@ import {
 	HiPhone,
 	HiDocumentCheck,
 } from 'react-icons/hi2'
-import Logo from './Logo'
+
+import Image from 'next/image'
 
 const training = [
 	// {
@@ -55,7 +56,13 @@ export default function Example() {
 				>
 					<div className="flex lg:flex-1">
 						<Link href="/" className="p-2 px-4 flex-shrink-0">
-							<Logo width={50} height={50} />
+							<Image
+								src="/genieGreenieLogo150px.jpg"
+								width={75}
+								height={75}
+								alt="Genie Greenie Logo"
+								className="mx-auto"
+							/>
 						</Link>
 					</div>
 					<span className="font-Young_Serif text-2xl lg:text-4xl text-white text-center">
@@ -155,7 +162,13 @@ export default function Example() {
 						<div className="flex items-center justify-between">
 							<Link href="/" className="p-2">
 								<span className="sr-only font-Young_Serif">Genie Greenie</span>
-								<Logo width={75} height={75} />
+								<Image
+									src="/genieGreenieLogo150px.jpg"
+									width={75}
+									height={75}
+									alt="Genie Greenie Logo"
+									className="mx-auto"
+								/>
 							</Link>
 
 							<button
