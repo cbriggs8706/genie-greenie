@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { sourceLinkerData, QuizNode, QuizAnswer } from '../data/sourceLinker'
+import {
+	sourceLinkerData,
+	QuizNode,
+	QuizAnswer,
+} from '../data/sourceLinkerDiagnosis'
 
 const getEmbedUrl = (url: string) => {
 	const videoIdMatch = url.match(

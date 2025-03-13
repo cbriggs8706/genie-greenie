@@ -11,6 +11,7 @@ export default authMiddleware({
 		'/deep-personality',
 		'/start',
 		'/learn',
+		'/help/source-linker',
 		'/learn/source-linker',
 		'/help',
 		'/about',

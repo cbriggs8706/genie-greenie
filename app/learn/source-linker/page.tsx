@@ -1,18 +1,27 @@
 'use client'
 
 import { H1 } from '@/components/headings'
-import SourceLinkerComponent from '@/components/sourceLinker'
+import SourceLinkerTraining from '@/components/sourceLinkerTraining'
 
 const Page = () => {
 	return (
 		<div>
-			<H1>Find the right SourceLinker video</H1>
-			<p className="max-w-5xl text-center mx-auto">
-				Source linking can be tricky. Whatever you&apos;re viewing on the
-				screen, we can help! Answer the questions below to find the training
-				video that will answer your question and get you on your way!
+			<H1>Source Linker 101</H1>
+			<p className="max-w-5xl text-center mx-auto mb-4">
+				FamilySearch uses a tool called SourceLinker to attach indexed records
+				to individuals and families in the tree. This process of attaching is
+				crucial to tree integrity by collecting all of the documents to support
+				the data points of persons in the tree.
 			</p>
-			<SourceLinkerComponent />
+			<p className="max-w-5xl text-center mx-auto">
+				These videos are best viewed in order to train from the beginning. If
+				you&apos;re already familiar with how to manuever SourceLinker but need
+				help troubleshooting a specific scenario, click here for the{' '}
+				<button className="py-2 px-2 border-green-700 border-solid border-2 text-green-700 hover:bg-green-500 hover:text-white rounded-sm">
+					<a href="/help/source-linker">SourceLinker Diagnoser</a>
+				</button>
+			</p>
+			<SourceLinkerTraining />
 		</div>
 	)
 }

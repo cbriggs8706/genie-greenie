@@ -1,7 +1,6 @@
 'use client'
 import { Fragment, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 
 import {
@@ -15,7 +14,6 @@ import {
 	HiDocumentCheck,
 } from 'react-icons/hi2'
 
-import { MdPallet } from 'react-icons/md'
 import Logo from '../shared/Logo'
 
 const training = [
@@ -59,13 +57,6 @@ export default function Example() {
 					<div className="flex lg:flex-1">
 						<Link href="/" className="p-2 px-4 flex-shrink-0">
 							<Logo width={50} height={50} />
-							{/* <Image
-								src="/genieGreenieLogo150px.png"
-								width={75}
-								height={75}
-								alt="Genie Greenie Logo"
-								className="w-10 lg:w-20"
-							/> */}
 						</Link>
 					</div>
 					<span className="font-Young_Serif text-2xl lg:text-4xl text-white text-center">
@@ -166,13 +157,6 @@ export default function Example() {
 							<Link href="/" className="p-2">
 								<span className="sr-only font-Young_Serif">Genie Greenie</span>
 								<Logo width={75} height={75} />
-								{/* <Image
-									src="/genieGreenieLogo150px.png"
-									width={50}
-									height={50}
-									alt="Genie Greenie Logo"
-									className="sm:hidden"
-								/> */}
 							</Link>
 
 							<button

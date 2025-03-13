@@ -7,6 +7,7 @@ import {
 } from '@/data/startQuestions'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { FaRegCircleCheck } from 'react-icons/fa6'
 
 export default function StartQuiz() {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -84,23 +85,27 @@ export default function StartQuiz() {
 						{questions[currentQuestionIndex].question}
 					</h2>
 					{currentQuestionIndex > 0 && <p>Select all that apply</p>}
-					<div className="flex flex-wrap gap-2">
+					<div className="flex flex-col gap-2">
 						{questions[currentQuestionIndex].options.map((option) => (
-							<button
-								key={option}
-								className={`block w-full text-left bg-green-700 text-white px-4 py-2 my-1 rounded shadow hover:bg-green-700 ${
-									filters[currentQuestionIndex]?.includes(option)
-										? 'bg-blue-500 text-white'
-										: 'bg-gray-200'
-								}`}
-								onClick={() => toggleOption(option)}
-							>
-								{option}
-							</button>
+							<div key={option} className="flex flex-row">
+								{filters[currentQuestionIndex]?.includes(option) && (
+									<FaRegCircleCheck className="text-2xl my-auto" />
+								)}
+								<button
+									className={`block w-full text-left  text-white px-4 py-2 my-1 rounded shadow  ${
+										filters[currentQuestionIndex]?.includes(option)
+											? 'bg-green-500 ml-6 '
+											: 'bg-green-700 '
+									}hover:bg-green-500`}
+									onClick={() => toggleOption(option)}
+								>
+									{option}
+								</button>
+							</div>
 						))}
 					</div>
 					<button
-						className="mt-4 px-4 py-2 bg-green-700 text-white rounded"
+						className="mt-4 px-4 py-2 border-green-700 text-green-700 border-solid border-2 rounded hover:bg-green-500 hover:text-white"
 						onClick={nextQuestion}
 					>
 						Next
@@ -113,7 +118,7 @@ export default function StartQuiz() {
 						filteredActivities.map((activity) => (
 							<div
 								key={activity.name}
-								className="w-full lg:max-w-2xl bg-white hover:bg-green-700 hover:cursor-pointer p-4 rounded-lg shadow-lg border-green-700 border-2 border-solid text-center mx-auto"
+								className="w-full lg:max-w-2xl bg-white hover:bg-green-700 hover:text-white hover:cursor-pointer p-4 rounded-lg shadow-lg border-green-700 border-2 border-solid text-center mx-auto"
 								onClick={() => activity.link && router.push(activity.link)}
 							>
 								<h3 className="font-semibold text-lg">{activity.name}</h3>
