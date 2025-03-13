@@ -14,7 +14,7 @@ import {
 	HiDocumentCheck,
 } from 'react-icons/hi2'
 
-import Logo from '../shared/Logo'
+import Logo from '@/components/shared/Logo'
 
 const training = [
 	// {
