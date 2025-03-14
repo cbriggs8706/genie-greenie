@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo } from 'react'
 import { sourceLinkerVideos } from '@/data/sourceLinkerVideos'
 import { H2, H3 } from './headings'
 
@@ -14,14 +14,16 @@ const getEmbedUrl = (url: string) => {
 export default function SourceLinkerTraining() {
 	const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
-	const groupedVideos = sourceLinkerVideos.reduce((acc, video) => {
-		if (!acc[video.skillLevel]) acc[video.skillLevel] = {}
-		if (!acc[video.skillLevel][video.subCategory])
-			acc[video.skillLevel][video.subCategory] = []
+	const groupedVideos = useMemo(() => {
+		return sourceLinkerVideos.reduce((acc, video) => {
+			if (!acc[video.skillLevel]) acc[video.skillLevel] = {}
+			if (!acc[video.skillLevel][video.subCategory])
+				acc[video.skillLevel][video.subCategory] = []
 
-		acc[video.skillLevel][video.subCategory].push(video)
-		return acc
-	}, {} as Record<string, Record<string, typeof sourceLinkerVideos>>)
+			acc[video.skillLevel][video.subCategory].push(video)
+			return acc
+		}, {} as Record<string, Record<string, typeof sourceLinkerVideos>>)
+	}, [sourceLinkerVideos])
 
 	const handleNavClick = (skillLevel: string) => {
 		sectionRefs.current[skillLevel]?.scrollIntoView({ behavior: 'smooth' })
@@ -57,25 +59,33 @@ export default function SourceLinkerTraining() {
 						>
 							<H3>{subCategory}</H3>
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								{videos.map((video) => (
-									<div
-										key={video.id}
-										className="border rounded-xl shadow-sm overflow-hidden p-2"
-									>
-										<iframe
-											className="w-full h-48 rounded"
-											src={getEmbedUrl(video.url) || ''}
-											title={video.title}
-											allowFullScreen
-										/>
-										<div className="mt-2">
-											<h4 className="text-md font-semibold">{video.title}</h4>
-											<p className="text-sm text-gray-500">
-												Length: {video.timestamp}
-											</p>
+								{videos.map((video) => {
+									const embedUrl = getEmbedUrl(video.url)
+									return (
+										<div
+											key={video.id}
+											className="border rounded-xl shadow-sm overflow-hidden p-2"
+										>
+											{embedUrl ? (
+												<iframe
+													className="w-full h-48 rounded"
+													src={embedUrl}
+													title={video.title}
+													allowFullScreen
+													loading="lazy"
+												/>
+											) : (
+												<div className="text-red-500">Invalid video URL</div>
+											)}
+											<div className="mt-2">
+												<h4 className="text-md font-semibold">{video.title}</h4>
+												<p className="text-sm text-gray-500">
+													Length: {video.timestamp}
+												</p>
+											</div>
 										</div>
-									</div>
-								))}
+									)
+								})}
 							</div>
 						</div>
 					))}
