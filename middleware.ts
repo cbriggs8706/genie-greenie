@@ -15,6 +15,9 @@ export default authMiddleware({
 		'/learn/source-linker',
 		'/help',
 		'/about',
+		'/contact',
+		'/api/send-email',
+		'/quiz',
 	],
 })
 

@@ -33,7 +33,7 @@ export default function Footer() {
 		},
 		{
 			name: 'Quiz',
-			href: '/personality',
+			href: '/quiz',
 			icon: FaChartPie,
 		},
 		{
