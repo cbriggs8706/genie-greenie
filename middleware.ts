@@ -18,6 +18,7 @@ export default authMiddleware({
 		'/contact',
 		'/api/send-email',
 		'/quiz',
+		'/learn/nickname',
 	],
 })
 
