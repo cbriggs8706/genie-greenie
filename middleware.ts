@@ -19,6 +19,7 @@ export default authMiddleware({
 		'/api/send-email',
 		'/quiz',
 		'/learn/nickname',
+		'/quiz/nickname',
 	],
 })
 
