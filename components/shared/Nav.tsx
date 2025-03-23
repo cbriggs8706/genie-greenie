@@ -231,6 +231,20 @@ export default function Example() {
 									>
 										About Us
 									</Link>
+									<Link
+										href="/quiz/nickname"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										Nickname Quiz
+									</Link>
+									<Link
+										href="/learn/nickname"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										Nickname Finder
+									</Link>
 
 									{/* <Link
 										href="/deep-personality"

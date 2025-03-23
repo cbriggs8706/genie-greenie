@@ -117,26 +117,26 @@ const NicknameQuiz = () => {
 
 			<div className="flex flex-wrap gap-2 mb-4">
 				<button
-					className={`px-3 py-1 rounded ${mode === 'toNicknames' ? 'bg-green-600 text-white' : 'bg-gray-100'}`}
+					className={`px-3 py-1 rounded ${mode === 'toNicknames' ? 'bg-green-700 text-white' : 'bg-gray-100'}`}
 					onClick={() => setMode('toNicknames')}
 				>
 					Formal → Nicknames
 				</button>
 				<button
-					className={`px-3 py-1 rounded ${mode === 'toFormal' ? 'bg-green-600 text-white' : 'bg-gray-100'}`}
+					className={`px-3 py-1 rounded ${mode === 'toFormal' ? 'bg-green-700 text-white' : 'bg-gray-100'}`}
 					onClick={() => setMode('toFormal')}
 				>
 					Nickname → Formal
 				</button>
 				<button
-					className={`px-3 py-1 rounded ${mode === 'mixed' ? 'bg-green-600 text-white' : 'bg-gray-100'}`}
+					className={`px-3 py-1 rounded ${mode === 'mixed' ? 'bg-green-700 text-white' : 'bg-gray-100'}`}
 					onClick={() => setMode('mixed')}
 				>
 					Mixed
 				</button>
 			</div>
 
-			<div className="mb-2 text-sm text-gray-600">
+			<div className="mb-2 text-sm text-gray-700">
 				Question {questionNumber} of {maxQuestions} — Score: {score}
 			</div>
 
@@ -161,7 +161,7 @@ const NicknameQuiz = () => {
 						/>
 						<button
 							type="submit"
-							className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+							className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-500 transition"
 						>
 							Submit
 						</button>
@@ -170,7 +170,7 @@ const NicknameQuiz = () => {
 					{feedback && <p className="mb-4">{feedback}</p>}
 
 					{showAnswers && (
-						<div className="mb-4 text-sm text-gray-600">
+						<div className="mb-4 text-sm text-gray-700">
 							<strong>
 								Correct {correctAnswers.length > 1 ? 'answers' : 'answer'}:
 							</strong>{' '}
@@ -183,7 +183,7 @@ const NicknameQuiz = () => {
 					{showAnswers && questionNumber <= maxQuestions && (
 						<button
 							onClick={handleNext}
-							className="text-sm text-green-600 underline hover:text-green-800"
+							className="text-sm text-green-700 underline hover:text-green-500"
 						>
 							Next Question
 						</button>

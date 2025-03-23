@@ -14,6 +14,9 @@ export default function Page() {
 				<button className="border-green-700 border-solid border-2 text-green-700 hover:bg-green-500 hover:text-white p-2">
 					<Link href="/help/source-linker">SourceLinker Diagnoser</Link>
 				</button>
+				<button className="border-green-700 border-solid border-2 text-green-700 hover:bg-green-500 hover:text-white p-2">
+					<Link href="/learn/nickname">Nickname Finder</Link>
+				</button>
 			</div>
 		</>
 	)

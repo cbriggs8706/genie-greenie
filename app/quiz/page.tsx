@@ -28,6 +28,13 @@ const Page = () => {
 					Take the Genie Greenie quiz to see what kind of genealogist you are
 				</p>
 			</div>
+			<div
+				className="w-full bg-white p-4 rounded-lg shadow-lg border-green-700 border-2 text-center transition hover:bg-green-700 hover:text-white cursor-pointer mb-8"
+				onClick={() => router.push('/quiz/nickname')}
+			>
+				<h3 className="font-semibold text-lg">Nickname Quiz</h3>
+				<p className="text-sm">Do you think you know common nicknames?</p>
+			</div>
 
 			{selectedGame ? (
 				<div>
