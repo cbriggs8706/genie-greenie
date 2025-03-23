@@ -215,7 +215,7 @@ export default function Example() {
 										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
-										Quiz
+										Quizzes
 									</Link>
 									<Link
 										href="/help"

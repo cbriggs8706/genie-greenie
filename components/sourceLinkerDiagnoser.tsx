@@ -50,11 +50,15 @@ export default function SourceLinkerComponent() {
 	}
 
 	const handleBreadcrumbClick = (index: number) => {
-		setCurrentNode(history[index])
-		setHistory(history.slice(0, index))
-		setBreadcrumb(breadcrumb.slice(0, index))
-		setCurrentVideo(null)
-		setVideoText(null)
+		if (index < history.length) {
+			setCurrentNode(history[index])
+			setHistory(history.slice(0, index))
+			setBreadcrumb(breadcrumb.slice(0, index))
+		} else {
+			// Clicking the last breadcrumb (currentNode), reset video/text
+			setCurrentVideo(null)
+			setVideoText(null)
+		}
 	}
 
 	return (
