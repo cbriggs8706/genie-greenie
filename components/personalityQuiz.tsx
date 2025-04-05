@@ -1,7 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
+import {
+	PieChart,
+	Pie,
+	Cell,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
+} from 'recharts'
 import { personalityData } from '@/data/personalityQuestions'
 import { personalityTypes } from '@/data/personalityTypes'
 import { Button } from '@headlessui/react'
@@ -28,6 +35,26 @@ export default function PersonalityQuiz() {
 		outerRadius: 100,
 	})
 
+	const questions = personalityData.questions
+	const totalQuestions = questions.length
+
+	// 🔁 Load saved results on mount
+	useEffect(() => {
+		const savedResults = localStorage.getItem('personalityResults')
+		if (savedResults) {
+			const parsed: Record<string, number> = JSON.parse(savedResults)
+			const reconstructedCounts = Object.fromEntries(
+				Object.entries(parsed).map(([category, percentage]) => [
+					category,
+					Math.round((percentage / 100) * totalQuestions),
+				])
+			)
+			setResults(reconstructedCounts)
+			setQuizComplete(true)
+		}
+	}, [totalQuestions])
+
+	// 📊 Adjust chart size on window resize
 	useEffect(() => {
 		const updateChartSize = () => {
 			if (window.innerWidth < 480) {
@@ -39,12 +66,40 @@ export default function PersonalityQuiz() {
 
 		updateChartSize()
 		window.addEventListener('resize', updateChartSize)
-
 		return () => window.removeEventListener('resize', updateChartSize)
 	}, [])
 
-	const questions = personalityData.questions
-	const totalQuestions = questions.length
+	// 💾 Save results as percentages in localStorage when complete
+	useEffect(() => {
+		if (quizComplete && Object.keys(results).length > 0) {
+			const totalAnswers = Object.values(results).reduce(
+				(acc, count) => acc + count,
+				0
+			)
+
+			const percentageResults = Object.fromEntries(
+				Object.entries(results).map(([category, count]) => [
+					category,
+					Math.round((count / totalAnswers) * 100),
+				])
+			)
+
+			localStorage.setItem(
+				'personalityResults',
+				JSON.stringify(percentageResults)
+			)
+		}
+	}, [quizComplete, results])
+
+	// 👑 Automatically select the top category after results are available
+	useEffect(() => {
+		if (quizComplete && Object.keys(results).length > 0 && !selectedCategory) {
+			const topCategory = Object.entries(results).reduce((a, b) =>
+				b[1] > a[1] ? b : a
+			)[0]
+			setSelectedCategory(topCategory)
+		}
+	}, [quizComplete, results, selectedCategory])
 
 	const handleAnswer = (category: string) => {
 		setResults((prev) => ({
@@ -72,6 +127,30 @@ export default function PersonalityQuiz() {
 	const selectedPersonality = personalityTypes.find((type) =>
 		type.title.toLowerCase().includes(selectedCategory?.toLowerCase() || '')
 	)
+
+	const handleRetake = () => {
+		localStorage.removeItem('personalityResults')
+		setCurrentQuestion(0)
+		setResults({})
+		setSelectedCategory(null)
+		setQuizComplete(false)
+	}
+
+	const getPercentageResults = () => {
+		const total = Object.values(results).reduce((sum, count) => sum + count, 0)
+		return Object.fromEntries(
+			Object.entries(results).map(([category, count]) => [
+				category,
+				Math.round((count / total) * 100),
+			])
+		)
+	}
+
+	const topCategory = Object.entries(results).reduce(
+		(a, b) => (b[1] > a[1] ? b : a),
+		['', 0]
+	)[0]
+	const percentageResults: Record<string, number> = getPercentageResults()
 
 	return (
 		<div className="flex flex-col items-center text-center">
@@ -110,34 +189,41 @@ export default function PersonalityQuiz() {
 					<p className="mb-4">
 						Tap the areas of the chart to read more about each personality.
 					</p>
-					<PieChart
-						width={chartSize.width}
-						height={chartSize.height}
+					<div
+						style={{ width: '100%', height: chartSize.height }}
 						className="mx-auto"
 					>
-						<Pie
-							data={data}
-							cx="50%"
-							cy="50%"
-							outerRadius={chartSize.outerRadius}
-							fill="#8884d8"
-							dataKey="value"
-							label
-							onClick={(e) => handlePieClick(e)}
-						>
-							{data.map((entry, index) => (
-								<Cell key={`cell-${index}`} fill={entry.color} />
-							))}
-						</Pie>
-						<Tooltip />
-						<Legend />
-					</PieChart>
+						<ResponsiveContainer width="100%" height="100%">
+							<PieChart>
+								<Pie
+									data={data}
+									cx="50%"
+									cy="50%"
+									outerRadius={chartSize.outerRadius}
+									fill="#8884d8"
+									dataKey="value"
+									label
+									onClick={(e) => handlePieClick(e)}
+								>
+									{data.map((entry, index) => (
+										<Cell key={`cell-${index}`} fill={entry.color} />
+									))}
+								</Pie>
+								<Tooltip />
+								<Legend />
+							</PieChart>
+						</ResponsiveContainer>
+					</div>
 
-					{selectedPersonality && (
+					{selectedCategory && (
 						<div className="mt-6 text-left">
-							<h3 className="text-xl font-bold">{selectedPersonality.title}</h3>
+							<h3 className="text-xl font-bold">
+								{selectedCategory === topCategory
+									? `You're an ${selectedCategory}! ${percentageResults[selectedCategory]}%`
+									: `You're ${percentageResults[selectedCategory]}% ${selectedCategory}!`}
+							</h3>
 
-							{selectedPersonality.text
+							{selectedPersonality?.text
 								.split('\n\n')
 								.map((paragraph, index) => (
 									<p key={index} className="mt-4">
@@ -147,7 +233,7 @@ export default function PersonalityQuiz() {
 						</div>
 					)}
 
-					<Button onClick={() => window.location.reload()} className="mt-4">
+					<Button onClick={handleRetake} className="mt-4">
 						Retake Quiz
 					</Button>
 				</div>
