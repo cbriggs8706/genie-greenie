@@ -32,23 +32,21 @@ export default async function RootLayout({
 			<body
 				className={`${youngSerif.variable} ${inter.variable} font-inter bg-sky-100`}
 			>
-				<head>
-					{/* Google Tag Manager */}
-					<Script
-						async
-						src="https://www.googletagmanager.com/gtag/js?id=G-YKG2VHXDPW"
-						strategy="afterInteractive"
-					/>
-					<Script id="google-analytics" strategy="afterInteractive">
-						{`
+				<Script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-YKG2VHXDPW"
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
+					{`
 						window.dataLayer = window.dataLayer || [];
 						function gtag(){dataLayer.push(arguments);}
 						gtag('js', new Date());
 						gtag('config', 'G-YKG2VHXDPW');
 					`}
-					</Script>
-					<Analytics />
-				</head>
+				</Script>
+				<Analytics />
+
 				<BackgroundSVG />
 				<Nav />
 				<main className="mx-4 md:mx-24 mb-24 mt-4 bg-white rounded-xl shadow-lg p-4 md:p-8 bg-opacity-85">

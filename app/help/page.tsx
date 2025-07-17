@@ -10,9 +10,12 @@ export default function Page() {
 			<p className="max-w-5xl text-center mx-auto mb-8">
 				Find the help you need
 			</p>
-			<div className="w-full flex mx-auto justify-center mt-4">
+			<div className="w-full flex mx-auto justify-center mt-4 gap-4">
 				<button className="border-green-700 border-solid border-2 text-green-700 hover:bg-green-500 hover:text-white p-2">
 					<Link href="/help/source-linker">SourceLinker Diagnoser</Link>
+				</button>
+				<button className="border-green-700 border-solid border-2 text-green-700 hover:bg-green-500 hover:text-white p-2">
+					<Link href="/learn/nickname">Nickname Finder</Link>
 				</button>
 			</div>
 		</>

@@ -380,7 +380,7 @@ export const personalityData: PersonalityData = {
 				},
 				{
 					answer:
-						'Being able to taste the recipe one more time, made by the hands your ancestor.',
+						'Being able to taste the recipe one more time, made by the hands of your ancestor.',
 					category: 'Explorer',
 				},
 			],
@@ -391,7 +391,7 @@ export const personalityData: PersonalityData = {
 			options: [
 				{
 					answer:
-						"Visiting a family cemeteries with some family members who havent't been there before",
+						"Visiting a family cemetery with some family members who haven't been there before",
 					category: 'Creator',
 				},
 				{
