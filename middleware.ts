@@ -20,6 +20,7 @@ export default authMiddleware({
 		'/quiz',
 		'/learn/nickname',
 		'/quiz/nickname',
+		'/mini-cassia',
 	],
 })
 
