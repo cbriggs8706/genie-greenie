@@ -22,6 +22,6 @@ export const games = [
 		url: 'https://wordwall.net/embed/134868bdd42746078ef0f2e9877531f7?themeId=41&templateId=76&fontStackId=0',
 		title: 'Nicknames',
 		skillLevel: 'Beginner',
-		description: 'Common abbreviations in early 20th century newspapers',
+		description: 'Common nicknames in early 20th century newspapers',
 	},
 ]

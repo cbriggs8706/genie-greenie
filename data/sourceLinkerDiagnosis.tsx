@@ -150,7 +150,7 @@ export const sourceLinkerData = {
 																														id: 'step',
 																														answer: 'Step',
 																														video:
-																															'Second spouse, stepchildren',
+																															'https://youtu.be/YjirKVYi1Sw',
 																													},
 																												],
 																											},
@@ -159,7 +159,7 @@ export const sourceLinkerData = {
 																											id: 'no',
 																											answer: 'No',
 																											video:
-																												'How to find and attach unrelated household members such as servants, housekeepers, lodgers etc.',
+																												'https://youtu.be/d1gZfUI1Jqg',
 																										},
 																									],
 																								},
@@ -295,8 +295,7 @@ export const sourceLinkerData = {
 											{
 												id: 'no',
 												answer: 'No',
-												video:
-													'Finding and verifying possible matches to attach sources to',
+												video: 'https://youtu.be/YO0NvFJAFqw',
 											},
 										],
 									},
@@ -393,14 +392,18 @@ export const sourceLinkerData = {
 										],
 									},
 								},
-								{ id: 'no', answer: 'No', video: 'What is a source?' },
+								{
+									id: 'no',
+									answer: 'No',
+									video: 'https://youtu.be/BivyryEQafk',
+								},
 							],
 						},
 					},
 					{
 						id: 'specific',
 						answer: 'I need specific help with a smartphone or tablet',
-						video: 'I need specific help with a smartphone or tablet',
+						video: 'https://youtu.be/_LvSLI0Uzp8',
 					},
 				],
 			},
