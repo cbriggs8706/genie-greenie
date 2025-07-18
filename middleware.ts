@@ -4,6 +4,7 @@ export default authMiddleware({
 	publicRoutes: [
 		'/',
 		'/api/webhooks/stripe',
+		'/api/newsletter',
 		'/full-test',
 		'/personality',
 		'/test',
@@ -22,6 +23,7 @@ export default authMiddleware({
 		'/quiz/nickname',
 		'/mini-cassia',
 	],
+	apiRoutes: ['/api(.*)'],
 })
 
 export const config = {

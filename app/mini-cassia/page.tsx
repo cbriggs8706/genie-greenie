@@ -1,5 +1,6 @@
 'use client'
 
+import BFSCNewsletterSignup from '@/components/bfscNewsletter'
 import { H1, H3 } from '@/components/headings'
 import LocationQuiz from '@/components/locationQuiz'
 import {
@@ -32,6 +33,10 @@ export default function Page() {
 					How much do you know about this area?
 				</p>
 				<LocationQuiz allQuestions={allQuestions} />
+				{/* <h2>
+					Sign up for the monthly newsletter from the Burley FamilySearch Center
+				</h2> */}
+				{/* <BFSCNewsletterSignup /> */}
 			</div>
 		</>
 	)

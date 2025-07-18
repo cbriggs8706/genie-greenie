@@ -475,10 +475,21 @@ export const triviaQuestions: TriviaQuestion[] = [
 		id: 45,
 		cityId: 'oakley',
 		prompt: 'What notable store in Oakley has operated nearly 100 years?',
-		correctAnswers: ['Clark’s Grocery (ZCMI cooperative originally)'],
+		correctAnswers: ['Clark’s Grocery'],
 		incorrectAnswers: [
 			'Oakley Mercantile',
 			'Howells Supply',
+			'Oakley Hardware',
+		],
+	},
+	{
+		id: 45,
+		cityId: 'oakley',
+		prompt: "What was Clark's originally known as?",
+		correctAnswers: ['ZCMI Cooperative'],
+		incorrectAnswers: [
+			'Oakley Mercantile',
+			"Clark's Supply",
 			'Oakley Hardware',
 		],
 	},
