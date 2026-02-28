@@ -197,11 +197,20 @@ export default function MicroskillsEditor() {
 			}),
 		})
 
-		const payload = (await response.json()) as { error?: string }
+		const payload = (await response.json()) as {
+			error?: string
+			current_version?: number | null
+		}
 		if (!response.ok) {
 			setMessage(payload.error ?? 'Could not save microskill.')
 			setSaving(false)
 			return
+		}
+		const nextVersion = payload.current_version
+		if (typeof nextVersion === 'number') {
+			setDetail((prev) =>
+				prev ? { ...prev, current_version: nextVersion } : prev
+			)
 		}
 
 		setMessage('Saved successfully.')

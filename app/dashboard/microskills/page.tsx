@@ -31,6 +31,12 @@ export default async function DashboardMicroskillsPage() {
 				<p className="mt-2 font-inter text-sky-900">
 					Choose a microskill to curate lessons and checkpoints.
 				</p>
+				<Link
+					href="/dashboard/microskills/assign"
+					className="mt-3 inline-flex rounded border-2 border-green-700 px-3 py-1.5 font-inter text-sm text-green-700 transition hover:bg-green-500 hover:text-white"
+				>
+					Open Assignment Catalog
+				</Link>
 			</div>
 			<MicroskillsCatalog />
 		</section>

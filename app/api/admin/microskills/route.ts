@@ -26,6 +26,10 @@ function slugify(value: string) {
 		.replace(/^-+|-+$/g, '')
 }
 
+function getSectionsSnapshot(lessons: unknown) {
+	return normalizeLessonsPayload(lessons).sections
+}
+
 export async function GET(request: Request) {
 	const user = await requireAdmin()
 	if (!user) {
@@ -141,14 +145,51 @@ export async function PATCH(request: Request) {
 	}
 	if (typeof body.description === 'string') updates.description = body.description
 	if (typeof body.url === 'string') updates.url = body.url
-	if (typeof body.current_version === 'number') updates.current_version = body.current_version
 	if (typeof body.is_public === 'boolean') updates.is_public = body.is_public
 	if (typeof body.badge_icon === 'string') {
 		updates.badge_icon = sanitizeBadgeIconName(body.badge_icon)
 	}
-	if (body.lessons !== undefined) updates.lessons = normalizeLessonsPayload(body.lessons)
 
 	const admin = createAdminClient()
+
+	let existingVersion: number | null = null
+	if (body.lessons !== undefined || typeof body.current_version === 'number') {
+		const { data: existingRow, error: existingError } = await admin
+			.from('microskills')
+			.select('current_version,lessons')
+			.eq('id', body.id)
+			.limit(1)
+			.maybeSingle()
+
+		if (existingError) {
+			return NextResponse.json({ error: existingError.message }, { status: 500 })
+		}
+		if (!existingRow) {
+			return NextResponse.json({ error: 'Microskill not found' }, { status: 404 })
+		}
+
+		existingVersion = existingRow.current_version
+
+		if (body.lessons !== undefined) {
+			const normalizedLessons = normalizeLessonsPayload(body.lessons)
+			updates.lessons = normalizedLessons
+			const existingSections = getSectionsSnapshot(existingRow.lessons)
+			const nextSections = normalizedLessons.sections
+			const sectionsChanged =
+				JSON.stringify(existingSections) !== JSON.stringify(nextSections)
+			if (sectionsChanged) {
+				updates.current_version = existingRow.current_version + 1
+			}
+		}
+	}
+
+	if (
+		typeof body.current_version === 'number' &&
+		updates.current_version === undefined &&
+		existingVersion !== null
+	) {
+		updates.current_version = body.current_version
+	}
 
 	if (nextCategory && updates.category_sort === undefined) {
 		const { data: categoryRow } = await admin
@@ -162,13 +203,19 @@ export async function PATCH(request: Request) {
 		}
 	}
 
-	const { error } = await admin.from('microskills').update(updates).eq('id', body.id)
+	const { data: updatedRow, error } = await admin
+		.from('microskills')
+		.update(updates)
+		.eq('id', body.id)
+		.select('current_version')
+		.limit(1)
+		.maybeSingle()
 
 	if (error) {
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
 
-	return NextResponse.json({ ok: true })
+	return NextResponse.json({ ok: true, current_version: updatedRow?.current_version ?? null })
 }
 
 export async function POST(request: Request) {

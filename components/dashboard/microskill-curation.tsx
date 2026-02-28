@@ -217,11 +217,20 @@ export default function MicroskillCuration({ microskillId }: { microskillId: num
 			}),
 		})
 
-		const payload = (await response.json()) as { error?: string }
+		const payload = (await response.json()) as {
+			error?: string
+			current_version?: number | null
+		}
 		if (!response.ok) {
 			setMessage(payload.error ?? 'Could not save microskill.')
 			setSaving(false)
 			return
+		}
+		const nextVersion = payload.current_version
+		if (typeof nextVersion === 'number') {
+			setDetail((prev) =>
+				prev ? { ...prev, current_version: nextVersion } : prev
+			)
 		}
 		setSaving(false)
 		setMessage('Saved successfully.')

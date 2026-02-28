@@ -51,6 +51,12 @@ export default async function DashboardPage() {
 					>
 						Open LMS Curation
 					</Link>
+					<Link
+						href="/dashboard/microskills/assign"
+						className="mt-3 ml-2 inline-flex rounded border-2 border-green-700 px-4 py-2 text-sm font-medium text-green-700 transition hover:bg-green-500 hover:text-white"
+					>
+						Open Assignment Catalog
+					</Link>
 				</div>
 			) : null}
 			{categories.length > 0 ? (
