@@ -11,6 +11,14 @@ function hashApiKey(apiKey: string) {
 	return createHash('sha256').update(apiKey).digest('hex')
 }
 
+function buildMicroskillContinueUrl(slug: string) {
+	const safeSlug = encodeURIComponent(slug)
+	const path = `/learn/${safeSlug}`
+	const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim()
+	const normalizedSiteUrl = configuredSiteUrl?.replace(/\/+$/, '')
+	return normalizedSiteUrl ? `${normalizedSiteUrl}${path}` : path
+}
+
 async function getMicroskillBySlug(slug: string) {
 	const admin = createAdminClient()
 	const { data, error } = await admin
@@ -323,6 +331,7 @@ export async function lookupCertificatesByEmail(email: string, partnerApiKeyId: 
 			microskillSlug: microskill.slug,
 			microskillTitle: microskill.name,
 			badgeIcon: sanitizeBadgeIconName(microskill.badge_icon),
+			continueUrl: buildMicroskillContinueUrl(microskill.slug),
 			dateEarned: row.earned_at,
 			earnedVersion: row.earned_version,
 			currentVersion: microskill.current_version,
@@ -345,6 +354,7 @@ type PartnerMicroskillStatus = {
 	microskillSlug: string
 	microskillTitle: string
 	badgeIcon: string
+	continueUrl: string
 	currentVersion: number
 	earnedVersion: number | null
 	dateEarned: string | null
@@ -478,6 +488,7 @@ export async function lookupMicroskillStatusesByEmail(
 			microskillSlug: row.slug,
 			microskillTitle: row.name,
 			badgeIcon: row.badgeIcon,
+			continueUrl: buildMicroskillContinueUrl(row.slug),
 			currentVersion: row.currentVersion,
 			earnedVersion: cert?.earnedVersion ?? null,
 			dateEarned: cert?.earnedAt ?? null,
