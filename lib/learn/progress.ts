@@ -300,7 +300,7 @@ export async function lookupCertificatesByEmail(email: string, partnerApiKeyId: 
 	const admin = createAdminClient()
 	const { data, error } = await admin
 		.from('certificates')
-		.select('earned_version,earned_at,microskills(id,slug,name,current_version)')
+		.select('earned_version,earned_at,microskills(id,slug,name,badge_icon,current_version)')
 		.eq('email_normalized', emailNormalized)
 		.order('earned_version', { ascending: false })
 		.order('earned_at', { ascending: false })
@@ -322,6 +322,7 @@ export async function lookupCertificatesByEmail(email: string, partnerApiKeyId: 
 		return {
 			microskillSlug: microskill.slug,
 			microskillTitle: microskill.name,
+			badgeIcon: sanitizeBadgeIconName(microskill.badge_icon),
 			dateEarned: row.earned_at,
 			earnedVersion: row.earned_version,
 			currentVersion: microskill.current_version,
@@ -343,6 +344,7 @@ type PartnerMicroskillStatus = {
 	microskillId: number
 	microskillSlug: string
 	microskillTitle: string
+	badgeIcon: string
 	currentVersion: number
 	earnedVersion: number | null
 	dateEarned: string | null
@@ -387,7 +389,7 @@ export async function lookupMicroskillStatusesByEmail(
 	const [{ data: microskills, error: microskillsError }, userId] = await Promise.all([
 		admin
 			.from('microskills')
-			.select('id,slug,name,current_version,lessons,is_public')
+			.select('id,slug,name,badge_icon,current_version,lessons,is_public')
 			.eq('is_public', true)
 			.order('category_sort', { ascending: true })
 			.order('skill_sort', { ascending: true }),
@@ -400,6 +402,7 @@ export async function lookupMicroskillStatusesByEmail(
 		id: row.id,
 		slug: row.slug,
 		name: row.name,
+		badgeIcon: sanitizeBadgeIconName(row.badge_icon),
 		currentVersion: row.current_version,
 		lessons: normalizeLessonsPayload(row.lessons),
 	}))
@@ -474,6 +477,7 @@ export async function lookupMicroskillStatusesByEmail(
 			microskillId: row.id,
 			microskillSlug: row.slug,
 			microskillTitle: row.name,
+			badgeIcon: row.badgeIcon,
 			currentVersion: row.currentVersion,
 			earnedVersion: cert?.earnedVersion ?? null,
 			dateEarned: cert?.earnedAt ?? null,
