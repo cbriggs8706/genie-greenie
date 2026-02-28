@@ -5,11 +5,9 @@ import { microSkills } from '@/data/microskills'
 export default function TrainingComponent() {
 	const router = useRouter()
 
-	// State for filters
 	const [selectedCategory, setSelectedCategory] = useState<string>('')
 	const [selectedSkillLevel, setSelectedSkillLevel] = useState<string>('')
 
-	// Extract unique category and skill level values for dropdowns
 	const categories = Array.from(
 		new Set(microSkills.map((category) => category.category))
 	)
@@ -21,7 +19,6 @@ export default function TrainingComponent() {
 		)
 	)
 
-	// Filter logic
 	const filteredSkills = microSkills
 		.map((category) => ({
 			...category,
@@ -31,13 +28,11 @@ export default function TrainingComponent() {
 					(selectedSkillLevel === '' || skill.skillLevel === selectedSkillLevel)
 			),
 		}))
-		.filter((category) => category.skills.length > 0) // Remove empty categories after filtering
+		.filter((category) => category.skills.length > 0)
 
 	return (
 		<div className="p-4">
-			{/* Filter Bar */}
 			<div className="flex flex-wrap gap-4 justify-center mb-6">
-				{/* Category Filter */}
 				<select
 					className="px-4 py-2 border border-gray-300 rounded-md"
 					value={selectedCategory}
@@ -51,7 +46,6 @@ export default function TrainingComponent() {
 					))}
 				</select>
 
-				{/* Skill Level Filter */}
 				<select
 					className="px-4 py-2 border border-gray-300 rounded-md"
 					value={selectedSkillLevel}
@@ -66,7 +60,6 @@ export default function TrainingComponent() {
 				</select>
 			</div>
 
-			{/* Display Filtered Skills */}
 			{filteredSkills.length > 0 ? (
 				<div className="space-y-10">
 					{filteredSkills.map((category, index) => (
@@ -94,9 +87,7 @@ export default function TrainingComponent() {
 					))}
 				</div>
 			) : (
-				<p className="text-center text-gray-500">
-					No skills match your filters.
-				</p>
+				<p className="text-center text-gray-500">No skills match your filters.</p>
 			)}
 		</div>
 	)

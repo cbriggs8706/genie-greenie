@@ -1,10 +1,7 @@
-'use client'
-
 import { H1 } from '@/components/headings'
-import TrainingComponent from '@/components/training'
-import Link from 'next/link'
+import CatalogGrid from '@/components/learn/catalogGrid'
 
-const Page = () => {
+export default function LearnPage() {
 	return (
 		<div>
 			<H1>Micro Skill Training Series</H1>
@@ -21,19 +18,8 @@ const Page = () => {
 				identify it&apos;s smaller micro skills. This makes them much more
 				attainable. You&apos;ve got this! We&apos;re here to help!
 			</p>
-			<p className="max-w-5xl text-center mx-auto mb-8 text-red-500">
-				Only Source Linking is currently available. Each of these will have a
-				whole training course. This list will grow extensively over the next few
-				months as more feedback is received.
-			</p>
-			{/* <div className="w-full flex mx-auto justify-center mt-4">
-				<button className="border-green-700 border-solid border-2 text-green-700 hover:bg-green-500 hover:text-white p-2">
-					<Link href="/learn/source-linker">SourceLinker 101</Link>
-				</button>
-			</div> */}
-			<TrainingComponent />
+
+			<CatalogGrid />
 		</div>
 	)
 }
-
-export default Page

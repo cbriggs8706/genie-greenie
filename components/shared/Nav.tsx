@@ -1,10 +1,9 @@
 'use client'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 
 import {
-	HiBars3,
 	HiCursorArrowRays,
 	HiFingerPrint,
 	HiSquaresPlus,
@@ -15,6 +14,7 @@ import {
 } from 'react-icons/hi2'
 
 import Image from 'next/image'
+import { createClient, supabaseConfigured } from '@/lib/supabase/client'
 
 const training = [
 	// {
@@ -41,12 +41,48 @@ const quizzes = [
 	// },
 ]
 
-function classNames(...classes: any) {
+function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+	const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+	useEffect(() => {
+		if (!supabaseConfigured()) {
+			setIsLoggedIn(false)
+			return
+		}
+
+		const supabase = createClient()
+
+		void supabase.auth.getUser().then(({ data }) => {
+			setIsLoggedIn(Boolean(data.user))
+		})
+
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, session) => {
+			setIsLoggedIn(Boolean(session?.user))
+		})
+
+		return () => {
+			subscription.unsubscribe()
+		}
+	}, [])
+
+	useEffect(() => {
+		const openMenu = () => setMobileMenuOpen(true)
+		window.addEventListener('open-mobile-menu', openMenu)
+		return () => {
+			window.removeEventListener('open-mobile-menu', openMenu)
+		}
+	}, [])
+
+	const authHref = isLoggedIn ? '/dashboard' : '/login'
+	const authLabel = isLoggedIn ? 'Dashboard' : 'Login'
+
 	return (
 		<>
 			<header className="bg-sky-800 text-white z-30 sticky font-Young_Serif">
@@ -68,17 +104,6 @@ export default function Example() {
 					<span className="font-Young_Serif text-2xl lg:text-4xl text-white text-center">
 						Genie Greenie
 					</span>
-					<div className="flex lg:hidden">
-						<button
-							type="button"
-							className="inline-flex items-center justify-center rounded-md p-2.5 pr-4 text-white"
-							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-						>
-							<span className="sr-only">Open main menu</span>
-							<HiBars3 className="h-10 w-10" aria-hidden="true" />
-						</button>
-					</div>
-
 					{/*<Popover.Group className="hidden lg:flex lg:gap-x-12">
 						 <Popover className="relative">
 							<Popover.Button className="flex items-center gap-x-1 text-xl leading-6 text-white uppercase">
@@ -151,12 +176,7 @@ export default function Example() {
 					</Popover.Group>*/}
 				</nav>
 
-				<Dialog
-					as="div"
-					className="lg:hidden"
-					open={mobileMenuOpen}
-					onClose={setMobileMenuOpen}
-				>
+				<Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
 					<div className="fixed inset-0 z-40" />
 					<Dialog.Panel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-sky-800 px-2 pb-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
 						<div className="flex items-center justify-between">
@@ -230,6 +250,13 @@ export default function Example() {
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										About Me
+									</Link>
+									<Link
+										href={authHref}
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										{authLabel}
 									</Link>
 									<Link
 										href="/quiz/nickname"

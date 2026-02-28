@@ -3,10 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import {
-	FaChartPie,
-	FaCircleQuestion,
 	FaGraduationCap,
 	FaHouseChimney,
+	FaBars,
 	FaSquareFacebook,
 	FaSquareInstagram,
 	FaSquareEnvelope,
@@ -30,16 +29,6 @@ export default function Footer() {
 			name: 'Learn',
 			href: '/learn',
 			icon: FaGraduationCap,
-		},
-		{
-			name: 'Quiz',
-			href: '/quiz',
-			icon: FaChartPie,
-		},
-		{
-			name: 'Help',
-			href: '/help',
-			icon: FaCircleQuestion,
 		},
 		// {
 		// 	name: 'About',
@@ -98,7 +87,7 @@ export default function Footer() {
 				<div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 text-white font-thin text-xs text-center px-4 pb-5"></div>
 			</div> */}
 			{/* Mobile Menu */}
-			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 grid grid-cols-5 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
+			<div className="fixed bottom-2 left-1/2 -translate-x-1/2 grid grid-cols-4 justify-around py-2 z-20 bg-green-700 w-5/6 rounded-full bg-opacity-95">
 				{footerIcons.map((item) => (
 					<a href={item.href} key={item.name}>
 						<div className="">
@@ -118,6 +107,22 @@ export default function Footer() {
 						</div>
 					</a>
 				))}
+				<button
+					type="button"
+					onClick={() => window.dispatchEvent(new Event('open-mobile-menu'))}
+					className="text-white"
+				>
+					<div className="">
+						<div className="flex justify-center">
+							<FaBars className="h-7 w-7 text-white" aria-hidden="true" />
+						</div>
+						<div className="flex justify-center">
+							<p className="block text-white text-xs sm:text-sm md:text-md">
+								More
+							</p>
+						</div>
+					</div>
+				</button>
 			</div>
 		</footer>
 	)
