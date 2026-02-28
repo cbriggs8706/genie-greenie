@@ -44,7 +44,17 @@ export default function LoginForm() {
 		const supabase = createClient()
 		const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim()
 		const normalizedSiteUrl = configuredSiteUrl?.replace(/\/+$/, '')
-		const redirectBase = normalizedSiteUrl || window.location.origin
+		const configuredIsLocalhost = normalizedSiteUrl
+			? /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(normalizedSiteUrl)
+			: false
+		const currentOrigin = window.location.origin.replace(/\/+$/, '')
+		const currentIsLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(
+			window.location.hostname
+		)
+		const redirectBase =
+			normalizedSiteUrl && (!configuredIsLocalhost || currentIsLocalhost)
+				? normalizedSiteUrl
+				: currentOrigin
 
 		const { error } = await supabase.auth.signInWithOAuth({
 			provider: 'google',
