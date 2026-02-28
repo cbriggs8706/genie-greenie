@@ -339,6 +339,161 @@ export async function lookupCertificatesByEmail(email: string, partnerApiKeyId: 
 	return { emailNormalized, certificates }
 }
 
+type PartnerMicroskillStatus = {
+	microskillId: number
+	microskillSlug: string
+	microskillTitle: string
+	currentVersion: number
+	earnedVersion: number | null
+	dateEarned: string | null
+	status: 'not_started' | 'in_progress' | 'active' | 'renewal_required'
+	requiredCompleted: number
+	requiredTotal: number
+	percent: number
+}
+
+async function resolveUserIdForEmail(emailNormalized: string) {
+	const admin = createAdminClient()
+	const pageSize = 200
+	let page = 1
+	let totalPages = 1
+
+	while (page <= totalPages) {
+		const { data, error } = await admin.auth.admin.listUsers({
+			page,
+			perPage: pageSize,
+		})
+		if (error) throw new Error(error.message)
+
+		const users = data?.users ?? []
+		const match = users.find((user) => normalizeEmail(user.email ?? '') === emailNormalized)
+		if (match?.id) return match.id
+
+		const total = typeof data?.total === 'number' ? data.total : users.length
+		totalPages = Math.max(1, Math.ceil(total / pageSize))
+		page += 1
+	}
+
+	return null
+}
+
+export async function lookupMicroskillStatusesByEmail(
+	email: string,
+	partnerApiKeyId: number | null
+) {
+	const emailNormalized = normalizeEmail(email)
+	const admin = createAdminClient()
+
+	const [{ data: microskills, error: microskillsError }, userId] = await Promise.all([
+		admin
+			.from('microskills')
+			.select('id,slug,name,current_version,lessons,is_public')
+			.eq('is_public', true)
+			.order('category_sort', { ascending: true })
+			.order('skill_sort', { ascending: true }),
+		resolveUserIdForEmail(emailNormalized),
+	])
+
+	if (microskillsError) throw new Error(microskillsError.message)
+
+	const microskillRows = (microskills ?? []).map((row) => ({
+		id: row.id,
+		slug: row.slug,
+		name: row.name,
+		currentVersion: row.current_version,
+		lessons: normalizeLessonsPayload(row.lessons),
+	}))
+
+	const microskillIds = microskillRows.map((row) => row.id)
+
+	const certificateQuery = admin
+		.from('certificates')
+		.select('earned_version,earned_at,microskill_id,microskills(id,slug,name,current_version)')
+		.eq('email_normalized', emailNormalized)
+		.in('microskill_id', microskillIds.length > 0 ? microskillIds : [-1])
+		.order('earned_version', { ascending: false })
+		.order('earned_at', { ascending: false })
+
+	const progressQuery = userId
+		? admin
+				.from('learner_progress')
+				.select('microskill_id,checkpoint_id')
+				.eq('user_id', userId)
+				.in('microskill_id', microskillIds.length > 0 ? microskillIds : [-1])
+		: Promise.resolve({ data: [] as { microskill_id: number; checkpoint_id: string }[], error: null })
+
+	const [{ data: certRows, error: certError }, { data: progressRows, error: progressError }] =
+		await Promise.all([certificateQuery, progressQuery])
+
+	if (certError) throw new Error(certError.message)
+	if (progressError) throw new Error(progressError.message)
+
+	const certificatesBySkill = new Map<
+		number,
+		{
+			earnedVersion: number
+			earnedAt: string
+		}
+	>()
+	for (const row of certRows ?? []) {
+		if (certificatesBySkill.has(row.microskill_id)) continue
+		certificatesBySkill.set(row.microskill_id, {
+			earnedVersion: row.earned_version,
+			earnedAt: row.earned_at,
+		})
+	}
+
+	const completedBySkill = new Map<number, Set<string>>()
+	for (const row of progressRows ?? []) {
+		if (!completedBySkill.has(row.microskill_id)) {
+			completedBySkill.set(row.microskill_id, new Set())
+		}
+		completedBySkill.get(row.microskill_id)!.add(row.checkpoint_id)
+	}
+
+	const statuses: PartnerMicroskillStatus[] = microskillRows.map((row) => {
+		const requiredCheckpointIds = row.lessons.sections.flatMap((section) =>
+			section.checkpoints.filter((checkpoint) => checkpoint.isRequired).map((checkpoint) => checkpoint.id)
+		)
+		const requiredTotal = requiredCheckpointIds.length
+		const completedSet = completedBySkill.get(row.id) ?? new Set<string>()
+		const requiredCompleted = requiredCheckpointIds.filter((id) => completedSet.has(id)).length
+		const percent =
+			requiredTotal === 0 ? 0 : Math.round((requiredCompleted / requiredTotal) * 100)
+
+		const cert = certificatesBySkill.get(row.id)
+		const status = cert
+			? cert.earnedVersion < row.currentVersion
+				? ('renewal_required' as const)
+				: ('active' as const)
+			: requiredCompleted > 0
+				? ('in_progress' as const)
+				: ('not_started' as const)
+
+		return {
+			microskillId: row.id,
+			microskillSlug: row.slug,
+			microskillTitle: row.name,
+			currentVersion: row.currentVersion,
+			earnedVersion: cert?.earnedVersion ?? null,
+			dateEarned: cert?.earnedAt ?? null,
+			status,
+			requiredCompleted,
+			requiredTotal,
+			percent,
+		}
+	})
+
+	const startedCount = statuses.filter((item) => item.status !== 'not_started').length
+	await admin.from('partner_lookup_audit').insert({
+		partner_api_key_id: partnerApiKeyId,
+		email_normalized: emailNormalized,
+		result_count: startedCount,
+	})
+
+	return { emailNormalized, statuses }
+}
+
 export async function getCompletedMicroskillIdsForUser(userId: string) {
 	const admin = createAdminClient()
 	const { data, error } = await admin
