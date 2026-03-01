@@ -9,20 +9,20 @@ export default async function DashboardMicroskillDetailPage({
 }: {
 	params: Promise<{ id: string }>
 }) {
+	const { id } = await params
 	const supabase = await createClient()
 	const {
 		data: { user },
 	} = await supabase.auth.getUser()
 
 	if (!user) {
-		redirect('/login')
+		redirect(`/login?next=${encodeURIComponent(`/dashboard/microskills/${id}`)}`)
 	}
 
 	if (!isAdminUser(user)) {
 		redirect('/dashboard')
 	}
 
-	const { id } = await params
 	const microskillId = Number(id)
 	if (!Number.isFinite(microskillId)) {
 		redirect('/dashboard/microskills')

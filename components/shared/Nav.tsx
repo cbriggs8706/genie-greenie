@@ -48,6 +48,7 @@ function classNames(...classes: string[]) {
 export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const [currentPath, setCurrentPath] = useState('/')
 
 	useEffect(() => {
 		if (!supabaseConfigured()) {
@@ -80,7 +81,13 @@ export default function Example() {
 		}
 	}, [])
 
-	const authHref = isLoggedIn ? '/dashboard' : '/login'
+	useEffect(() => {
+		setCurrentPath(`${window.location.pathname}${window.location.search}`)
+	}, [])
+
+	const authHref = isLoggedIn
+		? '/dashboard'
+		: `/login?next=${encodeURIComponent(currentPath)}`
 	const authLabel = isLoggedIn ? 'Dashboard' : 'Login'
 
 	return (

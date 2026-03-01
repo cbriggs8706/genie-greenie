@@ -3,6 +3,7 @@
 import { createClient, supabaseConfigured } from '@/lib/supabase/client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { signIn as signInWithNextAuth } from 'next-auth/react'
 
 function GoogleLogo() {
 	return (
@@ -27,7 +28,7 @@ function GoogleLogo() {
 	)
 }
 
-export default function LoginForm() {
+export default function LoginForm({ nextPath }: { nextPath: string }) {
 	const router = useRouter()
 	const [message, setMessage] = useState<string | null>(null)
 	const [email, setEmail] = useState('')
@@ -41,31 +42,8 @@ export default function LoginForm() {
 			return
 		}
 
-		const supabase = createClient()
-		const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim()
-		const normalizedSiteUrl = configuredSiteUrl?.replace(/\/+$/, '')
-		const configuredIsLocalhost = normalizedSiteUrl
-			? /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(normalizedSiteUrl)
-			: false
-		const currentOrigin = window.location.origin.replace(/\/+$/, '')
-		const currentIsLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(
-			window.location.hostname
-		)
-		const redirectBase =
-			normalizedSiteUrl && (!configuredIsLocalhost || currentIsLocalhost)
-				? normalizedSiteUrl
-				: currentOrigin
-
-		const { error } = await supabase.auth.signInWithOAuth({
-			provider: 'google',
-			options: {
-				redirectTo: `${redirectBase}/auth/callback?next=/dashboard`,
-			},
-		})
-
-		if (error) {
-			setMessage(error.message)
-		}
+		const callbackUrl = `/auth/nextauth-bridge?next=${encodeURIComponent(nextPath)}`
+		await signInWithNextAuth('google', { callbackUrl })
 	}
 
 	async function handleEmailSignIn() {
@@ -89,7 +67,7 @@ export default function LoginForm() {
 			return
 		}
 
-		router.push('/dashboard')
+		router.push(nextPath)
 		router.refresh()
 	}
 
@@ -129,7 +107,7 @@ export default function LoginForm() {
 
 			<button
 				type="button"
-				className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
+				className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-green-700 px-4 py-3 text-sm font-medium text-white transition hover:bg-green-500"
 				onClick={() => void handleGoogleSignIn()}
 				disabled={pending}
 			>

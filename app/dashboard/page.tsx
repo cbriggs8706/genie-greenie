@@ -14,7 +14,7 @@ export default async function DashboardPage() {
 	} = await supabase.auth.getUser()
 
 	if (!user) {
-		redirect('/login')
+		redirect(`/login?next=${encodeURIComponent('/dashboard')}`)
 	}
 
 	const canEditMicroskills = isAdminUser(user)

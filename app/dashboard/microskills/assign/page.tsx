@@ -11,7 +11,7 @@ export default async function DashboardMicroskillAssignmentPage() {
 	} = await supabase.auth.getUser()
 
 	if (!user) {
-		redirect('/login')
+		redirect(`/login?next=${encodeURIComponent('/dashboard/microskills/assign')}`)
 	}
 
 	if (!isAdminUser(user)) {

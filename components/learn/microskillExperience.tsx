@@ -108,6 +108,7 @@ export default function MicroskillExperience({ microskill }: { microskill: Micro
 	const [notice, setNotice] = useState<string | null>(null)
 	const [quizScores, setQuizScores] = useState<Record<string, string>>({})
 	const [expandedLessonId, setExpandedLessonId] = useState<string | null>(null)
+	const [currentPath, setCurrentPath] = useState(`/learn/${microskill.slug}`)
 
 	useEffect(() => {
 		if (!supabaseConfigured()) return
@@ -120,6 +121,10 @@ export default function MicroskillExperience({ microskill }: { microskill: Micro
 			}
 		})
 	}, [microskill.slug])
+
+	useEffect(() => {
+		setCurrentPath(`${window.location.pathname}${window.location.search}`)
+	}, [])
 
 	async function loadProgress() {
 		const response = await fetch(
@@ -141,6 +146,9 @@ export default function MicroskillExperience({ microskill }: { microskill: Micro
 		)
 		return new Set(ids)
 	}, [progress])
+	const loginHref = useMemo(() => {
+		return `/login?next=${encodeURIComponent(currentPath)}`
+	}, [currentPath])
 
 	async function markComplete(checkpointId: string) {
 		setPendingCheckpointId(checkpointId)
@@ -235,7 +243,11 @@ export default function MicroskillExperience({ microskill }: { microskill: Micro
 					</div>
 				) : (
 					<p className="font-inter text-sm text-sky-900 mt-2">
-						Guest access is open. <Link href="/login" className="underline">Sign in</Link> to track progress and earn badges.
+						Guest access is open.{' '}
+						<Link href={loginHref} className="underline">
+							Sign in
+						</Link>{' '}
+						to track progress and earn badges.
 					</p>
 				)}
 			</div>
