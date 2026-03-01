@@ -150,6 +150,42 @@ export default function MicroskillCuration({ microskillId }: { microskillId: num
 		setDetail(next)
 	}
 
+	function removeSection(sectionIndex: number) {
+		if (!detail) return
+		const section = detail.lessons.sections[sectionIndex]
+		if (!section) return
+		const confirmed = window.confirm(
+			`Delete section "${section.title}" and all ${section.checkpoints.length} checkpoints?`
+		)
+		if (!confirmed) return
+
+		const next = structuredClone(detail)
+		next.lessons.sections.splice(sectionIndex, 1)
+		setDetail(next)
+		setCollapsedSections((prev) => {
+			const copy = { ...prev }
+			delete copy[section.id]
+			return copy
+		})
+		setMessage(`Section "${section.title}" deleted. Save microskill to apply changes.`)
+	}
+
+	function removeCheckpoint(sectionIndex: number, checkpointIndex: number) {
+		if (!detail) return
+		const checkpoint = detail.lessons.sections[sectionIndex]?.checkpoints[checkpointIndex]
+		if (!checkpoint) return
+		const confirmed = window.confirm(`Delete checkpoint "${checkpoint.title}"?`)
+		if (!confirmed) return
+
+		const next = structuredClone(detail)
+		next.lessons.sections[sectionIndex].checkpoints.splice(checkpointIndex, 1)
+		setDetail(next)
+		if (autoDurationCheckpointId === checkpoint.id) {
+			setAutoDurationCheckpointId(null)
+		}
+		setMessage(`Checkpoint "${checkpoint.title}" deleted. Save microskill to apply changes.`)
+	}
+
 	function setDurationFromText(sectionIndex: number, checkpointIndex: number) {
 		if (!detail) return
 		const checkpoint = detail.lessons.sections[sectionIndex]?.checkpoints[checkpointIndex]
@@ -312,13 +348,24 @@ export default function MicroskillCuration({ microskillId }: { microskillId: num
 								<p className="font-inter text-sm text-sky-900">
 									{section.title} ({section.checkpoints.length} checkpoints)
 								</p>
-								<button
-									type="button"
-									onClick={() => toggleSection(section.id)}
-									className="border-green-700 border-2 text-green-700 hover:bg-green-500 hover:text-white px-3 py-1 rounded"
-								>
-									{collapsedSections[section.id] ? 'Expand Section' : 'Collapse Section'}
-								</button>
+								<div className="flex flex-wrap gap-2">
+									<button
+										type="button"
+										onClick={() => toggleSection(section.id)}
+										className="border-green-700 border-2 text-green-700 hover:bg-green-500 hover:text-white px-3 py-1 rounded"
+									>
+										{collapsedSections[section.id]
+											? 'Expand Section'
+											: 'Collapse Section'}
+									</button>
+									<button
+										type="button"
+										onClick={() => removeSection(sectionIndex)}
+										className="border-orange border-2 text-orange hover:bg-orange hover:text-white px-3 py-1 rounded"
+									>
+										Delete Section
+									</button>
+								</div>
 							</div>
 								{collapsedSections[section.id] ? null : (
 									<div className="mt-3">
@@ -342,6 +389,15 @@ export default function MicroskillCuration({ microskillId }: { microskillId: num
 									<div className="space-y-2 mt-2">
 										{section.checkpoints.map((checkpoint, checkpointIndex) => (
 											<div key={checkpoint.id} className="border border-sky-300 rounded p-2">
+												<div className="flex justify-end">
+													<button
+														type="button"
+														onClick={() => removeCheckpoint(sectionIndex, checkpointIndex)}
+														className="border-orange border-2 text-orange hover:bg-orange hover:text-white px-3 py-1 rounded text-xs"
+													>
+														Delete Checkpoint
+													</button>
+												</div>
 												<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 													<label className="font-inter text-xs text-sky-900">Checkpoint Title
 														<input className="mt-1 w-full border-2 border-green-700 rounded p-2" value={checkpoint.title} onChange={(e) => updateCheckpoint(sectionIndex, checkpointIndex, 'title', e.target.value)} />

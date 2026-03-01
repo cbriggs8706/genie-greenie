@@ -176,6 +176,34 @@ export default function MicroskillsEditor() {
 		setDetail(next)
 	}
 
+	function removeSection(sectionIndex: number) {
+		if (!detail) return
+		const section = detail.lessons.sections[sectionIndex]
+		if (!section) return
+		const confirmed = window.confirm(
+			`Delete section "${section.title}" and all ${section.checkpoints.length} checkpoints?`
+		)
+		if (!confirmed) return
+
+		const next = structuredClone(detail)
+		next.lessons.sections.splice(sectionIndex, 1)
+		setDetail(next)
+		setMessage(`Section "${section.title}" deleted. Save microskill to apply changes.`)
+	}
+
+	function removeCheckpoint(sectionIndex: number, checkpointIndex: number) {
+		if (!detail) return
+		const checkpoint = detail.lessons.sections[sectionIndex]?.checkpoints[checkpointIndex]
+		if (!checkpoint) return
+		const confirmed = window.confirm(`Delete checkpoint "${checkpoint.title}"?`)
+		if (!confirmed) return
+
+		const next = structuredClone(detail)
+		next.lessons.sections[sectionIndex].checkpoints.splice(checkpointIndex, 1)
+		setDetail(next)
+		setMessage(`Checkpoint "${checkpoint.title}" deleted. Save microskill to apply changes.`)
+	}
+
 	async function save() {
 		if (!detail) return
 		setSaving(true)
@@ -395,6 +423,15 @@ export default function MicroskillsEditor() {
 								<div className="space-y-3">
 									{detail.lessons.sections.map((section, sectionIndex) => (
 										<div key={section.id} className="border-2 border-green-700 rounded p-3">
+											<div className="mb-2 flex justify-end">
+												<button
+													type="button"
+													onClick={() => removeSection(sectionIndex)}
+													className="border-orange border-2 text-orange hover:bg-orange hover:text-white px-3 py-1 rounded"
+												>
+													Delete Section
+												</button>
+											</div>
 											<div className="grid grid-cols-1 md:grid-cols-3 gap-2">
 												<label className="font-inter text-xs text-sky-900">
 													Section Title
@@ -418,6 +455,15 @@ export default function MicroskillsEditor() {
 											<div className="space-y-2 mt-2">
 												{section.checkpoints.map((checkpoint, checkpointIndex) => (
 													<div key={checkpoint.id} className="border border-sky-300 rounded p-2">
+														<div className="flex justify-end">
+															<button
+																type="button"
+																onClick={() => removeCheckpoint(sectionIndex, checkpointIndex)}
+																className="border-orange border-2 text-orange hover:bg-orange hover:text-white px-3 py-1 rounded text-xs"
+															>
+																Delete Checkpoint
+															</button>
+														</div>
 														<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 															<label className="font-inter text-xs text-sky-900">
 																Checkpoint Title
