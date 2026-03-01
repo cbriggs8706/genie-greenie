@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
+import type { ReactNode } from 'react'
 import { createClient, supabaseConfigured } from '@/lib/supabase/client'
 
 type Checkpoint = {
@@ -51,6 +52,53 @@ type ProgressResponse = {
 			completed: boolean
 		}>
 	}>
+}
+
+function splitTrailingPunctuation(url: string) {
+	const match = url.match(/[),.!?:;]+$/)
+	if (!match) return { cleanUrl: url, trailing: '' }
+	const trailing = match[0]
+	return {
+		cleanUrl: url.slice(0, -trailing.length),
+		trailing,
+	}
+}
+
+function renderTextWithLinks(text: string) {
+	const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/gi
+	const parts: ReactNode[] = []
+	let lastIndex = 0
+	let match: RegExpExecArray | null
+
+	while ((match = urlRegex.exec(text)) !== null) {
+		const rawMatch = match[0]
+		const start = match.index
+		if (start > lastIndex) {
+			parts.push(text.slice(lastIndex, start))
+		}
+
+		const { cleanUrl, trailing } = splitTrailingPunctuation(rawMatch)
+		const href = cleanUrl.startsWith('http') ? cleanUrl : `https://${cleanUrl}`
+		parts.push(
+			<a
+				key={`${start}-${cleanUrl}`}
+				className="underline text-sky-800 hover:text-sky-900 break-all"
+				href={href}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				{cleanUrl}
+			</a>
+		)
+		if (trailing) parts.push(trailing)
+		lastIndex = start + rawMatch.length
+	}
+
+	if (lastIndex < text.length) {
+		parts.push(text.slice(lastIndex))
+	}
+
+	return parts.length > 0 ? parts : text
 }
 
 export default function MicroskillExperience({ microskill }: { microskill: Microskill }) {
@@ -226,7 +274,9 @@ export default function MicroskillExperience({ microskill }: { microskill: Micro
 
 									{isExpanded ? (
 										<div className="mt-3 border-t border-sky-200 pt-3">
-											<p className="font-inter text-sky-800">{checkpoint.description}</p>
+											<p className="font-inter text-sky-800 whitespace-pre-wrap">
+												{renderTextWithLinks(checkpoint.description)}
+											</p>
 
 											{videoEmbedUrl ? (
 												<div className="mt-3 rounded-lg overflow-hidden border-2 border-green-700">

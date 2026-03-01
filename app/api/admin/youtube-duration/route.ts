@@ -15,28 +15,57 @@ function extractYoutubeVideoId(url: string) {
 	const trimmed = url.trim()
 	if (!trimmed) return null
 
+	try {
+		const parsed = new URL(trimmed)
+		const host = parsed.hostname.replace(/^www\./, '')
+		if (host === 'youtu.be') {
+			const pathId = parsed.pathname.split('/').filter(Boolean)[0]
+			if (pathId && /^[a-zA-Z0-9_-]{11}$/.test(pathId)) return pathId
+		}
+		if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'music.youtube.com') {
+			const queryId = parsed.searchParams.get('v')
+			if (queryId && /^[a-zA-Z0-9_-]{11}$/.test(queryId)) return queryId
+			const segments = parsed.pathname.split('/').filter(Boolean)
+			if (segments.length >= 2 && ['embed', 'shorts', 'live'].includes(segments[0])) {
+				const pathId = segments[1]
+				if (pathId && /^[a-zA-Z0-9_-]{11}$/.test(pathId)) return pathId
+			}
+		}
+	} catch {
+		// Fall through to regex parsing for non-standard inputs.
+	}
+
 	const patterns = [
-		/(?:youtube\.com\/watch\?[^#]*v=)([a-zA-Z0-9_-]{6,})/,
-		/(?:youtu\.be\/)([a-zA-Z0-9_-]{6,})/,
-		/(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]{6,})/,
-		/(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]{6,})/,
+		/(?:youtube\.com\/watch\?[^#\s]*v=)([a-zA-Z0-9_-]{11})/,
+		/(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+		/(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+		/(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+		/(?:youtube\.com\/live\/)([a-zA-Z0-9_-]{11})/,
 	]
 
 	for (const pattern of patterns) {
 		const match = trimmed.match(pattern)
-		if (match) return match[1]
+		if (match) {
+			const id = match[1]
+			if (id && /^[a-zA-Z0-9_-]{11}$/.test(id)) return id
+		}
 	}
 
 	return null
 }
 
 function parseIsoDurationToSeconds(value: string) {
-	const match = value.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/)
+	const match = value.match(
+		/^P(?:(\d+)W)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/
+	)
 	if (!match) return null
-	const hours = Number(match[1] ?? '0')
-	const minutes = Number(match[2] ?? '0')
-	const seconds = Number(match[3] ?? '0')
-	const totalSeconds = hours * 3600 + minutes * 60 + seconds
+	const weeks = Number(match[1] ?? '0')
+	const days = Number(match[2] ?? '0')
+	const hours = Number(match[3] ?? '0')
+	const minutes = Number(match[4] ?? '0')
+	const seconds = Number(match[5] ?? '0')
+	const totalSeconds =
+		weeks * 7 * 24 * 3600 + days * 24 * 3600 + hours * 3600 + minutes * 60 + seconds
 	if (!Number.isFinite(totalSeconds) || totalSeconds <= 0) return null
 	return Math.ceil(totalSeconds)
 }
@@ -106,6 +135,10 @@ export async function POST(request: Request) {
 
 	const response = await fetch(apiUrl.toString(), { cache: 'no-store' })
 	if (!response.ok) {
+		const fallbackDuration = await detectDurationWithoutApiKey(videoId)
+		if (fallbackDuration) {
+			return NextResponse.json({ durationSeconds: fallbackDuration })
+		}
 		return NextResponse.json({ error: 'Could not fetch YouTube metadata' }, { status: 502 })
 	}
 
