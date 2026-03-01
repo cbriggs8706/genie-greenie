@@ -1,5 +1,6 @@
 import '../app/globals.css'
 import { Inter, Young_Serif } from 'next/font/google'
+import type { Metadata } from 'next'
 import Footer from '@/components/shared/Footer'
 import Nav from '@/components/shared/Nav'
 import BackgroundSVG from '@/components/shared/BackgroundSVG'
@@ -17,9 +18,31 @@ const youngSerif = Young_Serif({
 	variable: '--young',
 })
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Genie Greenie',
 	description: 'Genie Greenie',
+	icons: {
+		icon: [
+			{ url: '/favicon.ico' },
+			{ url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+			{ url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+		],
+		apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+		other: [
+			{
+				rel: 'icon',
+				url: '/android-chrome-192x192.png',
+				sizes: '192x192',
+				type: 'image/png',
+			},
+			{
+				rel: 'icon',
+				url: '/android-chrome-512x512.png',
+				sizes: '512x512',
+				type: 'image/png',
+			},
+		],
+	},
 }
 
 export default async function RootLayout({

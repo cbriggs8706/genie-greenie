@@ -420,9 +420,9 @@ export default function MicroskillsCatalog() {
 							{addingMicroskillCategory === category ? 'Adding...' : 'Add Microskill'}
 						</button>
 					</div>
-					<div className="divide-y divide-sky-200 border-y border-sky-200">
+					<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 						{skills.length === 0 ? (
-							<p className="px-2 py-3 font-inter text-sm text-sky-900">
+							<p className="col-span-full rounded-lg border-2 border-sky-200 bg-white px-3 py-3 font-inter text-sm text-sky-900">
 								No microskills in this category yet.
 							</p>
 						) : null}
@@ -430,15 +430,15 @@ export default function MicroskillsCatalog() {
 							<Link
 								key={skill.id}
 								href={`/dashboard/microskills/${skill.id}`}
-								className="block px-2 py-3 transition hover:bg-green-700 hover:text-white"
+								className="block rounded-lg border-2 border-green-700 bg-white p-3 text-center shadow-md transition hover:bg-green-700 hover:text-white"
 							>
-								<p className="font-Young_Serif text-xl leading-tight">{skill.name}</p>
+								<p className="font-Young_Serif text-lg leading-tight">{skill.name}</p>
 								<p className="font-inter text-xs">/{skill.slug}</p>
-								<p className="font-inter text-xs mt-1">
+								<p className="mt-1 font-inter text-xs">
 									Category Sort: {skill.category_sort} | Skill Sort: {skill.skill_sort}
 								</p>
-								<p className="font-inter text-sm mt-1">{skill.skill_level}</p>
-								<p className="font-inter text-xs mt-1">
+								<p className="mt-1 font-inter text-sm">{skill.skill_level}</p>
+								<p className="mt-1 font-inter text-xs">
 									{skill.is_public ? 'Published' : 'Hidden'}
 								</p>
 							</Link>
