@@ -35,6 +35,15 @@ const Page = () => {
 				<h3 className="font-semibold text-lg">Nickname Quiz</h3>
 				<p className="text-sm">Do you think you know common nicknames?</p>
 			</div>
+			<div
+				className="w-full bg-white p-4 rounded-lg shadow-lg border-green-700 border-2 text-center transition hover:bg-green-700 hover:text-white cursor-pointer mb-8"
+				onClick={() => router.push('/quiz/family-tree')}
+			>
+				<h3 className="font-semibold text-lg">Family Tree Puzzle</h3>
+				<p className="text-sm">
+					Solve relationship clues by placing each family member correctly in the tree
+				</p>
+			</div>
 
 			{selectedGame ? (
 				<div>

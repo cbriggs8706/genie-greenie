@@ -57,6 +57,12 @@ export default async function DashboardPage() {
 					>
 						Open Assignment Catalog
 					</Link>
+					<Link
+						href="/dashboard/family-puzzles"
+						className="mt-3 ml-2 inline-flex rounded border-2 border-green-700 px-4 py-2 text-sm font-medium text-green-700 transition hover:bg-green-500 hover:text-white"
+					>
+						Open Family Puzzle Studio
+					</Link>
 				</div>
 			) : null}
 			{categories.length > 0 ? (

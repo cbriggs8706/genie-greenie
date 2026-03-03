@@ -8,6 +8,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+		"test": "node --import tsx --test tests/family-puzzles.test.ts",
 		"db:push": "supabase db push",
 		"db:sync:microskills": "tsx scripts/sync-microskills-to-supabase.ts"
 	},
