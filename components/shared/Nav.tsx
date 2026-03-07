@@ -1,60 +1,22 @@
 'use client'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
-
-import {
-	HiCursorArrowRays,
-	HiFingerPrint,
-	HiSquaresPlus,
-	HiXMark,
-	HiChevronDown,
-	HiPhone,
-	HiDocumentCheck,
-} from 'react-icons/hi2'
+import { Dialog } from '@headlessui/react'
+import { HiBars3, HiXMark } from 'react-icons/hi2'
 
 import Image from 'next/image'
 import { createClient, supabaseConfigured } from '@/lib/supabase/client'
 
-const training = [
-	// {
-	// 	name: 'SourceLinker 101',
-	// 	href: '/source-linker',
-	// 	icon: MdPallet,
-	// },
-	{
-		name: 'SourceLinker 101',
-		href: '/source-linker',
-		img: 'mascot.svg',
-	},
-]
-const quizzes = [
-	{
-		name: 'Personality Quiz',
-		href: '/personality',
-		img: 'mascot.svg',
-	},
-	// {
-	// 	name: 'Deep Personality Quiz',
-	// 	href: '/deep-personality',
-	// 	img: 'mascot.svg',
-	// },
-]
-
-function classNames(...classes: string[]) {
-	return classes.filter(Boolean).join(' ')
-}
-
 export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
-	const [currentPath, setCurrentPath] = useState('/')
+	const currentPath =
+		typeof window === 'undefined'
+			? '/'
+			: `${window.location.pathname}${window.location.search}`
 
 	useEffect(() => {
-		if (!supabaseConfigured()) {
-			setIsLoggedIn(false)
-			return
-		}
+		if (!supabaseConfigured()) return
 
 		const supabase = createClient()
 
@@ -81,10 +43,6 @@ export default function Example() {
 		}
 	}, [])
 
-	useEffect(() => {
-		setCurrentPath(`${window.location.pathname}${window.location.search}`)
-	}, [])
-
 	const authHref = isLoggedIn
 		? '/dashboard'
 		: `/login?next=${encodeURIComponent(currentPath)}`
@@ -94,11 +52,11 @@ export default function Example() {
 		<>
 			<header className="bg-sky-800 text-white z-30 sticky font-Young_Serif">
 				<nav
-					className="mx-auto flex max-w-7xl items-center justify-between lg:px-16"
+					className="mx-auto grid max-w-7xl grid-cols-3 items-center px-2 py-1 sm:px-4 lg:px-6"
 					aria-label="Global"
 				>
-					<div className="flex lg:flex-1">
-						<Link href="/" className="p-2 px-4 flex-shrink-0">
+					<div className="flex justify-start">
+						<Link href="/" className="p-2">
 							<Image
 								src="/genieGreenieLogo150px.png"
 								width={50}
@@ -111,76 +69,16 @@ export default function Example() {
 					<span className="font-Young_Serif text-2xl lg:text-4xl text-white text-center">
 						Genie Greenie
 					</span>
-					{/*<Popover.Group className="hidden lg:flex lg:gap-x-12">
-						 <Popover className="relative">
-							<Popover.Button className="flex items-center gap-x-1 text-xl leading-6 text-white uppercase">
-								Training
-								<HiChevronDown
-									className="h-5 w-5 flex-none text-white"
-									aria-hidden="true"
-								/>
-							</Popover.Button>
-
-							<Transition
-								as={Fragment}
-								enter="transition ease-out duration-200"
-								enterFrom="opacity-0 translate-y-1"
-								enterTo="opacity-100 translate-y-0"
-								leave="transition ease-in duration-150"
-								leaveFrom="opacity-100 translate-y-0"
-								leaveTo="opacity-0 translate-y-1"
-							>
-								<Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-darkblue shadow-lg ring-1 ring-gray-900/5">
-									<div className="p-4">
-										{training.map((item) => (
-											<div
-												key={item.name}
-												className="group relative flex items-center gap-x-6 rounded-lg p-4 text-xl leading-6"
-											>
-												<div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-darkblue">
-													{item.img ? (
-														<Image
-															height={100}
-															width={100}
-															alt={`${item.name} image`}
-															src={item.img}
-														/>
-													) : (
-														<item.icon
-															className="h-6 w-6 text-white"
-															aria-hidden="true"
-														/>
-													)}
-												</div>
-												<div className="flex-auto">
-													<a href={item.href} className="block text-white">
-														{item.name}
-														<span className="absolute inset-0" />
-													</a>
-												</div>
-											</div>
-										))}
-									</div>
-								</Popover.Panel>
-							</Transition>
-						</Popover> 
-
-						<Link href="/start" className="text-lg leading-6 text-white">
-							Where do I start?
-						</Link>
-						<Link href="/learn" className="text-lg leading-6 text-white">
-							Learn
-						</Link>
-						<Link href="/personality" className="text-lg leading-6 text-white">
-							Quiz
-						</Link>
-						 <Link
-							href="/deep-personality"
-							className="text-lg leading-6 text-white"
+					<div className="flex justify-end">
+						<button
+							type="button"
+							className="rounded-full p-3 text-white transition hover:bg-sky-700"
+							onClick={() => setMobileMenuOpen(true)}
 						>
-							Deep Personality Quiz
-						</Link> 
-					</Popover.Group>*/}
+							<span className="sr-only">Open menu</span>
+							<HiBars3 className="h-8 w-8" aria-hidden="true" />
+						</button>
+					</div>
 				</nav>
 
 				<Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -238,11 +136,18 @@ export default function Example() {
 									</Link>
 
 									<Link
-										href="/personality"
+										href="/quiz"
 										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Quizzes
+									</Link>
+									<Link
+										href="/play"
+										className="-mx-3 block rounded-lg px-3 py-2 leading-8 text-white text-lg text-center font-Young_Serif"
+										onClick={() => setMobileMenuOpen(false)}
+									>
+										Play
 									</Link>
 									<Link
 										href="/help"

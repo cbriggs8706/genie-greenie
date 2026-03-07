@@ -1,0 +1,1787 @@
+{
+	"pid": "KWXJ-4V6",
+	"ancestry": {
+		"description": "Mock ancestry response for Genie Greenie flashcards",
+		"links": {
+			"self": {
+				"href": "https://api.familysearch.org/platform/tree/ancestry?person=KWXJ-4V6&generations=4"
+			}
+		},
+		"persons": [
+			{
+				"id": "KWXJ-4V6",
+				"living": true,
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "11 October 1987"
+						},
+						"place": {
+							"original": "Burley, Cassia, Idaho"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Software Engineer"
+					}
+				],
+				"display": {
+					"name": "Cameron J Briggs",
+					"lifespan": "1987-",
+					"gender": "Male",
+					"birthDate": "11 October 1987",
+					"birthPlace": "Burley, Cassia, Idaho",
+					"deathDate": "",
+					"deathPlace": "",
+					"ascendancyNumber": "1"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWXJ-4V6"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Cameron J Briggs"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "LXDB-Q7B",
+				"living": true,
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "1952"
+						},
+						"place": {
+							"original": "Idaho Falls, Idaho"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Teacher"
+					}
+				],
+				"display": {
+					"name": "Terry Wallace Briggs",
+					"lifespan": "1952-",
+					"gender": "Male",
+					"birthDate": "1952",
+					"birthPlace": "Idaho Falls, Idaho",
+					"deathDate": "",
+					"deathPlace": "",
+					"ascendancyNumber": "2"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["LXDB-Q7B"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Terry Wallace Briggs"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "LXDB-QW5",
+				"living": true,
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "1954"
+						},
+						"place": {
+							"original": "Rupert Idaho"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Nurse"
+					}
+				],
+				"display": {
+					"name": "Darlene Beyler",
+					"lifespan": "1954-",
+					"gender": "Female",
+					"birthDate": "1954",
+					"birthPlace": "Rupert Idaho",
+					"deathDate": "",
+					"deathPlace": "",
+					"ascendancyNumber": "3"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["LXDB-QW5"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Darlene Beyler"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWZQ-TDD",
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "14 March 1925"
+						},
+						"place": {
+							"original": "Archer, Madison, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "8 February 2000"
+						},
+						"place": {
+							"original": "Burley, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Farmer"
+					}
+				],
+				"display": {
+					"name": "Wallace Orval Briggs",
+					"lifespan": "1925-2000",
+					"gender": "Male",
+					"birthDate": "14 March 1925",
+					"birthPlace": "Archer, Madison, Idaho, United States",
+					"deathDate": "8 February 2000",
+					"deathPlace": "Burley, Cassia, Idaho, United States",
+					"ascendancyNumber": "4"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWZQ-TDD"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Wallace Orval Briggs"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWZQ-TDX",
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "6 January 1929"
+						},
+						"place": {
+							"original": "Shelley, Bingham, Idaho"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "11 April 2003"
+						},
+						"place": {
+							"original": "Pocatello, Bannock, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Homemaker"
+					}
+				],
+				"display": {
+					"name": "Marjean Johnson",
+					"lifespan": "1929-2003",
+					"gender": "Female",
+					"birthDate": "6 January 1929",
+					"birthPlace": "Shelley, Bingham, Idaho",
+					"deathDate": "11 April 2003",
+					"deathPlace": "Pocatello, Bannock, Idaho, United States",
+					"ascendancyNumber": "5"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWZQ-TDX"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Marjean Johnson"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWZS-Q4Q",
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "13 May 1929"
+						},
+						"place": {
+							"original": "Malta, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "25 September 2008"
+						},
+						"place": {
+							"original": "Malta, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Rancher"
+					}
+				],
+				"display": {
+					"name": "Grant Nelson Beyler",
+					"lifespan": "1929-2008",
+					"gender": "Male",
+					"birthDate": "13 May 1929",
+					"birthPlace": "Malta, Cassia, Idaho, United States",
+					"deathDate": "25 September 2008",
+					"deathPlace": "Malta, Cassia, Idaho, United States",
+					"ascendancyNumber": "6"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWZS-Q4Q"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Grant Nelson Beyler"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWZS-Q4W",
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "25 May 1933"
+						},
+						"place": {
+							"original": "Declo, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "28 April 2022"
+						},
+						"place": {
+							"original": "Malad, Oneida, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Homemaker"
+					}
+				],
+				"display": {
+					"name": "Clara Vee Wight",
+					"lifespan": "1933-2022",
+					"gender": "Female",
+					"birthDate": "25 May 1933",
+					"birthPlace": "Declo, Cassia, Idaho, United States",
+					"deathDate": "28 April 2022",
+					"deathPlace": "Malad, Oneida, Idaho, United States",
+					"ascendancyNumber": "7"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWZS-Q4W"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Clara Vee Wight"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWCG-FZ6",
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "13 August 1883"
+						},
+						"place": {
+							"original": "Lyman, Fremont, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "20 March 1964"
+						},
+						"place": {
+							"original": "Archer, Madison, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Farmer"
+					}
+				],
+				"display": {
+					"name": "George Briggs Jr",
+					"lifespan": "1883-1964",
+					"gender": "Male",
+					"birthDate": "13 August 1883",
+					"birthPlace": "Lyman, Fremont, Idaho, United States",
+					"deathDate": "20 March 1964",
+					"deathPlace": "Archer, Madison, Idaho, United States",
+					"ascendancyNumber": "8"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWCG-FZ6"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "George Briggs Jr"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWCG-FZN",
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "9 June 1885"
+						},
+						"place": {
+							"original": "Salt Lake City, Salt Lake, Utah, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "2 August 1957"
+						},
+						"place": {
+							"original": "Archer, Madison, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Teacher"
+					}
+				],
+				"display": {
+					"name": "Martha Burns",
+					"lifespan": "1885-1957",
+					"gender": "Female",
+					"birthDate": "9 June 1885",
+					"birthPlace": "Salt Lake City, Salt Lake, Utah, United States",
+					"deathDate": "2 August 1957",
+					"deathPlace": "Archer, Madison, Idaho, United States",
+					"ascendancyNumber": "9"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWCG-FZN"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Martha Burns"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWZQ-TDG",
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "11 February 1900"
+						},
+						"place": {
+							"original": "Goshen, Bingham, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "9 November 1980"
+						},
+						"place": {
+							"original": "Idaho Falls, Bonneville, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Railroad Worker"
+					}
+				],
+				"display": {
+					"name": "Ivan Leslie Johnson",
+					"lifespan": "1900-1980",
+					"gender": "Male",
+					"birthDate": "11 February 1900",
+					"birthPlace": "Goshen, Bingham, Idaho, United States",
+					"deathDate": "9 November 1980",
+					"deathPlace": "Idaho Falls, Bonneville, Idaho, United States",
+					"ascendancyNumber": "10"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWZQ-TDG"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Ivan Leslie Johnson"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWZQ-TDK",
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "17 July 1899"
+						},
+						"place": {
+							"original": "American Fork, Utah, Utah"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "14 May 1985"
+						},
+						"place": {
+							"original": "Idaho Falls, Bonneville, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Shopkeeper"
+					}
+				],
+				"display": {
+					"name": "Ruby Kelley",
+					"lifespan": "1899-1985",
+					"gender": "Female",
+					"birthDate": "17 July 1899",
+					"birthPlace": "American Fork, Utah, Utah",
+					"deathDate": "14 May 1985",
+					"deathPlace": "Idaho Falls, Bonneville, Idaho, United States",
+					"ascendancyNumber": "11"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWZQ-TDK"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Ruby Kelley"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWCK-HZ5",
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "17 November 1894"
+						},
+						"place": {
+							"original": "St. Charles, Bear Lake, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "7 January 1983"
+						},
+						"place": {
+							"original": "Burley, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Farmer"
+					}
+				],
+				"display": {
+					"name": "Leo William Beyler",
+					"lifespan": "1894-1983",
+					"gender": "Male",
+					"birthDate": "17 November 1894",
+					"birthPlace": "St. Charles, Bear Lake, Idaho, United States",
+					"deathDate": "7 January 1983",
+					"deathPlace": "Burley, Cassia, Idaho, United States",
+					"ascendancyNumber": "12"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWCK-HZ5"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Leo William Beyler"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWCK-HZL",
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "12 January 1897"
+						},
+						"place": {
+							"original": "Fish Haven, Bear Lake, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "19 November 1949"
+						},
+						"place": {
+							"original": "Salt Lake City, Salt Lake, Utah, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Railroad Worker"
+					}
+				],
+				"display": {
+					"name": "Gladys Ellen Nelson",
+					"lifespan": "1897-1949",
+					"gender": "Female",
+					"birthDate": "12 January 1897",
+					"birthPlace": "Fish Haven, Bear Lake, Idaho, United States",
+					"deathDate": "19 November 1949",
+					"deathPlace": "Salt Lake City, Salt Lake, Utah, United States",
+					"ascendancyNumber": "13"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWCK-HZL"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Gladys Ellen Nelson"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWCK-DZ6",
+				"gender": {
+					"type": "http://gedcomx.org/Male"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "22 September 1906"
+						},
+						"place": {
+							"original": "Brigham City, Box Elder, Utah, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "13 February 1981"
+						},
+						"place": {
+							"original": "Boise, Ada, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Carpenter"
+					}
+				],
+				"display": {
+					"name": "Harvey J Wight",
+					"lifespan": "1906-1981",
+					"gender": "Male",
+					"birthDate": "22 September 1906",
+					"birthPlace": "Brigham City, Box Elder, Utah, United States",
+					"deathDate": "13 February 1981",
+					"deathPlace": "Boise, Ada, Idaho, United States",
+					"ascendancyNumber": "14"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWCK-DZ6"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Harvey J Wight"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "KWCK-DZD",
+				"gender": {
+					"type": "http://gedcomx.org/Female"
+				},
+				"facts": [
+					{
+						"type": "http://gedcomx.org/Birth",
+						"date": {
+							"original": "24 April 1907"
+						},
+						"place": {
+							"original": "Elba, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Death",
+						"date": {
+							"original": "4 June 1985"
+						},
+						"place": {
+							"original": "Burley, Cassia, Idaho, United States"
+						}
+					},
+					{
+						"type": "http://gedcomx.org/Occupation",
+						"value": "Rancher"
+					}
+				],
+				"display": {
+					"name": "Sarah Mae Darrington",
+					"lifespan": "1907-1985",
+					"gender": "Female",
+					"birthDate": "24 April 1907",
+					"birthPlace": "Elba, Cassia, Idaho, United States",
+					"deathDate": "4 June 1985",
+					"deathPlace": "Burley, Cassia, Idaho, United States",
+					"ascendancyNumber": "15"
+				},
+				"identifiers": {
+					"http://gedcomx.org/Persistent": ["KWCK-DZD"]
+				},
+				"names": [
+					{
+						"nameForms": [
+							{
+								"fullText": "Sarah Mae Darrington"
+							}
+						]
+					}
+				]
+			}
+		],
+		"childAndParentsRelationships": [
+			{
+				"id": "cpr-1",
+				"child": {
+					"resource": "#KWXJ-4V6",
+					"resourceId": "KWXJ-4V6"
+				},
+				"father": {
+					"resource": "#LXDB-Q7B",
+					"resourceId": "LXDB-Q7B"
+				},
+				"mother": {
+					"resource": "#LXDB-QW5",
+					"resourceId": "LXDB-QW5"
+				}
+			},
+			{
+				"id": "cpr-2",
+				"child": {
+					"resource": "#LXDB-Q7B",
+					"resourceId": "LXDB-Q7B"
+				},
+				"father": {
+					"resource": "#KWZQ-TDD",
+					"resourceId": "KWZQ-TDD"
+				},
+				"mother": {
+					"resource": "#KWZQ-TDX",
+					"resourceId": "KWZQ-TDX"
+				}
+			},
+			{
+				"id": "cpr-3",
+				"child": {
+					"resource": "#LXDB-QW5",
+					"resourceId": "LXDB-QW5"
+				},
+				"father": {
+					"resource": "#KWZS-Q4Q",
+					"resourceId": "KWZS-Q4Q"
+				},
+				"mother": {
+					"resource": "#KWZS-Q4W",
+					"resourceId": "KWZS-Q4W"
+				}
+			},
+			{
+				"id": "cpr-4",
+				"child": {
+					"resource": "#KWZQ-TDD",
+					"resourceId": "KWZQ-TDD"
+				},
+				"father": {
+					"resource": "#KWCG-FZ6",
+					"resourceId": "KWCG-FZ6"
+				},
+				"mother": {
+					"resource": "#KWCG-FZN",
+					"resourceId": "KWCG-FZN"
+				}
+			},
+			{
+				"id": "cpr-5",
+				"child": {
+					"resource": "#KWZQ-TDX",
+					"resourceId": "KWZQ-TDX"
+				},
+				"father": {
+					"resource": "#KWZQ-TDG",
+					"resourceId": "KWZQ-TDG"
+				},
+				"mother": {
+					"resource": "#KWZQ-TDK",
+					"resourceId": "KWZQ-TDK"
+				}
+			},
+			{
+				"id": "cpr-6",
+				"child": {
+					"resource": "#KWZS-Q4Q",
+					"resourceId": "KWZS-Q4Q"
+				},
+				"father": {
+					"resource": "#KWCK-HZ5",
+					"resourceId": "KWCK-HZ5"
+				},
+				"mother": {
+					"resource": "#KWCK-HZL",
+					"resourceId": "KWCK-HZL"
+				}
+			},
+			{
+				"id": "cpr-7",
+				"child": {
+					"resource": "#KWZS-Q4W",
+					"resourceId": "KWZS-Q4W"
+				},
+				"father": {
+					"resource": "#KWCK-DZ6",
+					"resourceId": "KWCK-DZ6"
+				},
+				"mother": {
+					"resource": "#KWCK-DZD",
+					"resourceId": "KWCK-DZD"
+				}
+			}
+		],
+		"relationships": [
+			{
+				"id": "wallace-marjean-couple",
+				"type": "http://gedcomx.org/Couple",
+				"person1": {
+					"resource": "#KWZQ-TDD",
+					"resourceId": "KWZQ-TDD"
+				},
+				"person2": {
+					"resource": "#KWZQ-TDX",
+					"resourceId": "KWZQ-TDX"
+				},
+				"facts": [
+					{
+						"id": "wallace-marjean-marriage",
+						"type": "http://gedcomx.org/Marriage",
+						"date": {
+							"original": "1948"
+						},
+						"place": {
+							"original": "Archer, Madison, Idaho, United States"
+						}
+					}
+				]
+			},
+			{
+				"id": "grant-clara-couple",
+				"type": "http://gedcomx.org/Couple",
+				"person1": {
+					"resource": "#KWZS-Q4Q",
+					"resourceId": "KWZS-Q4Q"
+				},
+				"person2": {
+					"resource": "#KWZS-Q4W",
+					"resourceId": "KWZS-Q4W"
+				},
+				"facts": [
+					{
+						"id": "grant-clara-marriage",
+						"type": "http://gedcomx.org/Marriage",
+						"date": {
+							"original": "1953"
+						},
+						"place": {
+							"original": "Cassia, Idaho, United States"
+						}
+					}
+				]
+			},
+			{
+				"id": "george-martha-couple",
+				"type": "http://gedcomx.org/Couple",
+				"person1": {
+					"resource": "#KWCG-FZ6",
+					"resourceId": "KWCG-FZ6"
+				},
+				"person2": {
+					"resource": "#KWCG-FZN",
+					"resourceId": "KWCG-FZN"
+				},
+				"facts": [
+					{
+						"id": "george-martha-marriage",
+						"type": "http://gedcomx.org/Marriage",
+						"date": {
+							"original": "1908"
+						},
+						"place": {
+							"original": "Salt Lake City, Salt Lake, Utah, United States"
+						}
+					}
+				]
+			},
+			{
+				"id": "leo-gladys-couple",
+				"type": "http://gedcomx.org/Couple",
+				"person1": {
+					"resource": "#KWCK-HZ5",
+					"resourceId": "KWCK-HZ5"
+				},
+				"person2": {
+					"resource": "#KWCK-HZL",
+					"resourceId": "KWCK-HZL"
+				},
+				"facts": [
+					{
+						"id": "leo-gladys-marriage",
+						"type": "http://gedcomx.org/Marriage",
+						"date": {
+							"original": "1918"
+						},
+						"place": {
+							"original": "St. Charles, Bear Lake, Idaho, United States"
+						}
+					}
+				]
+			}
+		]
+	},
+	"portraits": {
+		"KWXJ-4V6": {
+			"personId": "KWXJ-4V6",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWXJ-4V6",
+					"about": "#KWXJ-4V6",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Cameron J Briggs"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/cameron.jpg"
+						},
+						"image": {
+							"href": "/ancestors/cameron.jpg"
+						}
+					}
+				}
+			]
+		},
+		"LXDB-Q7B": {
+			"personId": "LXDB-Q7B",
+			"sourceDescriptions": [
+				{
+					"id": "sd-LXDB-Q7B",
+					"about": "#LXDB-Q7B",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Terry Wallace Briggs"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": ""
+						},
+						"image": {
+							"href": ""
+						}
+					}
+				}
+			]
+		},
+		"LXDB-QW5": {
+			"personId": "LXDB-QW5",
+			"sourceDescriptions": [
+				{
+					"id": "sd-LXDB-QW5",
+					"about": "#LXDB-QW5",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Darlene Beyler"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/darlene.jpg"
+						},
+						"image": {
+							"href": "/ancestors/darlene.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWZQ-TDD": {
+			"personId": "KWZQ-TDD",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWZQ-TDD",
+					"about": "#KWZQ-TDD",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Wallace Orval Briggs"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/wallace.png"
+						},
+						"image": {
+							"href": "/ancestors/wallace.png"
+						}
+					}
+				}
+			]
+		},
+		"KWZQ-TDX": {
+			"personId": "KWZQ-TDX",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWZQ-TDX",
+					"about": "#KWZQ-TDX",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Marjean Johnson"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/marjean.jpg"
+						},
+						"image": {
+							"href": "/ancestors/marjean.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWZS-Q4Q": {
+			"personId": "KWZS-Q4Q",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWZS-Q4Q",
+					"about": "#KWZS-Q4Q",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Grant Nelson Beyler"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/grant.jpg"
+						},
+						"image": {
+							"href": "/ancestors/grant.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWZS-Q4W": {
+			"personId": "KWZS-Q4W",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWZS-Q4W",
+					"about": "#KWZS-Q4W",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Clara Vee Wight"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/clara.jpg"
+						},
+						"image": {
+							"href": "/ancestors/clara.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWCG-FZ6": {
+			"personId": "KWCG-FZ6",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWCG-FZ6",
+					"about": "#KWCG-FZ6",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of George Briggs Jr"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/george.jpg"
+						},
+						"image": {
+							"href": "/ancestors/george.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWCG-FZN": {
+			"personId": "KWCG-FZN",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWCG-FZN",
+					"about": "#KWCG-FZN",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Martha Burns"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/martha.jpg"
+						},
+						"image": {
+							"href": "/ancestors/martha.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWZQ-TDG": {
+			"personId": "KWZQ-TDG",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWZQ-TDG",
+					"about": "#KWZQ-TDG",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Ivan Leslie Johnson"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/ivan.jpg"
+						},
+						"image": {
+							"href": "/ancestors/ivan.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWZQ-TDK": {
+			"personId": "KWZQ-TDK",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWZQ-TDK",
+					"about": "#KWZQ-TDK",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Ruby Kelley"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/ruby.jpg"
+						},
+						"image": {
+							"href": "/ancestors/ruby.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWCK-HZ5": {
+			"personId": "KWCK-HZ5",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWCK-HZ5",
+					"about": "#KWCK-HZ5",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Leo William Beyler"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/leo.jpg"
+						},
+						"image": {
+							"href": "/ancestors/leo.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWCK-HZL": {
+			"personId": "KWCK-HZL",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWCK-HZL",
+					"about": "#KWCK-HZL",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Gladys Ellen Nelson"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/gladys.jpg"
+						},
+						"image": {
+							"href": "/ancestors/gladys.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWCK-DZ6": {
+			"personId": "KWCK-DZ6",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWCK-DZ6",
+					"about": "#KWCK-DZ6",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Harvey J Wight"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/harvey.jpg"
+						},
+						"image": {
+							"href": "/ancestors/harvey.jpg"
+						}
+					}
+				}
+			]
+		},
+		"KWCK-DZD": {
+			"personId": "KWCK-DZD",
+			"sourceDescriptions": [
+				{
+					"id": "sd-KWCK-DZD",
+					"about": "#KWCK-DZD",
+					"resourceType": "http://gedcomx.org/DigitalArtifact",
+					"titles": [
+						{
+							"value": "Portrait of Sarah Mae Darrington"
+						}
+					],
+					"links": {
+						"image-thumbnail": {
+							"href": "/ancestors/sarah.jpg"
+						},
+						"image": {
+							"href": "/ancestors/sarah.jpg"
+						}
+					}
+				}
+			]
+		}
+	},
+	"insights": {
+		"description": "Sample survey boards and fact-spotting prompts for Genie Greenie family games. These are pre-aggregated from the mock GedcomX ancestry payload now, and can later be regenerated directly from FamilySearch ancestry responses.",
+		"surveyPrompts": [
+			{
+				"id": "occupations",
+				"title": "Occupations and migration",
+				"prompt": "Top 8 occupations in this family tree",
+				"description": "Guess the jobs that appear most often across this pedigree and look for work patterns passed down through branches.",
+				"answerLimit": 8,
+				"skillsLearned": [
+					"noticing patterns",
+					"demographic trends",
+					"occupations and migration"
+				],
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[].facts[]",
+							"matchType": "http://gedcomx.org/Occupation",
+							"field": "value",
+							"note": "FamilySearch occupation facts are person-level facts with a typed value."
+						}
+					]
+				},
+				"sampleAnswers": [
+					{
+						"answer": "Farmer",
+						"count": 3,
+						"personIds": ["KWZQ-TDD", "KWCG-FZ6", "KWCK-HZ5"],
+						"aliases": ["farm", "farmers"]
+					},
+					{
+						"answer": "Homemaker",
+						"count": 2,
+						"personIds": ["KWZQ-TDX", "KWZS-Q4W"],
+						"aliases": ["homemakers", "stay at home"]
+					},
+					{
+						"answer": "Railroad Worker",
+						"count": 2,
+						"personIds": ["KWZQ-TDG", "KWCK-HZL"],
+						"aliases": ["railroad", "rail worker"]
+					},
+					{
+						"answer": "Rancher",
+						"count": 2,
+						"personIds": ["KWZS-Q4Q", "KWCK-DZD"],
+						"aliases": ["ranch", "ranchers"]
+					},
+					{
+						"answer": "Teacher",
+						"count": 2,
+						"personIds": ["LXDB-Q7B", "KWCG-FZN"],
+						"aliases": ["teachers", "schoolteacher"]
+					},
+					{
+						"answer": "Carpenter",
+						"count": 1,
+						"personIds": ["KWCK-DZ6"],
+						"aliases": ["woodworker"]
+					},
+					{
+						"answer": "Nurse",
+						"count": 1,
+						"personIds": ["LXDB-QW5"],
+						"aliases": ["nursing"]
+					},
+					{
+						"answer": "Shopkeeper",
+						"count": 1,
+						"personIds": ["KWZQ-TDK"],
+						"aliases": ["storekeeper", "merchant"]
+					}
+				]
+			},
+			{
+				"id": "given-names",
+				"title": "Naming patterns",
+				"prompt": "Most common given names in this pedigree",
+				"description": "This board groups repeated given-name tokens from the tree so players can spot favorite family names across generations.",
+				"answerLimit": 8,
+				"skillsLearned": ["noticing patterns", "demographic trends"],
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[].names[].nameForms[].fullText",
+							"transform": "Split the full text into given-name tokens and exclude the surname token.",
+							"note": "FamilySearch exposes person names as full text in GedcomX name forms."
+						}
+					]
+				},
+				"sampleAnswers": [
+					{
+						"answer": "Wallace",
+						"count": 2,
+						"personIds": ["LXDB-Q7B", "KWZQ-TDD"]
+					},
+					{
+						"answer": "Leo",
+						"count": 1,
+						"personIds": ["KWCK-HZ5"]
+					},
+					{
+						"answer": "Grant",
+						"count": 1,
+						"personIds": ["KWZS-Q4Q"]
+					},
+					{
+						"answer": "Marjean",
+						"count": 1,
+						"personIds": ["KWZQ-TDX"]
+					},
+					{
+						"answer": "Ruby",
+						"count": 1,
+						"personIds": ["KWZQ-TDK"]
+					},
+					{
+						"answer": "Clara",
+						"count": 1,
+						"personIds": ["KWZS-Q4W"]
+					},
+					{
+						"answer": "Martha",
+						"count": 1,
+						"personIds": ["KWCG-FZN"]
+					},
+					{
+						"answer": "Sarah",
+						"count": 1,
+						"personIds": ["KWCK-DZD"]
+					}
+				]
+			},
+			{
+				"id": "birthplaces",
+				"title": "Migration map",
+				"prompt": "Most common birthplaces",
+				"description": "This board collapses birth places to the city-level label so you can spot geographic clusters in the pedigree.",
+				"answerLimit": 8,
+				"skillsLearned": [
+					"noticing patterns",
+					"demographic trends",
+					"occupations and migration"
+				],
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[].facts[]",
+							"matchType": "http://gedcomx.org/Birth",
+							"field": "place.original",
+							"transform": "Take the first locality token from the original place string for a survey-style city board."
+						}
+					]
+				},
+				"sampleAnswers": [
+					{
+						"answer": "American Fork",
+						"count": 1,
+						"personIds": ["KWZQ-TDK"],
+						"aliases": ["american fork utah"]
+					},
+					{
+						"answer": "Archer",
+						"count": 1,
+						"personIds": ["KWZQ-TDD"],
+						"aliases": ["archer idaho"]
+					},
+					{
+						"answer": "Brigham City",
+						"count": 1,
+						"personIds": ["KWCK-DZ6"],
+						"aliases": ["brigham city utah"]
+					},
+					{
+						"answer": "Burley",
+						"count": 1,
+						"personIds": ["KWXJ-4V6"],
+						"aliases": ["burley idaho"]
+					},
+					{
+						"answer": "Declo",
+						"count": 1,
+						"personIds": ["KWZS-Q4W"],
+						"aliases": ["declo idaho"]
+					},
+					{
+						"answer": "Fish Haven",
+						"count": 1,
+						"personIds": ["KWCK-HZL"],
+						"aliases": ["fish haven idaho"]
+					},
+					{
+						"answer": "Idaho Falls",
+						"count": 1,
+						"personIds": ["LXDB-Q7B"],
+						"aliases": ["idaho falls idaho"]
+					},
+					{
+						"answer": "Malta",
+						"count": 1,
+						"personIds": ["KWZS-Q4Q"],
+						"aliases": ["malta idaho"]
+					}
+				]
+			}
+		],
+		"twoTruthsOneLiePrompts": [
+			{
+				"id": "terry-briggs-parent-lie",
+				"personId": "LXDB-Q7B",
+				"adjacentPersonId": "KWZQ-TDD",
+				"adjacentRelationship": "parent",
+				"title": "Parent branch mix-up",
+				"prompt": "Which statement is the lie?",
+				"description": "Two facts belong to Terry Wallace Briggs. One fact actually belongs to his father in the FamilySearch child-and-parents relationship.",
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[]",
+							"field": "display.name"
+						},
+						{
+							"path": "ancestry.persons[].facts[]",
+							"field": "date.original, place.original, value"
+						},
+						{
+							"path": "ancestry.childAndParentsRelationships[]",
+							"transform": "Use the child-to-father or child-to-mother resourceId link to select an adjacent ancestor."
+						}
+					]
+				},
+				"statements": [
+					{
+						"id": "terry-briggs-truth-1",
+						"text": "He was born in 1952 in Idaho Falls, Idaho.",
+						"personId": "LXDB-Q7B",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Birth"
+					},
+					{
+						"id": "terry-briggs-truth-2",
+						"text": "He worked as a teacher.",
+						"personId": "LXDB-Q7B",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Occupation"
+					},
+					{
+						"id": "terry-briggs-lie-1",
+						"text": "He died on 8 February 2000 in Burley, Idaho.",
+						"personId": "KWZQ-TDD",
+						"kind": "lie",
+						"factType": "http://gedcomx.org/Death"
+					}
+				]
+			},
+			{
+				"id": "darlene-beyler-parent-lie",
+				"personId": "LXDB-QW5",
+				"adjacentPersonId": "KWZS-Q4W",
+				"adjacentRelationship": "parent",
+				"title": "Maternal clue",
+				"prompt": "Which statement is the lie?",
+				"description": "Two facts belong to Darlene Beyler. One fact was borrowed from her mother through the same FamilySearch relationship pattern.",
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[]",
+							"field": "display.name"
+						},
+						{
+							"path": "ancestry.persons[].facts[]",
+							"field": "date.original, place.original, value"
+						},
+						{
+							"path": "ancestry.childAndParentsRelationships[]",
+							"transform": "Use the child-to-father or child-to-mother resourceId link to select an adjacent ancestor."
+						}
+					]
+				},
+				"statements": [
+					{
+						"id": "darlene-beyler-truth-1",
+						"text": "She was born in 1954 in Rupert, Idaho.",
+						"personId": "LXDB-QW5",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Birth"
+					},
+					{
+						"id": "darlene-beyler-truth-2",
+						"text": "She worked as a nurse.",
+						"personId": "LXDB-QW5",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Occupation"
+					},
+					{
+						"id": "darlene-beyler-lie-1",
+						"text": "She was born on 25 May 1933 in Declo, Idaho.",
+						"personId": "KWZS-Q4W",
+						"kind": "lie",
+						"factType": "http://gedcomx.org/Birth"
+					}
+				]
+			},
+			{
+				"id": "wallace-briggs-child-lie",
+				"personId": "KWZQ-TDD",
+				"adjacentPersonId": "LXDB-Q7B",
+				"adjacentRelationship": "child",
+				"title": "Child branch mix-up",
+				"prompt": "Which statement is the lie?",
+				"description": "Two facts belong to Wallace Orval Briggs. One fact actually belongs to his child in the same ancestry graph.",
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[]",
+							"field": "display.name"
+						},
+						{
+							"path": "ancestry.persons[].facts[]",
+							"field": "date.original, place.original, value"
+						},
+						{
+							"path": "ancestry.childAndParentsRelationships[]",
+							"transform": "Match a person as father or mother, then read the child resourceId as an adjacent relative."
+						}
+					]
+				},
+				"statements": [
+					{
+						"id": "wallace-briggs-truth-1",
+						"text": "He was born on 14 March 1925 in Archer, Idaho.",
+						"personId": "KWZQ-TDD",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Birth"
+					},
+					{
+						"id": "wallace-briggs-truth-2",
+						"text": "He worked as a farmer.",
+						"personId": "KWZQ-TDD",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Occupation"
+					},
+					{
+						"id": "wallace-briggs-lie-1",
+						"text": "He was born in 1952 in Idaho Falls, Idaho.",
+						"personId": "LXDB-Q7B",
+						"kind": "lie",
+						"factType": "http://gedcomx.org/Birth"
+					}
+				]
+			},
+			{
+				"id": "marjean-johnson-parent-lie",
+				"personId": "KWZQ-TDX",
+				"adjacentPersonId": "KWZQ-TDG",
+				"adjacentRelationship": "parent",
+				"title": "Occupation swap",
+				"prompt": "Which statement is the lie?",
+				"description": "Two facts belong to Marjean Johnson. One fact was swapped in from her father via the child-and-parents relationship payload.",
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[]",
+							"field": "display.name"
+						},
+						{
+							"path": "ancestry.persons[].facts[]",
+							"field": "date.original, place.original, value"
+						},
+						{
+							"path": "ancestry.childAndParentsRelationships[]",
+							"transform": "Use the child-to-father or child-to-mother resourceId link to select an adjacent ancestor."
+						}
+					]
+				},
+				"statements": [
+					{
+						"id": "marjean-johnson-truth-1",
+						"text": "She was born on 6 January 1929 in Shelley, Idaho.",
+						"personId": "KWZQ-TDX",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Birth"
+					},
+					{
+						"id": "marjean-johnson-truth-2",
+						"text": "She was listed as a homemaker.",
+						"personId": "KWZQ-TDX",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Occupation"
+					},
+					{
+						"id": "marjean-johnson-lie-1",
+						"text": "She worked as a railroad worker.",
+						"personId": "KWZQ-TDG",
+						"kind": "lie",
+						"factType": "http://gedcomx.org/Occupation"
+					}
+				]
+			},
+			{
+				"id": "grant-beyler-child-lie",
+				"personId": "KWZS-Q4Q",
+				"adjacentPersonId": "LXDB-QW5",
+				"adjacentRelationship": "child",
+				"title": "Generational swap",
+				"prompt": "Which statement is the lie?",
+				"description": "Two facts belong to Grant Nelson Beyler. One fact actually belongs to his child in the same ancestry response.",
+				"source": {
+					"endpoint": "GET /platform/tree/ancestry?person={pid}&generations=4",
+					"photoPath": "portraits[{personId}].sourceDescriptions[0].links.image-thumbnail.href",
+					"derivedFrom": [
+						{
+							"path": "ancestry.persons[]",
+							"field": "display.name"
+						},
+						{
+							"path": "ancestry.persons[].facts[]",
+							"field": "date.original, place.original, value"
+						},
+						{
+							"path": "ancestry.childAndParentsRelationships[]",
+							"transform": "Match a person as father or mother, then read the child resourceId as an adjacent relative."
+						}
+					]
+				},
+				"statements": [
+					{
+						"id": "grant-beyler-truth-1",
+						"text": "He died on 25 September 2008 in Malta, Idaho.",
+						"personId": "KWZS-Q4Q",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Death"
+					},
+					{
+						"id": "grant-beyler-truth-2",
+						"text": "He worked as a rancher.",
+						"personId": "KWZS-Q4Q",
+						"kind": "truth",
+						"factType": "http://gedcomx.org/Occupation"
+					},
+					{
+						"id": "grant-beyler-lie-1",
+						"text": "He was born in 1954 in Rupert, Idaho.",
+						"personId": "LXDB-QW5",
+						"kind": "lie",
+						"factType": "http://gedcomx.org/Birth"
+					}
+				]
+			}
+		]
+	}
+}

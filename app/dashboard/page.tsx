@@ -57,6 +57,18 @@ export default async function DashboardPage() {
 					>
 						Open Assignment Catalog
 					</Link>
+					<Link
+						href="/dashboard/play"
+						className="mt-3 ml-2 inline-flex rounded border-2 border-green-700 px-4 py-2 text-sm font-medium text-green-700 transition hover:bg-green-500 hover:text-white"
+					>
+						Open Play Builder
+					</Link>
+					<Link
+						href="/my-family"
+						className="mt-3 ml-2 inline-flex rounded border-2 border-green-700 px-4 py-2 text-sm font-medium text-green-700 transition hover:bg-green-500 hover:text-white"
+					>
+						Open My Family
+					</Link>
 				</div>
 			) : null}
 			{categories.length > 0 ? (

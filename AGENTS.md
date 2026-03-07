@@ -64,6 +64,10 @@ Use this file as the source of truth for preserving the current Genie Greenie ae
   - subtle hover color transitions (`transition`)
   - modest duration values (around 200-300ms)
   - shadow depth over heavy transforms
+- For study cards/flashcards:
+  - prefer a simple card flip over multiple moving panels
+  - avoid layout shift when flipping or advancing
+  - keep action buttons anchored in a stable position
 
 ## Imagery and Iconography
 - Mascot/logo visuals are central to brand recognition.
@@ -76,6 +80,17 @@ Use this file as the source of truth for preserving the current Genie Greenie ae
 - Reuse existing card/button patterns for consistency.
 - Maintain rounded corners and medium shadow depth (`rounded-lg/xl`, `shadow-lg/md`).
 - Avoid dark mode-first redesigns or neon/purple-heavy palettes.
+- Prefer simple UI over explanatory chrome:
+  - minimize repeated headings, badges, helper text, and redundant counters
+  - let the main activity dominate the page width when the screen is task-focused
+- When building quiz/flashcard flows:
+  - design mobile-first, then scale up cleanly for desktop
+  - center front/back card content vertically and horizontally when possible
+  - use progress bars instead of multiple competing progress indicators
+  - move advanced customization into an inconspicuous dialog or settings control
+- When mocking future API integrations:
+  - prefer realistic local sample JSON files over visible "mock api" panels in the UI
+  - keep sample JSON close to the future API shape, but keep the interface user-facing
 - For new screens, start from:
   - sky page background
   - white rounded content container
@@ -88,3 +103,17 @@ Use this file as the source of truth for preserving the current Genie Greenie ae
 - Interactive card: `w-full bg-white p-4 rounded-lg shadow-lg border-green-700 border-2 text-center transition hover:bg-green-700 hover:text-white cursor-pointer`
 - Outline button: `border-green-700 border-2 text-green-700 hover:bg-green-500 hover:text-white p-2`
 - Primary button: `bg-green-700 text-white rounded hover:bg-green-500 transition`
+
+## Flashcard Pattern
+- Use a single dominant flashcard surface that takes most of the available width.
+- Keep the visible page chrome minimal: one heading, one progress indicator, one small settings trigger.
+- Front and back faces should avoid redundant labels if the content itself is clear.
+- Default to large centered imagery on photo-first cards.
+- If more fields are selected, grow the card height instead of forcing the user to scroll inside the card.
+- For study-mode interactions, use simple success/fail actions such as `Got it right` and `Missed it`.
+- Missed cards should remain in the study deck and reappear later until fully mastered.
+
+## Sample Data Pattern
+- Store proof-of-concept family/history data in local JSON files when preparing for future API integrations.
+- Keep asset references in the sample JSON up to date with actual files in `public/`.
+- Preserve a missing-data fallback case in sample content so the UI path remains tested.
