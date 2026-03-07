@@ -1,5 +1,7 @@
 const ROOM_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
+export const DATE_IS_RIGHT_YEAR_PADDING = 5
+
 const PROFANITY_EXACT = new Set([
 	'anal',
 	'asshole',
@@ -81,4 +83,28 @@ export function scoreGuess(guessYear: number, answerYear: number) {
 		wentOver: false,
 		score: Math.max(1, 100 - diff),
 	}
+}
+
+export function getGuessYearBounds(years: number[]) {
+	return {
+		minYear: Math.min(...years) - DATE_IS_RIGHT_YEAR_PADDING,
+		maxYear: Math.max(...years) + DATE_IS_RIGHT_YEAR_PADDING,
+	}
+}
+
+export function getInitialGuessYear(answerYear: number, minYear: number, maxYear: number) {
+	const options: number[] = []
+
+	for (let year = minYear; year <= maxYear; year += 1) {
+		if (year !== answerYear) {
+			options.push(year)
+		}
+	}
+
+	if (options.length === 0) {
+		return answerYear
+	}
+
+	const randomIndex = Math.floor(Math.random() * options.length)
+	return options[randomIndex]
 }

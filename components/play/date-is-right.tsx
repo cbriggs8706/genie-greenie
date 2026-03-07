@@ -6,20 +6,22 @@ import { useState } from 'react'
 import { HiXMark } from 'react-icons/hi2'
 import { useRouter } from 'next/navigation'
 import { H1 } from '@/components/headings'
-import { scoreGuess } from '@/lib/date-is-right/utils'
+import { DateIsRightEventCard } from '@/components/play/date-is-right-event-card'
+import { getGuessYearBounds, getInitialGuessYear, scoreGuess } from '@/lib/date-is-right/utils'
 import { buildDateIsRightRounds } from '@/lib/familysearch/date-is-right'
 
 const SINGLE_PLAYER_ROUNDS = 8
 
 function buildSinglePlayerSession() {
 	const rounds = buildDateIsRightRounds(SINGLE_PLAYER_ROUNDS)
-	const minYear = Math.min(...rounds.map((round) => round.year))
-	const maxYear = Math.max(...rounds.map((round) => round.year))
+	const { minYear, maxYear } = getGuessYearBounds(rounds.map((round) => round.year))
 
 	return {
 		rounds,
+		minYear,
+		maxYear,
 		roundIndex: 0,
-		guessYear: Math.round((minYear + maxYear) / 2),
+		guessYear: rounds[0] ? getInitialGuessYear(rounds[0].year, minYear, maxYear) : minYear,
 		submittedGuess: null as number | null,
 		score: 0,
 	}
@@ -49,6 +51,8 @@ function GameSlider({
 	onChange: (next: number) => void
 	disabled?: boolean
 }) {
+	const sliderPercent = max === min ? 0 : (value - min) / (max - min)
+
 	return (
 		<div>
 			<div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-sky-700">
@@ -56,15 +60,26 @@ function GameSlider({
 				<span>Year guess</span>
 				<span>{max}</span>
 			</div>
-			<input
-				type="range"
-				min={min}
-				max={max}
-				value={value}
-				disabled={disabled}
-				onChange={(event) => onChange(Number(event.target.value))}
-				className="mt-3 h-3 w-full cursor-pointer appearance-none rounded-full bg-sky-200 accent-green-700 disabled:cursor-not-allowed"
-			/>
+			<div className="relative mt-3">
+				<input
+					type="range"
+					min={min}
+					max={max}
+					value={value}
+					disabled={disabled}
+					onChange={(event) => onChange(Number(event.target.value))}
+					className="date-is-right-slider w-full cursor-pointer appearance-none disabled:cursor-not-allowed"
+				/>
+				<div
+					aria-hidden="true"
+					className="pointer-events-none absolute top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-green-700 text-2xl text-white shadow-lg ring-2 ring-green-700/20"
+					style={{
+						left: `calc((100% - 56px) * ${sliderPercent.toFixed(4)} + 28px)`,
+					}}
+				>
+					?
+				</div>
+			</div>
 			<div className="mt-4 rounded-lg bg-sky-100 p-3 text-center">
 				<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">Your guess</p>
 				<p className="font-Young_Serif text-3xl text-sky-900">{value}</p>
@@ -75,11 +90,9 @@ function GameSlider({
 
 function SinglePlayerPanel() {
 	const [session, setSession] = useState(buildSinglePlayerSession)
-	const { rounds, roundIndex, guessYear, submittedGuess, score } = session
+	const { rounds, minYear, maxYear, roundIndex, guessYear, submittedGuess, score } = session
 
 	const currentRound = rounds[roundIndex] ?? null
-	const minYear = rounds.length > 0 ? Math.min(...rounds.map((round) => round.year)) : 1850
-	const maxYear = rounds.length > 0 ? Math.max(...rounds.map((round) => round.year)) : 2025
 	const result =
 		currentRound && submittedGuess !== null
 			? scoreGuess(submittedGuess, currentRound.year)
@@ -94,45 +107,9 @@ function SinglePlayerPanel() {
 	return (
 		<div className="mt-8 sm:px-2">
 			<div className="mt-6">
-				<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
-					Current score
-				</p>
-				<div className="mt-4 grid gap-3 text-center sm:grid-cols-3">
-					<div className="rounded-lg bg-sky-100 p-3">
-						<p className="font-Young_Serif text-3xl text-sky-900">{score}</p>
-						<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
-							Points
-						</p>
-					</div>
-					<div className="rounded-lg bg-sky-100 p-3">
-						<p className="font-Young_Serif text-3xl text-sky-900">{roundIndex + 1}</p>
-						<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
-							Round
-						</p>
-					</div>
-					<div className="rounded-lg bg-sky-100 p-3">
-						<p className="font-Young_Serif text-3xl text-sky-900">{rounds.length}</p>
-						<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
-							Total
-						</p>
-					</div>
+				<div>
+					<DateIsRightEventCard event={currentRound} />
 				</div>
-				<div className="mt-5 h-3 overflow-hidden rounded-full bg-sky-100">
-					<div
-						className="h-full rounded-full bg-green-700 transition-all duration-300"
-						style={{
-							width: `${((roundIndex + (submittedGuess !== null ? 1 : 0)) / rounds.length) * 100}%`,
-						}}
-					/>
-				</div>
-			</div>
-
-			<div className="mt-6">
-				<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
-					Family date
-				</p>
-				<h2 className="mt-2 font-Young_Serif text-3xl text-sky-900">{currentRound.prompt}</h2>
-				<p className="mt-3 font-inter text-sm text-sky-900">{currentRound.clue}</p>
 
 				<div className="mt-5">
 					<GameSlider
@@ -197,7 +174,13 @@ function SinglePlayerPanel() {
 								...current,
 								roundIndex: current.roundIndex + 1,
 								submittedGuess: null,
-								guessYear: Math.round((minYear + maxYear) / 2),
+								guessYear: current.rounds[current.roundIndex + 1]
+									? getInitialGuessYear(
+											current.rounds[current.roundIndex + 1].year,
+											current.minYear,
+											current.maxYear
+										)
+									: current.guessYear,
 							}))
 						}
 						className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
@@ -214,6 +197,58 @@ function SinglePlayerPanel() {
 						Play again
 					</button>
 				) : null}
+			</div>
+
+			<div className="mt-8">
+				<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
+					Current score
+				</p>
+				<div className="mt-3 rounded-xl bg-sky-100 p-3 sm:hidden">
+					<div className="flex items-center justify-between gap-3">
+						<div>
+							<p className="font-inter text-[11px] uppercase tracking-[0.18em] text-sky-700">
+								Points
+							</p>
+							<p className="font-Young_Serif text-3xl leading-none text-sky-900">{score}</p>
+						</div>
+						<div className="text-right">
+							<p className="font-inter text-[11px] uppercase tracking-[0.18em] text-sky-700">
+								Progress
+							</p>
+							<p className="font-inter text-sm text-sky-900">
+								Round {roundIndex + 1} of {rounds.length}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div className="mt-4 hidden gap-3 text-center sm:grid sm:grid-cols-3">
+					<div className="rounded-lg bg-sky-100 p-3">
+						<p className="font-Young_Serif text-3xl text-sky-900">{score}</p>
+						<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
+							Points
+						</p>
+					</div>
+					<div className="rounded-lg bg-sky-100 p-3">
+						<p className="font-Young_Serif text-3xl text-sky-900">{roundIndex + 1}</p>
+						<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
+							Round
+						</p>
+					</div>
+					<div className="rounded-lg bg-sky-100 p-3">
+						<p className="font-Young_Serif text-3xl text-sky-900">{rounds.length}</p>
+						<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
+							Total
+						</p>
+					</div>
+				</div>
+				<div className="mt-5 h-3 overflow-hidden rounded-full bg-sky-100">
+					<div
+						className="h-full rounded-full bg-green-700 transition-all duration-300"
+						style={{
+							width: `${((roundIndex + (submittedGuess !== null ? 1 : 0)) / rounds.length) * 100}%`,
+						}}
+					/>
+				</div>
 			</div>
 		</div>
 	)
@@ -287,14 +322,14 @@ export default function DateIsRightLanding() {
 
 	return (
 		<div className="space-y-4">
-			<div className="relative flex min-h-12 items-center justify-end gap-3">
-				<H1 className="pointer-events-none absolute inset-x-0 mb-0 text-center text-4xl md:text-6xl">
+			<div className="flex flex-col gap-3 sm:relative sm:min-h-12 sm:flex-row sm:items-center sm:justify-end">
+				<H1 className="mb-0 text-center text-4xl sm:pointer-events-none sm:absolute sm:inset-x-0 md:text-6xl">
 					The Date Is Right
 				</H1>
 				<button
 					type="button"
 					onClick={() => setSettingsOpen(true)}
-					className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
+					className="self-center rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700 sm:self-end"
 					aria-label="Open game settings"
 				>
 					<Settings className="h-5 w-5" />

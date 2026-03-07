@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Dialog } from '@headlessui/react'
 import { HiXMark } from 'react-icons/hi2'
-import { Settings } from 'lucide-react'
+import { Settings, UserRound } from 'lucide-react'
 import { H1 } from '@/components/headings'
 import {
 	buildFamilyFlashcards,
@@ -33,23 +33,6 @@ const shuffleCards = (cards: FamilyFlashcard[]): FamilyFlashcard[] => {
 	}
 
 	return next
-}
-
-const getCardMinHeight = (
-	frontFields: FamilySearchFlashcardField[],
-	backFields: FamilySearchFlashcardField[]
-): number => {
-	const estimateFaceHeight = (fields: FamilySearchFlashcardField[]) => {
-		const hasPhoto = fields.includes('photo')
-		const nonPhotoCount = fields.filter((field) => field !== 'photo').length
-		const baseHeight = 240
-		const photoHeight = hasPhoto ? 360 : 0
-		const fieldHeight = nonPhotoCount * 112
-		const spacing = Math.max(fields.length - 1, 0) * 16
-		return baseHeight + photoHeight + fieldHeight + spacing
-	}
-
-	return Math.max(estimateFaceHeight(frontFields), estimateFaceHeight(backFields))
 }
 
 const toStoredSettings = (value: unknown): FamilyFlashcardSettings | null => {
@@ -154,6 +137,8 @@ export default function FamilyFlashcards() {
 	const currentCard = studyDeck[0] || null
 	const completedCount = cards.length - studyDeck.length
 	const totalCount = cards.length
+	const progressPercent =
+		totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100)
 
 	useEffect(() => {
 		setStudyDeck(shuffleCards(cards))
@@ -235,8 +220,11 @@ export default function FamilyFlashcards() {
 								className="h-72 w-full object-contain object-center sm:h-80"
 							/>
 						) : (
-							<div className="flex h-72 items-center justify-center font-inter text-lg text-sky-900 sm:h-80">
-								-
+							<div className="flex h-72 w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-sky-300 bg-sky-50 px-4 text-center text-sky-900 sm:h-80">
+								<div className="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm">
+									<UserRound className="h-10 w-10 text-sky-500" aria-hidden="true" />
+								</div>
+								<p className="font-inter text-base sm:text-lg">No photo available</p>
 							</div>
 						)}
 					</div>
@@ -266,12 +254,15 @@ export default function FamilyFlashcards() {
 	) => {
 		return (
 			<div
-				className="absolute inset-0 flex h-full flex-col rounded-[28px] bg-white p-4 [backface-visibility:hidden] sm:p-6"
+				className="col-start-1 row-start-1 flex h-full flex-col rounded-[28px] bg-white p-4 transition-all duration-200 [backface-visibility:hidden] sm:p-6"
 				style={{
 					transform: side === 'back' ? 'rotateY(180deg)' : 'rotateY(0deg)',
+					opacity: showBack === (side === 'back') ? 1 : 0,
+					pointerEvents: showBack === (side === 'back') ? 'auto' : 'none',
+					visibility: showBack === (side === 'back') ? 'visible' : 'hidden',
 				}}
 			>
-				<div className="flex flex-1 items-center justify-center">
+				<div className="flex items-center justify-center">
 					<div className="grid w-full gap-4 place-items-center">
 						{renderCardFields(card, fields)}
 					</div>
@@ -280,50 +271,28 @@ export default function FamilyFlashcards() {
 		)
 	}
 
-	const cardMinHeight = getCardMinHeight(settings.frontFields, settings.backFields)
-
 	return (
 		<div className="space-y-4">
-			<div className="relative flex min-h-12 items-center justify-end gap-3">
-				<H1 className="pointer-events-none absolute inset-x-0 mb-0 text-center text-4xl md:text-6xl">
+			<div className="space-y-3">
+				<H1 className="mb-0 text-center text-4xl md:text-6xl">
 					Family Flashcards
 				</H1>
-				<button
-					type="button"
-					onClick={() => setSettingsOpen(true)}
-					className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
-					aria-label="Open flashcard settings"
-				>
-					<Settings className="h-5 w-5" />
-				</button>
+				<div className="flex justify-center">
+					<button
+						type="button"
+						onClick={() => setSettingsOpen(true)}
+						className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
+						aria-label="Open flashcard settings"
+					>
+						<Settings className="h-5 w-5" />
+					</button>
+				</div>
 			</div>
 
 			<p className="mx-auto max-w-2xl text-center font-inter text-sm text-sky-900">
 				Flip each card, decide whether you knew it, and keep studying until the
 				entire deck is mastered.
 			</p>
-
-			<div className="rounded-xl border border-sky-200 bg-white/80 p-4 shadow-sm">
-				<div className="flex items-center justify-between gap-4">
-					<p className="text-sm text-sky-900">
-						{completedCount} of {totalCount} mastered
-					</p>
-					<p className="text-sm text-sky-900">
-						{studyDeck.length} remaining
-					</p>
-				</div>
-				<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
-					<div
-						className="h-full rounded-full bg-green-700 transition-all duration-300"
-						style={{
-							width:
-								totalCount === 0
-									? '0%'
-									: `${Math.round((completedCount / totalCount) * 100)}%`,
-						}}
-					/>
-				</div>
-			</div>
 
 			{currentCard ? (
 				<div className="space-y-4">
@@ -339,9 +308,8 @@ export default function FamilyFlashcards() {
 						style={{ perspective: '1600px' }}
 					>
 						<div
-							className="relative w-full rounded-[28px] transition-transform duration-200"
+							className="grid w-full rounded-[28px] transition-transform duration-200"
 							style={{
-								minHeight: `${cardMinHeight}px`,
 								transformStyle: 'preserve-3d',
 								transform: showBack ? 'rotateY(180deg)' : 'rotateY(0deg)',
 							}}
@@ -369,20 +337,56 @@ export default function FamilyFlashcards() {
 							Got it right
 						</button>
 					</div>
+
+					<div className="rounded-xl border border-sky-200 bg-white/80 p-4 shadow-sm">
+						<div className="flex items-center justify-between gap-4">
+							<p className="text-sm text-sky-900">
+								{completedCount} of {totalCount} mastered
+							</p>
+							<p className="text-sm text-sky-900">
+								{studyDeck.length} remaining
+							</p>
+						</div>
+						<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
+							<div
+								className="h-full rounded-full bg-green-700 transition-all duration-300"
+								style={{ width: `${progressPercent}%` }}
+							/>
+						</div>
+					</div>
 				</div>
 			) : (
-				<div className="rounded-[28px] border-2 border-green-700 bg-white p-8 text-center shadow-lg">
-					<h3 className="font-Young_Serif text-3xl text-sky-900">Deck complete</h3>
-					<p className="mt-3 text-sky-900">
-						You worked through every card in this sample deck.
-					</p>
-					<button
-						type="button"
-						onClick={restartDeck}
-						className="mt-5 rounded bg-green-700 px-5 py-3 text-white transition hover:bg-green-500"
-					>
-						Study again
-					</button>
+				<div className="space-y-4">
+					<div className="rounded-[28px] border-2 border-green-700 bg-white p-8 text-center shadow-lg">
+						<h3 className="font-Young_Serif text-3xl text-sky-900">Deck complete</h3>
+						<p className="mt-3 text-sky-900">
+							You worked through every card in this sample deck.
+						</p>
+						<button
+							type="button"
+							onClick={restartDeck}
+							className="mt-5 rounded bg-green-700 px-5 py-3 text-white transition hover:bg-green-500"
+						>
+							Study again
+						</button>
+					</div>
+
+					<div className="rounded-xl border border-sky-200 bg-white/80 p-4 shadow-sm">
+						<div className="flex items-center justify-between gap-4">
+							<p className="text-sm text-sky-900">
+								{completedCount} of {totalCount} mastered
+							</p>
+							<p className="text-sm text-sky-900">
+								{studyDeck.length} remaining
+							</p>
+						</div>
+						<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
+							<div
+								className="h-full rounded-full bg-green-700 transition-all duration-300"
+								style={{ width: `${progressPercent}%` }}
+							/>
+						</div>
+					</div>
 				</div>
 			)}
 

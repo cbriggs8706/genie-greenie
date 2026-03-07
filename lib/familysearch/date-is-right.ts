@@ -4,6 +4,7 @@ import type {
 	FamilySearchFactType,
 	FamilySearchMockBundle,
 	FamilySearchPerson,
+	FamilySearchPortraitResponse,
 } from '@/lib/familysearch/types'
 
 const familySearchMockBundle = familySearchSampleTree as FamilySearchMockBundle
@@ -65,6 +66,23 @@ function parseYear(originalDate: string) {
 	return match ? Number(match[1]) : null
 }
 
+function getPortraitUrl(portrait: FamilySearchPortraitResponse | undefined) {
+	const source = portrait?.sourceDescriptions?.[0]
+	return source?.links?.['image-thumbnail']?.href || source?.links?.image?.href || null
+}
+
+function buildPrompt(personName: string, factKind: DateIsRightEvent['factKind']) {
+	if (factKind === 'birth') {
+		return `What year was ${personName} born?`
+	}
+
+	if (factKind === 'death') {
+		return `What year did ${personName} die?`
+	}
+
+	return `What year was ${personName} married?`
+}
+
 function toEvent(
 	person: FamilySearchPerson,
 	type: FamilySearchFactType,
@@ -85,12 +103,13 @@ function toEvent(
 		personId: person.id,
 		personName,
 		relationship,
+		portraitUrl: getPortraitUrl(familySearchMockBundle.portraits[person.id]),
 		factKind,
 		factLabel,
 		year,
 		originalDate: fact.date,
 		place: fact.place,
-		prompt: `What year was ${personName} ${factLabel}?`,
+		prompt: buildPrompt(personName, factKind),
 		clue: `${relationship}${fact.place ? ` • ${fact.place}` : ''}`,
 	}
 }

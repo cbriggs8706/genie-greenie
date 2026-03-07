@@ -3,7 +3,7 @@
 import { FormEvent, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { Dialog } from '@headlessui/react'
-import { Settings } from 'lucide-react'
+import { SendHorizontal, Settings } from 'lucide-react'
 import { HiXMark } from 'react-icons/hi2'
 import { useRouter } from 'next/navigation'
 import { H1 } from '@/components/headings'
@@ -183,14 +183,14 @@ export default function AncestorFeud() {
 
 	return (
 		<div className="space-y-4">
-			<div className="relative flex min-h-12 items-center justify-end gap-3">
-				<H1 className="pointer-events-none absolute inset-x-0 mb-0 text-center text-4xl md:text-6xl">
+			<div className="flex flex-col items-center gap-3 md:relative md:min-h-12 md:flex-row md:justify-end">
+				<H1 className="mb-0 text-center text-4xl md:pointer-events-none md:absolute md:inset-x-0 md:text-6xl">
 					Ancestor Feud
 				</H1>
 				<button
 					type="button"
 					onClick={() => setSettingsOpen(true)}
-					className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
+					className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700 md:ml-auto"
 					aria-label="Open Ancestor Feud settings"
 				>
 					<Settings className="h-5 w-5" />
@@ -205,101 +205,6 @@ export default function AncestorFeud() {
 			<div className="mt-8 sm:px-2">
 				<div className="mt-6">
 					<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
-						Current score
-					</p>
-					<div className="mt-4 grid gap-3 text-center sm:grid-cols-3">
-						<div className="rounded-lg bg-sky-100 p-3">
-							<p className="font-Young_Serif text-3xl text-sky-900">{revealedPoints}</p>
-							<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
-								Points
-							</p>
-						</div>
-						<div className="rounded-lg bg-sky-100 p-3">
-							<p className="font-Young_Serif text-3xl text-sky-900">
-								{revealedAnswers.length}
-							</p>
-							<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
-								Found
-							</p>
-						</div>
-						<div className="rounded-lg bg-sky-100 p-3">
-							<p className="font-Young_Serif text-3xl text-sky-900">
-								{MAX_STRIKES - Math.min(strikes.length, MAX_STRIKES)}
-							</p>
-							<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
-								Lives
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<form className="mt-5 space-y-3" onSubmit={submitGuess}>
-					<input
-						type="text"
-						value={guess}
-						onChange={(event) => setGuess(event.target.value)}
-						placeholder="Type a survey guess"
-						className="w-full rounded-lg border-2 border-green-700 px-4 py-3 font-inter text-sky-900 outline-none transition focus:border-green-500"
-					/>
-					<button
-						type="submit"
-						className="w-full rounded-lg bg-green-700 px-4 py-3 font-inter text-white transition hover:bg-green-500"
-					>
-						Submit guess
-					</button>
-				</form>
-
-				<div className="mt-4 flex flex-wrap gap-2">
-					<button
-						type="button"
-						onClick={resetRound}
-						className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
-					>
-						Reset round
-					</button>
-					<button
-						type="button"
-						onClick={revealBoard}
-						className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
-					>
-						Show board
-					</button>
-					<button
-						type="button"
-						onClick={() => switchRound((roundIndex + 1) % rounds.length)}
-						className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
-					>
-						Next board
-					</button>
-				</div>
-
-				<div className="mt-5 rounded-xl bg-sky-50 p-4">
-					<p className="font-inter text-sm text-sky-900">{status}</p>
-					<div className="mt-3 flex gap-2">
-						{Array.from({ length: MAX_STRIKES }).map((_, index) => {
-							const used = index < strikes.length
-
-							return (
-								<div
-									key={index}
-									className={`flex h-11 w-11 items-center justify-center rounded-full font-Young_Serif text-2xl ${
-										used ? 'bg-orange text-white' : 'bg-sky-100 text-sky-700'
-									}`}
-								>
-									X
-								</div>
-							)
-						})}
-					</div>
-					{strikes.length > 0 ? (
-						<p className="mt-3 font-inter text-xs text-sky-800">
-							Missed guesses: {strikes.join(', ')}
-						</p>
-					) : null}
-				</div>
-
-				<div className="mt-6">
-					<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
 						Survey board
 					</p>
 					<h2 className="mt-2 font-Young_Serif text-3xl text-sky-900">
@@ -309,16 +214,48 @@ export default function AncestorFeud() {
 						{round.description}
 					</p>
 
-					<div className="mt-5 h-3 overflow-hidden rounded-full bg-sky-100">
-						<div
-							className="h-full rounded-full bg-green-700 transition-all duration-300"
-							style={{
-								width: `${(revealedAnswers.length / round.answers.length) * 100}%`,
-							}}
+					<form className="relative mt-4" onSubmit={submitGuess}>
+						<input
+							type="text"
+							value={guess}
+							onChange={(event) => setGuess(event.target.value)}
+							placeholder="Type a survey guess"
+							className="w-full rounded-full border-2 border-green-700 py-3 pl-4 pr-16 font-inter text-sky-900 outline-none transition focus:border-green-500"
 						/>
-					</div>
+						<button
+							type="submit"
+							className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-green-700 text-white transition hover:bg-green-500"
+							aria-label="Submit guess"
+						>
+							<SendHorizontal className="h-5 w-5" />
+						</button>
+					</form>
 
-					<div className="mt-5 grid gap-3 lg:grid-cols-2">
+					{strikes.length > 0 ? (
+						<div className="mt-3 rounded-xl bg-sky-50 p-4">
+							<div className="flex justify-center gap-2">
+								{Array.from({ length: MAX_STRIKES }).map((_, index) => {
+									const used = index < strikes.length
+
+									return (
+										<div
+											key={index}
+											className={`flex h-11 w-11 items-center justify-center rounded-full font-Young_Serif text-2xl ${
+												used ? 'bg-orange text-white' : 'bg-sky-100 text-sky-700'
+											}`}
+										>
+											X
+										</div>
+									)
+								})}
+							</div>
+							<p className="mt-3 text-center font-inter text-xs text-sky-800">
+								Missed guesses: {strikes.join(', ')}
+							</p>
+						</div>
+					) : null}
+
+					<div className="mt-4 grid gap-3 lg:grid-cols-2">
 						{round.answers.map((answer, index) => {
 							const revealed = guessedAnswerIds.includes(answer.id)
 
@@ -363,6 +300,36 @@ export default function AncestorFeud() {
 								</div>
 							)
 						})}
+					</div>
+				</div>
+
+				<div className="mt-6">
+					<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
+						Current score
+					</p>
+					<div className="mt-4 grid gap-3 text-center sm:grid-cols-3">
+						<div className="rounded-lg bg-sky-100 p-3">
+							<p className="font-Young_Serif text-3xl text-sky-900">{revealedPoints}</p>
+							<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
+								Points
+							</p>
+						</div>
+						<div className="rounded-lg bg-sky-100 p-3">
+							<p className="font-Young_Serif text-3xl text-sky-900">
+								{revealedAnswers.length}
+							</p>
+							<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
+								Found
+							</p>
+						</div>
+						<div className="rounded-lg bg-sky-100 p-3">
+							<p className="font-Young_Serif text-3xl text-sky-900">
+								{MAX_STRIKES - Math.min(strikes.length, MAX_STRIKES)}
+							</p>
+							<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">
+								Lives
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -441,6 +408,29 @@ export default function AncestorFeud() {
 
 								{settingsMode === 'solo' ? (
 									<div className="space-y-3">
+										<div className="grid gap-2 sm:grid-cols-3">
+											<button
+												type="button"
+												onClick={resetRound}
+												className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
+											>
+												Reset round
+											</button>
+											<button
+												type="button"
+												onClick={revealBoard}
+												className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
+											>
+												Show board
+											</button>
+											<button
+												type="button"
+												onClick={() => switchRound((roundIndex + 1) % rounds.length)}
+												className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
+											>
+												Next board
+											</button>
+										</div>
 										{rounds.map((entry, index) => {
 											const guessedCount = guessedAnswerIdsByRound[entry.id]?.length || 0
 											const selected = index === roundIndex

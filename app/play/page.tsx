@@ -1,9 +1,65 @@
 import Link from 'next/link'
-import { H1 } from '@/components/headings'
+import { H1, H3 } from '@/components/headings'
 import { listPublishedTimelineGames } from '@/lib/timeline-games/server'
+import { createClient } from '@/lib/supabase/server'
+import { isAdminUser } from '@/lib/supabase/is-admin'
+
+const featuredGames = [
+	{
+		slug: '/the-date-is-right',
+		title: 'The Date Is Right',
+		description:
+			'Use a year slider to guess family-history dates without going over, or open a private realtime room with friends.',
+		label: 'Date Guessing Game',
+		adminOnlyOnPlayPage: true,
+	},
+	{
+		slug: '/ancestor-feud',
+		title: 'Ancestor Feud',
+		description:
+			'Guess the top occupations, names, and birthplaces hiding inside the sample family tree.',
+		label: 'Survey Game',
+		adminOnlyOnPlayPage: true,
+	},
+	{
+		slug: '/two-truths-one-lie',
+		title: 'Two Truths, One Lie',
+		description:
+			'Study one ancestor, then pick the single fact that really belongs to an adjacent relative.',
+		label: 'Fact Spotting Game',
+		adminOnlyOnPlayPage: true,
+	},
+	{
+		slug: '/the-couples-game',
+		title: 'The Couples Game',
+		description:
+			'See one husband-and-wife pair from the sample tree, then reveal answers to Newlywed Game style family-history questions.',
+		label: 'Couple Trivia Game',
+		adminOnlyOnPlayPage: true,
+	},
+	{
+		slug: '/family-flashcards',
+		title: 'Family Flashcards',
+		description:
+			'Study direct ancestors with a simple flip-card deck using photos, names, and relationships.',
+		label: 'Flashcard Study Deck',
+		adminOnlyOnPlayPage: true,
+	},
+] as const
 
 export default async function PlayPage() {
+	const supabase = await createClient()
+	const {
+		data: { user },
+	} = await supabase.auth.getUser()
+	const isAdmin = isAdminUser(user)
 	const games = await listPublishedTimelineGames()
+	const publicFeaturedGames = featuredGames.filter(
+		(game) => !game.adminOnlyOnPlayPage
+	)
+	const adminFeaturedGames = isAdmin
+		? featuredGames.filter((game) => game.adminOnlyOnPlayPage)
+		: []
 
 	return (
 		<section>
@@ -14,75 +70,19 @@ export default async function PlayPage() {
 			</p>
 
 			<div className="grid gap-4 md:grid-cols-2">
-				<Link
-					href="/the-date-is-right"
-					className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
-				>
-					<p className="font-Young_Serif text-3xl">The Date Is Right</p>
-					<p className="mt-3 font-inter text-sm">
-						Use a year slider to guess family-history dates without going over, or
-						open a private realtime room with friends.
-					</p>
-					<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
-						Date Guessing Game
-					</p>
-				</Link>
-
-				<Link
-					href="/ancestor-feud"
-					className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
-				>
-					<p className="font-Young_Serif text-3xl">Ancestor Feud</p>
-					<p className="mt-3 font-inter text-sm">
-						Guess the top occupations, names, and birthplaces hiding inside the
-						sample family tree.
-					</p>
-					<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
-						Survey Game
-					</p>
-				</Link>
-
-				<Link
-					href="/two-truths-one-lie"
-					className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
-				>
-					<p className="font-Young_Serif text-3xl">Two Truths, One Lie</p>
-					<p className="mt-3 font-inter text-sm">
-						Study one ancestor, then pick the single fact that really belongs to
-						an adjacent relative.
-					</p>
-					<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
-						Fact Spotting Game
-					</p>
-				</Link>
-
-				<Link
-					href="/the-couples-game"
-					className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
-				>
-					<p className="font-Young_Serif text-3xl">The Couples Game</p>
-					<p className="mt-3 font-inter text-sm">
-						See one husband-and-wife pair from the sample tree, then reveal answers
-						to Newlywed Game style family-history questions.
-					</p>
-					<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
-						Couple Trivia Game
-					</p>
-				</Link>
-
-				<Link
-					href="/my-family"
-					className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
-				>
-					<p className="font-Young_Serif text-3xl">Family Flashcards</p>
-					<p className="mt-3 font-inter text-sm">
-						Study direct ancestors with a simple flip-card deck using photos,
-						names, and relationships.
-					</p>
-					<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
-						Flashcard Study Deck
-					</p>
-				</Link>
+				{publicFeaturedGames.map((game) => (
+					<Link
+						key={game.slug}
+						href={game.slug}
+						className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
+					>
+						<p className="font-Young_Serif text-3xl">{game.title}</p>
+						<p className="mt-3 font-inter text-sm">{game.description}</p>
+						<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
+							{game.label}
+						</p>
+					</Link>
+				))}
 
 				{games.length > 0 ? (
 					games.map((game) => (
@@ -109,6 +109,27 @@ export default async function PlayPage() {
 					</div>
 				)}
 			</div>
+
+			{adminFeaturedGames.length > 0 ? (
+				<div className="mt-12">
+					<H3 className="mb-4 text-center text-sky-900">Admin Only</H3>
+					<div className="grid gap-4 md:grid-cols-2">
+						{adminFeaturedGames.map((game) => (
+							<Link
+								key={game.slug}
+								href={game.slug}
+								className="block rounded-lg border-2 border-green-700 bg-white p-6 text-center shadow-lg transition hover:bg-green-700 hover:text-white"
+							>
+								<p className="font-Young_Serif text-3xl">{game.title}</p>
+								<p className="mt-3 font-inter text-sm">{game.description}</p>
+								<p className="mt-4 font-inter text-xs uppercase tracking-[0.2em]">
+									{game.label}
+								</p>
+							</Link>
+						))}
+					</div>
+				</div>
+			) : null}
 		</section>
 	)
 }

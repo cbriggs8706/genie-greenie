@@ -77,3 +77,39 @@
 		@apply font-inter;
 	}
 }
+
+@layer components {
+	.date-is-right-slider {
+		height: 3.5rem;
+		background: transparent;
+	}
+
+	.date-is-right-slider::-webkit-slider-runnable-track {
+		height: 0.875rem;
+		border-radius: 9999px;
+		background: linear-gradient(90deg, #5fa7d3 0%, #a1c181 100%);
+	}
+
+	.date-is-right-slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		width: 3.5rem;
+		height: 3.5rem;
+		border: 0;
+		background: transparent;
+		margin-top: -1.3125rem;
+	}
+
+	.date-is-right-slider::-moz-range-track {
+		height: 0.875rem;
+		border: 0;
+		border-radius: 9999px;
+		background: linear-gradient(90deg, #5fa7d3 0%, #a1c181 100%);
+	}
+
+	.date-is-right-slider::-moz-range-thumb {
+		width: 3.5rem;
+		height: 3.5rem;
+		border: 0;
+		background: transparent;
+	}
+}

@@ -1,10 +1,11 @@
-export type DateIsRightFactKind = 'birth' | 'death'
+export type DateIsRightFactKind = 'birth' | 'death' | 'marriage'
 
 export type DateIsRightEvent = {
 	id: string
 	personId: string
 	personName: string
 	relationship: string
+	portraitUrl: string | null
 	factKind: DateIsRightFactKind
 	factLabel: string
 	year: number

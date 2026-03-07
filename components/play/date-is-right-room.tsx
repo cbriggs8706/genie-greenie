@@ -4,13 +4,14 @@ import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Copy } from 'lucide-react'
 import { H1 } from '@/components/headings'
+import { DateIsRightEventCard } from '@/components/play/date-is-right-event-card'
 import { createClient, supabaseConfigured } from '@/lib/supabase/client'
 import type {
 	DateIsRightGuess,
 	DateIsRightRoomSnapshot,
 	DateIsRightRoundResult,
 } from '@/lib/date-is-right/types'
-import { scoreGuess } from '@/lib/date-is-right/utils'
+import { getInitialGuessYear, scoreGuess } from '@/lib/date-is-right/utils'
 
 function getPlayerStorageKey(code: string) {
 	return `date-is-right-player:${code.toUpperCase()}`
@@ -64,6 +65,8 @@ function GameSlider({
 	onChange: (next: number) => void
 	disabled?: boolean
 }) {
+	const sliderPercent = max === min ? 0 : (value - min) / (max - min)
+
 	return (
 		<div>
 			<div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-sky-700">
@@ -71,15 +74,26 @@ function GameSlider({
 				<span>Year guess</span>
 				<span>{max}</span>
 			</div>
-			<input
-				type="range"
-				min={min}
-				max={max}
-				value={value}
-				disabled={disabled}
-				onChange={(event) => onChange(Number(event.target.value))}
-				className="mt-3 h-3 w-full cursor-pointer appearance-none rounded-full bg-sky-200 accent-green-700 disabled:cursor-not-allowed"
-			/>
+			<div className="relative mt-3">
+				<input
+					type="range"
+					min={min}
+					max={max}
+					value={value}
+					disabled={disabled}
+					onChange={(event) => onChange(Number(event.target.value))}
+					className="date-is-right-slider w-full cursor-pointer appearance-none disabled:cursor-not-allowed"
+				/>
+				<div
+					aria-hidden="true"
+					className="pointer-events-none absolute top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-green-700 text-2xl text-white shadow-lg ring-2 ring-green-700/20"
+					style={{
+						left: `calc((100% - 56px) * ${sliderPercent.toFixed(4)} + 28px)`,
+					}}
+				>
+					?
+				</div>
+			</div>
 			<div className="mt-4 rounded-lg bg-sky-100 p-3 text-center">
 				<p className="font-inter text-xs uppercase tracking-[0.18em] text-sky-700">Your guess</p>
 				<p className="font-Young_Serif text-3xl text-sky-900">{value}</p>
@@ -115,14 +129,19 @@ export default function DateIsRightRoom({ code }: { code: string }) {
 	}, [normalizedCode])
 
 	const roomId = room?.room.id ?? null
+	const currentRoundIndex = room?.room.currentRoundIndex ?? 0
+	const currentRound = room?.rounds[room.room.currentRoundIndex] ?? null
 	const roomMinYear = room?.room.minYear ?? 1900
 	const roomMaxYear = room?.room.maxYear ?? 2025
-	const currentRoundIndex = room?.room.currentRoundIndex ?? 0
 
 	useEffect(() => {
 		if (!roomId) return
-		setGuessYear(Math.round((roomMinYear + roomMaxYear) / 2))
-	}, [currentRoundIndex, roomId, roomMaxYear, roomMinYear])
+		setGuessYear(
+			currentRound
+				? getInitialGuessYear(currentRound.year, roomMinYear, roomMaxYear)
+				: Math.round((roomMinYear + roomMaxYear) / 2)
+		)
+	}, [currentRound, currentRoundIndex, roomId, roomMaxYear, roomMinYear])
 
 	useEffect(() => {
 		if (!roomId || !supabaseConfigured()) return
@@ -162,7 +181,6 @@ export default function DateIsRightRoom({ code }: { code: string }) {
 		}
 	}, [normalizedCode, roomId])
 
-	const currentRound = room?.rounds[room.room.currentRoundIndex] ?? null
 	const currentRoundGuesses = useMemo(
 		() =>
 			room?.guesses.filter((guess) => guess.roundIndex === room.room.currentRoundIndex) ?? [],
@@ -404,13 +422,9 @@ export default function DateIsRightRoom({ code }: { code: string }) {
 						</div>
 
 						<div className="mt-6">
-							<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
-								Family date
-							</p>
-							<h2 className="mt-2 font-Young_Serif text-3xl text-sky-900">
-								{currentRound.prompt}
-							</h2>
-							<p className="mt-3 font-inter text-sm text-sky-900">{currentRound.clue}</p>
+							<div>
+								<DateIsRightEventCard event={currentRound} />
+							</div>
 
 							<div className="mt-5 h-3 overflow-hidden rounded-full bg-sky-100">
 								<div
@@ -423,13 +437,13 @@ export default function DateIsRightRoom({ code }: { code: string }) {
 
 							{room.room.status === 'playing' && !allGuessed ? (
 								<div className="mt-5">
-									<GameSlider
-										value={guessYear}
-										min={room.room.minYear}
-										max={room.room.maxYear}
-										onChange={setGuessYear}
-										disabled={hasGuessed}
-									/>
+										<GameSlider
+											value={guessYear}
+											min={roomMinYear}
+											max={roomMaxYear}
+											onChange={setGuessYear}
+											disabled={hasGuessed}
+										/>
 								</div>
 							) : null}
 						</div>

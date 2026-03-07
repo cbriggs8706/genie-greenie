@@ -74,6 +74,14 @@ const toStoredSettings = (value: unknown): CouplesGameSettings | null => {
 const getQuestion = (round: CouplesGameRound, kind: CouplesGameQuestionKind) =>
 	round.questions.find((question) => question.kind === kind) || round.questions[0]
 
+const formatChildrenLabel = (count: number): string =>
+	count === 1 ? '1 child' : `${count} children`
+
+const parseChildrenCount = (answer: string): number | null => {
+	const match = answer.match(/^(\d+)\s+child(?:ren)?$/)
+	return match ? Number.parseInt(match[1], 10) : null
+}
+
 const buildOptions = (
 	activeRounds: CouplesGameRound[],
 	round: CouplesGameRound,
@@ -132,6 +140,32 @@ const buildOptions = (
 		id: `${round.id}-${kind}-correct`,
 		label: correctQuestion.answer,
 		isCorrect: true,
+	}
+
+	if (kind === 'children') {
+		const childCount = parseChildrenCount(correctQuestion.answer)
+
+		if (childCount !== null) {
+			const extraCounts = shuffleItems(
+				Array.from({ length: 5 }, (_, index) => index).filter(
+					(count) => count !== childCount
+				)
+			).slice(0, 2)
+
+			for (const count of extraCounts) {
+				const label = formatChildrenLabel(count)
+				if (usedLabels.has(label)) {
+					continue
+				}
+
+				usedLabels.add(label)
+				distractors.push({
+					id: `${round.id}-${kind}-dev-${count}`,
+					label,
+					isCorrect: false,
+				})
+			}
+		}
 	}
 
 	return shuffleItems([correctOption, ...distractors]).slice(0, 4)
@@ -334,42 +368,28 @@ export default function TheCouplesGame() {
 
 	return (
 		<div className="space-y-4">
-			<div className="relative flex min-h-12 items-center justify-end gap-3">
-				<H1 className="pointer-events-none absolute inset-x-0 mb-0 text-center text-4xl md:text-6xl">
+			<div className="space-y-3">
+				<H1 className="mb-0 text-center text-4xl md:text-6xl">
 					The Couples Game
 				</H1>
-				<button
-					type="button"
-					onClick={() => setSettingsOpen(true)}
-					className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
-					aria-label="Open couples game settings"
-				>
-					<Settings className="h-5 w-5" />
-				</button>
+				<div className="flex justify-center">
+					<button
+						type="button"
+						onClick={() => setSettingsOpen(true)}
+						className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
+						aria-label="Open couples game settings"
+					>
+						<Settings className="h-5 w-5" />
+					</button>
+				</div>
 			</div>
 			<p className="mx-auto max-w-3xl text-center font-inter text-sky-900">
 				Study one couple at a time, then answer a Newlywed Game style question with
 				multiple-choice options drawn from nearby family branches in the sample tree.
 			</p>
 
-			<div className="rounded-xl border border-sky-200 bg-white/80 p-4 shadow-sm">
-				<div className="flex items-center justify-between gap-4">
-					<p className="text-sm text-sky-900">
-						{answeredCount} of {totalPrompts} answered
-					</p>
-				</div>
-				<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
-					<div
-						className="h-full rounded-full bg-green-700 transition-all duration-300"
-						style={{
-							width: `${((safeQuestionIndex + 1) / totalPrompts) * 100}%`,
-						}}
-					/>
-				</div>
-			</div>
-
 			<div className="rounded-xl border-2 border-green-700 bg-white p-4 shadow-lg md:p-6">
-				<div className="grid items-center gap-4 md:grid-cols-[minmax(0,1fr)_88px_minmax(0,1fr)]">
+				<div className="grid grid-cols-[minmax(0,1fr)_56px_minmax(0,1fr)] items-start gap-3 md:grid-cols-[minmax(0,1fr)_88px_minmax(0,1fr)] md:items-center md:gap-4">
 					<div className="text-center">
 						<div className="mx-auto overflow-hidden rounded-2xl border-2 border-green-700 bg-sky-100">
 							{round.husbandPortraitUrl ? (
@@ -378,20 +398,20 @@ export default function TheCouplesGame() {
 									alt={round.husbandName}
 									width={320}
 									height={320}
-									className="h-48 w-full object-cover md:h-56"
+									className="h-32 w-full object-cover md:h-56"
 								/>
 							) : (
-								<div className="flex h-48 items-center justify-center font-inter text-sky-800 md:h-56">
+								<div className="flex h-32 items-center justify-center font-inter text-sky-800 md:h-56">
 									No photo
 								</div>
 							)}
 						</div>
-						<p className="mt-4 font-Young_Serif text-2xl text-sky-900 md:text-3xl">
+						<p className="mt-3 font-Young_Serif text-lg text-sky-900 md:mt-4 md:text-3xl">
 							{round.husbandName}
 						</p>
 					</div>
 
-					<div className="flex items-center justify-center">
+					<div className="flex items-center justify-center pt-10 md:pt-0">
 						<div className="text-center">
 							<div className="flex items-center justify-center">
 								<CouplesRingsIcon />
@@ -407,15 +427,15 @@ export default function TheCouplesGame() {
 									alt={round.wifeName}
 									width={320}
 									height={320}
-									className="h-48 w-full object-cover md:h-56"
+									className="h-32 w-full object-cover md:h-56"
 								/>
 							) : (
-								<div className="flex h-48 items-center justify-center font-inter text-sky-800 md:h-56">
+								<div className="flex h-32 items-center justify-center font-inter text-sky-800 md:h-56">
 									No photo
 								</div>
 							)}
 						</div>
-						<p className="mt-4 font-Young_Serif text-2xl text-sky-900 md:text-3xl">
+						<p className="mt-3 font-Young_Serif text-lg text-sky-900 md:mt-4 md:text-3xl">
 							{round.wifeName}
 						</p>
 					</div>
@@ -473,6 +493,22 @@ export default function TheCouplesGame() {
 					>
 						Next question
 					</button>
+				</div>
+			</div>
+
+			<div className="rounded-xl border border-sky-200 bg-white/80 p-4 shadow-sm">
+				<div className="flex items-center justify-between gap-4">
+					<p className="text-sm text-sky-900">
+						{answeredCount} of {totalPrompts} answered
+					</p>
+				</div>
+				<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
+					<div
+						className="h-full rounded-full bg-green-700 transition-all duration-300"
+						style={{
+							width: `${((safeQuestionIndex + 1) / totalPrompts) * 100}%`,
+						}}
+					/>
 				</div>
 			</div>
 

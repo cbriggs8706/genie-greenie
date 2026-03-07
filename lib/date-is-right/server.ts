@@ -6,6 +6,7 @@ import type {
 	DateIsRightRoomSnapshot,
 	DateIsRightRoomStatus,
 } from '@/lib/date-is-right/types'
+import { getGuessYearBounds } from '@/lib/date-is-right/utils'
 import { buildDateIsRightRounds } from '@/lib/familysearch/date-is-right'
 
 type RoomRow = {
@@ -117,9 +118,7 @@ export async function getDateIsRightRoomByCode(code: string) {
 export async function createDateIsRightRoom(code: string, nickname: string) {
 	const admin = createAdminClient()
 	const rounds = buildDateIsRightRounds(8)
-	const years = rounds.map((round) => round.year)
-	const minYear = Math.min(...years)
-	const maxYear = Math.max(...years)
+	const { minYear, maxYear } = getGuessYearBounds(rounds.map((round) => round.year))
 
 	const { data: roomData, error: roomError } = await admin
 		.from('date_is_right_rooms')
@@ -225,6 +224,10 @@ export async function submitDateIsRightGuess(
 	if (room.room.currentRoundIndex !== roundIndex) throw new Error('This round is no longer active.')
 	if (!room.players.some((player) => player.id === playerId)) {
 		throw new Error('Player not found in this room.')
+	}
+	const currentRound = room.rounds[roundIndex]
+	if (!currentRound) {
+		throw new Error('This round could not be found.')
 	}
 	if (guessYear < room.room.minYear || guessYear > room.room.maxYear) {
 		throw new Error('Guess is outside the allowed range.')

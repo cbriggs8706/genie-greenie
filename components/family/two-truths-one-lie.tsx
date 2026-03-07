@@ -152,18 +152,20 @@ export default function TwoTruthsOneLie() {
 
 	return (
 		<div className="space-y-4">
-			<div className="relative flex min-h-12 items-center justify-end gap-3">
-				<H1 className="pointer-events-none absolute inset-x-0 mb-0 text-center text-4xl md:text-6xl">
+			<div className="flex flex-col items-center gap-3">
+				<H1 className="mb-0 text-center text-4xl md:text-6xl">
 					Two Truths, One Lie
 				</H1>
-				<button
-					type="button"
-					onClick={() => setSettingsOpen(true)}
-					className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
-					aria-label="Open two truths one lie settings"
-				>
-					<Settings className="h-5 w-5" />
-				</button>
+				<div className="flex w-full justify-center">
+					<button
+						type="button"
+						onClick={() => setSettingsOpen(true)}
+						className="rounded-full border border-sky-300 bg-white/80 p-2.5 text-sky-800 shadow-sm transition hover:border-green-700 hover:text-green-700"
+						aria-label="Open two truths one lie settings"
+					>
+						<Settings className="h-5 w-5" />
+					</button>
+				</div>
 			</div>
 			<p className="mx-auto max-w-3xl text-center font-inter text-sky-900">
 				Study one ancestor at a time, then spot which fact was pulled from an
@@ -171,36 +173,13 @@ export default function TwoTruthsOneLie() {
 			</p>
 
 			<div className="mt-8 sm:px-2">
-				<div>
-					<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
-						Progress
-					</p>
-					<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
-						<div
-							className="h-full rounded-full bg-green-700 transition-all duration-300"
-							style={{
-								width: `${((safeRoundIndex + 1) / activeRounds.length) * 100}%`,
-							}}
-						/>
-					</div>
-					<p className="mt-3 font-inter text-sm text-sky-900">
-						Round {safeRoundIndex + 1} of {activeRounds.length}. {correctCount} of{' '}
-						{activeRounds.length} lies found so far.
-					</p>
-					<p className="mt-1 font-inter text-sm text-sky-900">
-						Showing {selectedGenerations} generation
-						{selectedGenerations === 1 ? '' : 's'}.
-					</p>
-				</div>
-
-				<div className="mt-6 rounded-xl border-2 border-green-700 bg-white p-4 shadow-lg md:p-6">
+				<div className="rounded-xl border-2 border-green-700 bg-white p-4 shadow-lg md:p-6">
 					<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
 						{round.title}
 					</p>
 					<h2 className="mt-2 font-Young_Serif text-3xl text-sky-900">
 						{round.prompt}
 					</h2>
-					<p className="mt-3 font-inter text-sm text-sky-900">{round.description}</p>
 
 					<div className="mt-6 flex flex-col items-center text-center">
 						<div className="overflow-hidden rounded-xl border-2 border-green-700 bg-sky-100">
@@ -210,10 +189,10 @@ export default function TwoTruthsOneLie() {
 									alt={round.personName}
 									width={480}
 									height={480}
-									className="h-64 w-64 object-cover sm:h-72 sm:w-72"
+									className="h-40 w-40 object-cover sm:h-64 sm:w-64 md:h-72 md:w-72"
 								/>
 							) : (
-								<div className="flex h-64 w-64 items-center justify-center bg-sky-100 font-inter text-sky-800 sm:h-72 sm:w-72">
+								<div className="flex h-40 w-40 items-center justify-center bg-sky-100 font-inter text-sky-800 sm:h-64 sm:w-64 md:h-72 md:w-72">
 									No photo
 								</div>
 							)}
@@ -252,29 +231,17 @@ export default function TwoTruthsOneLie() {
 						})}
 					</div>
 
-					<div className="mt-5 flex flex-wrap gap-2">
-						<button
-							type="button"
-							onClick={resetRound}
-							className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
-						>
-							Reset round
-						</button>
-						<button
-							type="button"
-							onClick={revealAnswer}
-							className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
-						>
-							Reveal lie
-						</button>
-						<button
-							type="button"
-							onClick={() => goToRound((safeRoundIndex + 1) % activeRounds.length)}
-							className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
-						>
-							Next ancestor
-						</button>
-					</div>
+					{hasAnswered ? (
+						<div className="mt-5 flex flex-wrap gap-2">
+							<button
+								type="button"
+								onClick={() => goToRound((safeRoundIndex + 1) % activeRounds.length)}
+								className="rounded-lg border-2 border-green-700 px-3 py-2 font-inter text-green-700 transition hover:bg-green-500 hover:text-white"
+							>
+								Next ancestor
+							</button>
+						</div>
+					) : null}
 
 					{revealed ? (
 						<div className="mt-5 bg-sky-50 p-4">
@@ -286,11 +253,33 @@ export default function TwoTruthsOneLie() {
 									: 'Lie revealed'}
 							</p>
 							<p className="mt-2 font-inter text-sm text-sky-900">
-								The lie came from {round.adjacentPersonName}, who is this
-								ancestor&apos;s {relationshipLabels[round.adjacentRelationship]}.
+								The lie came from {round.adjacentPersonName}, who is {round.personName}
+								&apos;s {relationshipLabels[round.adjacentRelationship]}.
 							</p>
 						</div>
 					) : null}
+				</div>
+
+				<div className="mt-6">
+					<p className="font-inter text-xs uppercase tracking-[0.26em] text-sky-700">
+						Progress
+					</p>
+					<div className="mt-3 h-3 overflow-hidden rounded-full bg-sky-100">
+						<div
+							className="h-full rounded-full bg-green-700 transition-all duration-300"
+							style={{
+								width: `${((safeRoundIndex + 1) / activeRounds.length) * 100}%`,
+							}}
+						/>
+					</div>
+					<p className="mt-3 font-inter text-sm text-sky-900">
+						Round {safeRoundIndex + 1} of {activeRounds.length}. {correctCount} of{' '}
+						{activeRounds.length} lies found so far.
+					</p>
+					<p className="mt-1 font-inter text-sm text-sky-900">
+						Showing {selectedGenerations} generation
+						{selectedGenerations === 1 ? '' : 's'}.
+					</p>
 				</div>
 			</div>
 
@@ -338,6 +327,32 @@ export default function TwoTruthsOneLie() {
 											{generation} generation{generation === 1 ? '' : 's'}
 										</button>
 									))}
+								</div>
+							</div>
+
+							<div className="mt-6 space-y-3">
+								<p className="font-Young_Serif text-lg text-sky-900">Round Controls</p>
+								<div className="grid gap-2">
+									<button
+										type="button"
+										onClick={() => {
+											resetRound()
+											setSettingsOpen(false)
+										}}
+										className="rounded-xl border-2 border-green-700 bg-white px-4 py-3 text-left font-inter text-sky-900 transition hover:bg-green-700 hover:text-white"
+									>
+										Reset round
+									</button>
+									<button
+										type="button"
+										onClick={() => {
+											revealAnswer()
+											setSettingsOpen(false)
+										}}
+										className="rounded-xl border-2 border-green-700 bg-white px-4 py-3 text-left font-inter text-sky-900 transition hover:bg-green-700 hover:text-white"
+									>
+										Reveal lie
+									</button>
 								</div>
 							</div>
 						</Dialog.Panel>
